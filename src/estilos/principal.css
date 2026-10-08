@@ -1,0 +1,26 @@
+/* EstoqueHosp — ponto de entrada do CSS. A ordem dos imports importa. */
+
+/* 1. Base */
+@import url('./base/variaveis.css');
+@import url('./base/reinicio.css');
+
+/* 2. Estrutura */
+@import url('./estrutura/pagina.css');
+@import url('./estrutura/cabecalho.css');
+@import url('./estrutura/menu.css');
+
+/* 3. Componentes */
+@import url('./componentes/logo.css');
+@import url('./componentes/botoes.css');
+@import url('./componentes/formularios.css');
+@import url('./componentes/segmentado.css');
+@import url('./componentes/cartao.css');
+@import url('./componentes/selo.css');
+@import url('./componentes/lista.css');
+@import url('./componentes/grafico.css');
+
+/* 4. Telas */
+@import url('./paginas/entrar.css');
+
+/* 5. Responsivo (por último, para sobrescrever) */
+@import url('./responsivo.css');
