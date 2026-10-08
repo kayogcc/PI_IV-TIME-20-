@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Dashboard — EstoqueHosp</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🏥%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/estilos/principal.css" />
+  </head>
+  <body>
+    <header id="header"></header>
+
+    <main id="conteudo">
+      <div class="top">
+        <div>
+          <div class="eyebrow">Visão geral</div>
+          <h2>
+            Bom dia,
+            <span id="primeiro-nome"></span>
+          </h2>
+          <p class="sub">Acompanhe os principais dados do estoque hospitalar.</p>
+        </div>
+        <div class="pill">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M12 7v5l3 2"/>
+          </svg>
+          Atualizado há 5 min
+        </div>
+      </div>
+      <div class="grid">
+        <div class="card stat">
+          <span>Itens cadastrados</span>
+          <div class="ico" style="background:var(--blue-soft);color:var(--blue)">
+            <svg viewBox="0 0 24 24">
+              <path d="M21 8 12 3 3 8v8l9 5 9-5zM3 8l9 5 9-5M12 13v8"/>
+            </svg>
+          </div>
+          <strong id="res-itens"></strong>
+          <em style="color:var(--green)">
+            <span id="res-cresc"></span>
+          </em>
+        </div>
+        <div class="card stat">
+          <span>Estoque baixo</span>
+          <div class="ico" style="background:var(--amber-soft);color:var(--amber)">
+            <svg viewBox="0 0 24 24">
+              <path d="M10.3 3.9 2 18a2 2 0 0 0 1.7 3h16.6a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/>
+            </svg>
+          </div>
+          <strong id="res-baixo"></strong>
+          <em style="color:var(--amber)">Necessitam reposição</em>
+        </div>
+        <div class="card stat">
+          <span>Vencendo logo</span>
+          <div class="ico" style="background:var(--red-soft);color:var(--red)">
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 7v5l3 2"/>
+            </svg>
+          </div>
+          <strong id="res-venc"></strong>
+          <em style="color:var(--red)">Nos próximos 30 dias</em>
+        </div>
+      </div>
+      <div class="two">
+        <div class="card">
+          <div class="head">
+            <div>
+              <h3>Movimentação do estoque</h3>
+              <p>Entradas e saídas nos últimos 7 dias</p>
+            </div>
+            <div class="legend">
+              <span>
+                <i style="background:var(--blue)"></i>Entradas
+              </span>
+              <span>
+                <i style="background:#bcd0f7"></i>Saídas
+              </span>
+            </div>
+          </div>
+          <div class="chart" id="chart"></div>
+          <div class="days" id="days"></div>
+        </div>
+        <div class="card">
+          <div class="head">
+            <div>
+              <h3>Alertas recentes</h3>
+              <p>Itens que precisam de atenção</p>
+            </div>
+          </div>
+          <ul class="list" id="l-alertas"></ul>
+        </div>
+      </div>
+      <div class="card" style="margin-top:20px">
+        <div class="head">
+          <div>
+            <h3>Últimas movimentações</h3>
+            <p>Registros mais recentes do estoque</p>
+          </div>
+        </div>
+        <ul class="list" id="l-mov"></ul>
+      </div>
+    </main>
+    <script type="module" src="/src/paginas/painel.js"></script>
+  </body>
+</html>
