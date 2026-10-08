@@ -1,0 +1,19 @@
+/* Variáveis de design: cores, sombras e tema (somente tema claro) */
+
+:root {
+  color-scheme: light;
+  --bg: #f7f9fc;
+  --page: #fff;
+  --card: #fff;
+  --ink: #0f172a;
+  --mute: #64748b;
+  --line: #e6eaf2;
+  --blue: #1a5cff;
+  --blue-soft: #eaf1ff;
+  --green: #059669;
+  --amber: #d97706;
+  --amber-soft: #fef6dc;
+  --red: #dc2626;
+  --red-soft: #feecec;
+  --shadow: 0 1px 3px rgba(15,23,42,.06);
+}
