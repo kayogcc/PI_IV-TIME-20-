@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Movimentação — EstoqueHosp</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🏥%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/estilos/principal.css" />
+  </head>
+  <body>
+    <header id="header"></header>
+
+    <main id="conteudo">
+      <div class="top">
+        <div>
+          <div class="eyebrow">Operação</div>
+          <h2>Registro de entrada e saída</h2>
+          <p class="sub">Registre a movimentação no momento em que ela acontece.</p>
+        </div>
+      </div>
+      <div class="card" style="max-width:640px">
+        <label style="margin-top:0">Tipo de movimentação</label>
+        <div class="seg">
+          <button class="on">Entrada</button>
+          <button>Saída</button>
+        </div>
+        <label>Origem do registro</label>
+        <div class="seg">
+          <button class="on">Código de barras</button>
+          <button>Manual</button>
+        </div>
+        <label>Material</label>
+        <input class="field" placeholder="Leia o código ou busque pelo nome...">
+        <div class="fg">
+          <div>
+            <label>Quantidade</label>
+            <input class="field" type="number" placeholder="0">
+          </div>
+          <div>
+            <label>Local</label>
+            <select class="field">
+              <option>Almoxarifado A</option>
+              <option>Almoxarifado B</option>
+              <option>Centro Cirúrgico</option>
+            </select>
+          </div>
+        </div>
+        <div class="acts">
+          <button class="btn" data-href="/alertas.html">Confirmar movimentação</button>
+        </div>
+      </div>
+    </main>
+    <script type="module" src="/src/paginas/movimentacao.js"></script>
+  </body>
+</html>
