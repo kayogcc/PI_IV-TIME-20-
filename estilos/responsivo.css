@@ -1,0 +1,32 @@
+/* Responsivo: telas até 860px (tablet e celular) */
+
+@media (max-width: 860px) {
+  .grid,
+  .two {
+    grid-template-columns: 1fr;
+  }
+
+  .search {
+    display: none;
+  }
+
+  .bar {
+    padding: 14px 20px;
+  }
+
+  main {
+    padding: 24px 20px 40px;
+  }
+
+  h2 {
+    font-size: 28px;
+  }
+
+  .fg {
+    grid-template-columns: 1fr;
+  }
+
+  nav {
+    padding: 0 20px;
+  }
+}
