@@ -1,0 +1,88 @@
+/* Layout: cabeçalho (logo, busca e usuário) */
+
+header {
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: env(safe-area-inset-top,0px);
+  z-index: 5;
+}
+
+.bar {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px 28px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.search {
+  flex: 0 1 400px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  color: var(--mute);
+}
+
+.search input {
+  border: 0;
+  outline: none;
+  background: none;
+  flex: 1;
+  min-width: 0;
+}
+
+.search kbd {
+  font: 600 11px 'DM Sans';
+  background: var(--bg);
+  padding: 3px 7px;
+  border-radius: 6px;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-left: 20px;
+  border-left: 1px solid var(--line);
+  cursor: pointer;
+}
+
+.av {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--blue-soft);
+  color: var(--blue);
+  font-weight: 700;
+  font-size: 13px;
+  display: grid;
+  place-items: center;
+}
+
+.user small {
+  display: block;
+  color: var(--mute);
+  font-size: 12px;
+}
+
+.user strong {
+  font-size: 14px;
+}
+
+.search svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--mute);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+}

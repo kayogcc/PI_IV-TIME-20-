@@ -1,0 +1,69 @@
+/* Layout: estrutura das páginas, títulos e grades */
+
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 30px 28px 48px;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 26px;
+}
+
+.eyebrow {
+  color: var(--blue);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+h2 {
+  font-size: 32px;
+  margin: 6px 0 8px;
+  letter-spacing: -.5px;
+}
+
+.sub {
+  color: var(--mute);
+  font-size: 14px;
+  margin: 0;
+}
+
+.pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  padding: 10px 16px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.pill svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--mute);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 20px;
+}
+
+.two {
+  display: grid;
+  grid-template-columns: 1.7fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
