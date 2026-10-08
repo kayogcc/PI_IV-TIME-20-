@@ -1,0 +1,37 @@
+/* Componente: gráficos de barras e barra de progresso */
+
+.chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  height: 190px;
+  border-bottom: 1px solid var(--line);
+}
+
+.day {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 5px;
+  height: 100%;
+}
+
+.day div {
+  width: 38%;
+  max-width: 20px;
+  border-radius: 6px 6px 0 0;
+}
+
+.days {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--mute);
+}
+
+.days span {
+  flex: 1;
+  text-align: center;
+}

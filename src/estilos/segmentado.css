@@ -1,0 +1,28 @@
+/* Componente: controle segmentado */
+
+.seg {
+  display: flex;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 4px;
+  gap: 4px;
+}
+
+.seg button {
+  flex: 1;
+  border: 0;
+  background: none;
+  padding: 9px 6px;
+  border-radius: 9px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--mute);
+  white-space: nowrap;
+}
+
+.seg button.on {
+  background: var(--card);
+  color: var(--blue);
+  box-shadow: var(--shadow);
+}
