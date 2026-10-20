@@ -1,9 +1,9 @@
 // Dados fictícios simulando o banco de dados
 const produtosFicticios = [
-    { id: 1, nome: "Arroz 5kg", quantidade: 2, minimo: 5 },
-    { id: 2, nome: "Feijão 1kg", quantidade: 1, minimo: 4 },
-    { id: 3, nome: "Óleo de Soja", quantidade: 8, minimo: 3 }, // Este não deve aparecer (estoque normal)
-    { id: 4, nome: "Açúcar 1kg", quantidade: 3, minimo: 10 }
+    { id: 1, nome: "Cateter venoso 20G", quantidade: 4, minimo: 30 },
+    { id: 2, nome: "Seringa 10 ml", quantidade: 85, minimo: 150 },
+    { id: 3, nome: "Máscara cirúrgica", quantidade: 420, minimo: 200 }, // Este não deve aparecer (estoque normal)
+    { id: 4, nome: "Gaze estéril", quantidade: 60, minimo: 120 }
 ];
 
 function carregarEstoqueBaixo() {
