@@ -1,0 +1,27 @@
+{
+  "name": "pi_iv-time-20-",
+  "version": "1.0.0",
+  "description": "**Projeto Integrador IV — Engenharia de Software**\r **PUC Campinas — 2026**",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kayogcc/PI_IV-TIME-20-.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/kayogcc/PI_IV-TIME-20-/issues"
+  },
+  "homepage": "https://github.com/kayogcc/PI_IV-TIME-20-#readme",
+  "devDependencies": {
+    "vite": "^8.3.4"
+  }
+}
