@@ -1,0 +1,43 @@
+/* Estilos específicos para a página de estoque baixo */
+.pagina-conteudo {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.tabela-container {
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-family: inherit;
+}
+
+th, td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+    color: #333;
+}
+
+tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Exemplo de uso de selo/alerta visual simples */
+.selo-alerta {
+    background-color: #ffcccc;
+    color: #990000;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
