@@ -23,6 +23,7 @@
 @import url('./paginas/entrar.css');
 @import url('./paginas/inicio.css');
 @import url('./paginas/historico.css');
+@import url('./paginas/movimentacao-estoque.css');
 @import url('./paginas/criar-conta.css');
 
 /* 5. Responsivo (por último, para sobrescrever) */

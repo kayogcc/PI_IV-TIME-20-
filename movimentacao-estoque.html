@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Movimentação do estoque — EstoqueHosp</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🏥%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="src/estilos/principal.css" />
+  </head>
+  <body>
+    <header id="header"></header>
+
+    <main id="conteudo">
+      <div class="top">
+        <div>
+          <a class="voltar" href="index.html">Voltar ao painel</a>
+          <div class="eyebrow">Visão geral</div>
+          <h2>Movimentação do estoque</h2>
+          <p class="sub" id="periodo"></p>
+        </div>
+        <a class="ver-mais" href="movimentacao.html">+ Registrar movimentação</a>
+      </div>
+
+      <div class="grid">
+        <div class="card stat">
+          <span>Entradas</span>
+          <div class="ico" style="background:var(--blue-soft);color:var(--blue)">
+            <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+          </div>
+          <strong id="tot-entradas"></strong>
+          <em style="color:var(--blue)"><span id="reg-entradas"></span></em>
+        </div>
+        <div class="card stat">
+          <span>Saídas</span>
+          <div class="ico" style="background:var(--amber-soft);color:var(--amber)">
+            <svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+          </div>
+          <strong id="tot-saidas"></strong>
+          <em style="color:var(--amber)"><span id="reg-saidas"></span></em>
+        </div>
+        <div class="card stat">
+          <span>Saldo do período</span>
+          <div class="ico" style="background:var(--bg);color:var(--green)">
+            <svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg>
+          </div>
+          <strong id="tot-saldo"></strong>
+          <em id="saldo-msg"></em>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:20px">
+        <div class="head">
+          <div>
+            <h3>Entradas e saídas por dia</h3>
+            <p>Volume movimentado nos últimos 7 dias</p>
+          </div>
+          <div class="legend">
+            <span><i style="background:var(--blue)"></i>Entradas</span>
+            <span><i style="background:#bcd0f7"></i>Saídas</span>
+          </div>
+        </div>
+        <div class="chart" id="chart"></div>
+        <div class="days" id="days"></div>
+
+        <div class="tabela-mov">
+          <table>
+            <thead>
+              <tr>
+                <th>Dia</th>
+                <th>Entradas</th>
+                <th>Saídas</th>
+                <th>Saldo</th>
+              </tr>
+            </thead>
+            <tbody id="t-dias"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="two">
+        <div class="card">
+          <div class="head">
+            <div>
+              <h3>Materiais mais movimentados</h3>
+              <p>Soma de entradas e saídas no período</p>
+            </div>
+          </div>
+          <ul class="list" id="l-materiais"></ul>
+        </div>
+        <div class="card">
+          <div class="head">
+            <div>
+              <h3>Por local</h3>
+              <p>Onde o estoque mais se movimentou</p>
+            </div>
+          </div>
+          <ul class="list" id="l-locais"></ul>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:20px">
+        <div class="head">
+          <div>
+            <h3>Registros do período</h3>
+            <p id="qtd-registros"></p>
+          </div>
+          <div class="seg" id="filtro-mov">
+            <button type="button" class="on" data-f="">Todas</button>
+            <button type="button" data-f="Entrada">Entradas</button>
+            <button type="button" data-f="Saída">Saídas</button>
+          </div>
+        </div>
+        <ul class="list" id="l-registros"></ul>
+      </div>
+    </main>
+    <script type="module" src="src/paginas/movimentacao-estoque.js"></script>
+  </body>
+</html>
