@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estoque Baixo - Sistema</title>
+    <!-- Seus estilos globais e da página -->
+    <link rel="stylesheet" href="src/estilos/principal.css">
+    <link rel="stylesheet" href="src/estilos/paginas/estoque-baixo.css">
+</head>
+<body>
+    <header class="cabecalho">
+        <h1>Controle de Estoque</h1>
+    </header>
+
+    <main class="pagina-conteudo">
+        <section class="cartao">
+            <h2>Produtos com Estoque Baixo</h2>
+            <p>Itens que atingiram o limite mínimo e precisam de reposição.</p>
+            
+            <div class="tabela-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Quantidade Atual</th>
+                            <th>Mínimo Permitido</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabela-estoque-baixo">
+                        <!-- Os dados fictícios serão injetados aqui via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Script para carregar os dados fictícios -->
+    <script src="src/paginas/estoque-baixo.js"></script>
+</body>
+</html>
