@@ -1,0 +1,48 @@
+/* Tela: início (nome do site e botões de acesso) */
+
+.inicio {
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.inicio .logo {
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  font-size: 38px;
+  letter-spacing: -.5px;
+}
+
+.inicio .logo i {
+  width: 76px;
+  height: 76px;
+  border-radius: 22px;
+}
+
+.inicio .logo svg {
+  width: 38px;
+  height: 38px;
+}
+
+.inicio .btn {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  line-height: 48px;
+}
+
+.inicio .logo + .btn {
+  margin-top: 36px;
+}
+
+.inicio .btn + .btn {
+  margin-top: 12px;
+}
+
+.inicio .btn.sec {
+  background: transparent;
+  color: var(--blue);
+  border: 1.5px solid var(--blue);
+  line-height: 45px;
+}
