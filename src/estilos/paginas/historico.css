@@ -1,0 +1,44 @@
+/* Tela: histórico de movimentações + botão "Ver mais" do painel */
+
+.ver-mais {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.ver-mais:hover {
+  background: var(--blue-soft);
+}
+
+.ver-mais:focus-visible,
+.voltar:focus-visible {
+  outline: 3px solid var(--blue-soft);
+  outline-offset: 2px;
+}
+
+.voltar {
+  display: inline-block;
+  margin-bottom: 14px;
+  color: var(--mute);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.voltar:hover {
+  color: var(--blue);
+}
+
+#fm {
+  min-width: 300px;
+  max-width: 100%;
+}

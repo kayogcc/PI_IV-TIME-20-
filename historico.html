@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Histórico — EstoqueHosp</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🏥%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="src/estilos/principal.css" />
+  </head>
+  <body>
+    <header id="header"></header>
+
+    <main id="conteudo">
+      <div class="top">
+        <div>
+          <a class="voltar" href="index.html">Voltar ao painel</a>
+          <div class="eyebrow">Operação</div>
+          <h2>Histórico de movimentações</h2>
+          <p class="sub">Todas as entradas e saídas registradas no estoque.</p>
+        </div>
+        <div class="seg" id="fm">
+          <button type="button" class="on" data-f="">Todas</button>
+          <button type="button" data-f="e">Entradas</button>
+          <button type="button" data-f="s">Saídas</button>
+        </div>
+      </div>
+      <div class="card">
+        <ul class="list" id="l-hist"></ul>
+      </div>
+    </main>
+    <script type="module" src="/src/paginas/historico.js"></script>
+  </body>
+</html>
