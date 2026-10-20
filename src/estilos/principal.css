@@ -21,6 +21,7 @@
 
 /* 4. Telas */
 @import url('./paginas/entrar.css');
+@import url('./paginas/inicio.css');
 
 /* 5. Responsivo (por último, para sobrescrever) */
 @import url('./responsivo.css');
