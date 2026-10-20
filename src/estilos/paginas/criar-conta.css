@@ -1,0 +1,33 @@
+/* Tela: criar conta (reaproveita .login, .box, .roles e .role de entrar.css) */
+
+.box .dica {
+  margin: 10px 0 0;
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+.box .rodape {
+  margin: 20px 0 0;
+  text-align: center;
+}
+
+.rodape a {
+  color: var(--blue);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.rodape a:hover {
+  text-decoration: underline;
+}
+
+.box .erro {
+  margin: 16px 0 0;
+  color: var(--red);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.box .field[aria-invalid="true"] {
+  border-color: var(--red);
+}
