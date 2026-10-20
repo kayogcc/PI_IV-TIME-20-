@@ -2,10 +2,10 @@
   "name": "pi_iv-time-20-",
   "version": "1.0.0",
   "description": "**Projeto Integrador IV — Engenharia de Software**\r **PUC Campinas — 2026**",
-  "main": "index.js",
+  "main": "inicio.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "vite --host 127.0.0.1",
+    "dev": "vite --host 127.0.0.1 --open /inicio.html",
     "build": "vite build",
     "preview": "vite preview"
   },
