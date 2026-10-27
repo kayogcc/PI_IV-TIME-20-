@@ -26,3 +26,6 @@ replay_pid*
 # Node / Vite
 node_modules/
 dist/
+
+# Maven
+target/
