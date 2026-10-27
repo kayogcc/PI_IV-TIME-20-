@@ -22,6 +22,31 @@ label {
   box-shadow: 0 0 0 3px var(--blue-soft);
 }
 
+.field[aria-invalid="true"] {
+  border-color: var(--red);
+}
+
+/* Mensagens de validação (criadas por utilitarios/formulario.js) */
+/* .box p (entrar.css) vem depois e é mais específico, por isso o .box aqui */
+p.erro,
+p.sucesso,
+.box p.erro,
+.box p.sucesso {
+  margin: 16px 0 0;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+p.erro,
+.box p.erro {
+  color: var(--red);
+}
+
+p.sucesso,
+.box p.sucesso {
+  color: var(--green);
+}
+
 .fg {
   display: grid;
   grid-template-columns: repeat(2,1fr);

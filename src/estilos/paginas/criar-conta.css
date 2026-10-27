@@ -20,14 +20,3 @@
 .rodape a:hover {
   text-decoration: underline;
 }
-
-.box .erro {
-  margin: 16px 0 0;
-  color: var(--red);
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.box .field[aria-invalid="true"] {
-  border-color: var(--red);
-}

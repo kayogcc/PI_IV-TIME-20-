@@ -1,3 +1,6 @@
+import { montarLayout } from '../componentes/estrutura.js'
+import { esc } from '../utilitarios/textos.js'
+
 // Dados fictícios simulando o banco de dados
 const produtosFicticios = [
     { id: 1, nome: "Cateter venoso 20G", quantidade: 4, minimo: 30 },
@@ -22,14 +25,14 @@ function carregarEstoqueBaixo() {
     estoqueBaixo.forEach(produto => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
-            <td>${produto.nome}</td>
-            <td>${produto.quantidade}</td>
-            <td>${produto.minimo}</td>
+            <td>${esc(produto.nome)}</td>
+            <td>${esc(produto.quantidade)}</td>
+            <td>${esc(produto.minimo)}</td>
             <td><span class="selo-alerta">Crítico</span></td>
         `;
         tbody.appendChild(tr);
     });
 }
 
-// Executa a função assim que o DOM estiver carregado
-document.addEventListener("DOMContentLoaded", carregarEstoqueBaixo);
+// Módulos rodam depois do HTML carregado; sem login, montarLayout redireciona
+if (montarLayout()) carregarEstoqueBaixo();

@@ -21,13 +21,13 @@ if (usuario) {
     <li>
       <div class="dot ${a.nivel}">!</div>
       <div><b>${esc(a.titulo)}</b><small>${esc(a.detalhe)}</small></div>
-      <span class="tag" style="color:${corNivel[a.nivel]}">${a.prioridade}</span>
+      <span class="tag" style="color:${corNivel[a.nivel]}">${esc(a.prioridade)}</span>
     </li>`).join('')
 
   $('l-mov').innerHTML = historico.slice(0, 3).map((h) => `
     <li>
       <div class="dot ${h.tipo === 'Entrada' ? 'in' : 'nt'}">${h.tipo === 'Entrada' ? '↓' : '↑'}</div>
-      <div><b>${esc(h.material)} — ${h.quantidade} un.</b><small>${h.tipo} · ${esc(h.origem)} · ${esc(h.local)}</small></div>
-      <span class="tag" style="color:var(--mute)">${h.data.split(' ')[1]}</span>
+      <div><b>${esc(h.material)} — ${esc(h.quantidade)} un.</b><small>${esc(h.tipo)} · ${esc(h.origem)} · ${esc(h.local)}</small></div>
+      <span class="tag" style="color:var(--mute)">${esc(h.data.split(' ')[1])}</span>
     </li>`).join('')
 }

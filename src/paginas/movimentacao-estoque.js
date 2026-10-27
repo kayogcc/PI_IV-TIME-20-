@@ -67,8 +67,8 @@ if (usuario) {
     $('l-registros').innerHTML = lista.map((m) => `
       <li>
         <div class="dot ${m.tipo === 'Entrada' ? 'in' : 'nt'}">${m.tipo === 'Entrada' ? '↓' : '↑'}</div>
-        <div><b>${esc(m.material)} — ${m.quantidade} un.</b><small>${m.tipo} · ${esc(m.origem)} · ${esc(m.local)}</small></div>
-        <span class="tag" style="color:var(--mute)">${m.data}</span>
+        <div><b>${esc(m.material)} — ${esc(m.quantidade)} un.</b><small>${esc(m.tipo)} · ${esc(m.origem)} · ${esc(m.local)}</small></div>
+        <span class="tag" style="color:var(--mute)">${esc(m.data)}</span>
       </li>`).join('')
   }
 

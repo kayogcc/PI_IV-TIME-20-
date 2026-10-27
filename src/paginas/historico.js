@@ -1,3 +1,4 @@
+import { montarLayout } from "../componentes/estrutura.js";
 
 /*
  * Histórico de movimentações - EstoqueHosp
@@ -199,4 +200,6 @@ function inicializarHistorico() {
   renderizarHistorico();
 }
 
-inicializarHistorico();
+if (montarLayout()) {
+  inicializarHistorico();
+}

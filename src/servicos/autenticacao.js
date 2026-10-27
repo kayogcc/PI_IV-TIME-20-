@@ -1,11 +1,16 @@
 const CHAVE = 'estoquehosp:usuario'
 
+// Devolve o usuário salvo na sessão, ou null se não houver ou estiver corrompido
 export function usuarioAtual() {
   try {
-    return JSON.parse(sessionStorage.getItem(CHAVE))
+    const usuario = JSON.parse(sessionStorage.getItem(CHAVE))
+    const campos = ['nome', 'perfil', 'hospital', 'unidade']
+    if (usuario && campos.every((c) => typeof usuario[c] === 'string' && usuario[c].trim())) return usuario
   } catch {
-    return null
+    // JSON inválido: trata como sem login
   }
+  sessionStorage.removeItem(CHAVE)
+  return null
 }
 
 export function login(perfil) {

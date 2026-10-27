@@ -20,27 +20,27 @@
           <p class="sub">Registre a movimentação no momento em que ela acontece.</p>
         </div>
       </div>
-      <div class="card" style="max-width:640px">
+      <form class="card" id="form-mov" style="max-width:640px" novalidate>
         <label style="margin-top:0">Tipo de movimentação</label>
-        <div class="seg">
-          <button class="on">Entrada</button>
-          <button>Saída</button>
+        <div class="seg" id="seg-tipo">
+          <button type="button" class="on">Entrada</button>
+          <button type="button">Saída</button>
         </div>
         <label>Origem do registro</label>
-        <div class="seg">
-          <button class="on">Código de barras</button>
-          <button>Manual</button>
+        <div class="seg" id="seg-origem">
+          <button type="button" class="on">Código de barras</button>
+          <button type="button">Manual</button>
         </div>
-        <label>Material</label>
-        <input class="field" placeholder="Leia o código ou busque pelo nome...">
+        <label for="material">Material</label>
+        <input class="field" id="material" placeholder="Leia o código ou busque pelo nome..." maxlength="120" autocomplete="off">
         <div class="fg">
           <div>
-            <label>Quantidade</label>
-            <input class="field" type="number" placeholder="0">
+            <label for="quantidade">Quantidade</label>
+            <input class="field" id="quantidade" type="number" min="1" max="100000" step="1" inputmode="numeric" placeholder="0">
           </div>
           <div>
-            <label>Local</label>
-            <select class="field">
+            <label for="local">Local</label>
+            <select class="field" id="local">
               <option>Almoxarifado A</option>
               <option>Almoxarifado B</option>
               <option>Centro Cirúrgico</option>
@@ -48,9 +48,9 @@
           </div>
         </div>
         <div class="acts">
-          <button class="btn" data-href="alertas.html">Confirmar movimentação</button>
+          <button class="btn" id="confirmar" type="submit">Confirmar movimentação</button>
         </div>
-      </div>
+      </form>
     </main>
     <script type="module" src="src/paginas/movimentacao.js"></script>
   </body>

@@ -9,15 +9,19 @@
     <link rel="stylesheet" href="src/estilos/paginas/estoque-baixo.css">
 </head>
 <body>
-    <header class="cabecalho">
-        <h1>Controle de Estoque</h1>
-    </header>
+    <header id="header"></header>
 
-    <main class="pagina-conteudo">
-        <section class="cartao">
-            <h2>Produtos com Estoque Baixo</h2>
-            <p>Itens que atingiram o limite mínimo e precisam de reposição.</p>
-            
+    <main id="conteudo">
+        <div class="top">
+            <div>
+                <a class="voltar" href="index.html">Voltar ao painel</a>
+                <div class="eyebrow">Monitoramento</div>
+                <h2>Produtos com estoque baixo</h2>
+                <p class="sub">Itens que atingiram o limite mínimo e precisam de reposição.</p>
+            </div>
+        </div>
+        <section class="card">
+
             <div class="tabela-container">
                 <table>
                     <thead>
@@ -37,6 +41,6 @@
     </main>
 
     <!-- Script para carregar os dados fictícios -->
-    <script src="src/paginas/estoque-baixo.js"></script>
+    <script type="module" src="src/paginas/estoque-baixo.js"></script>
 </body>
 </html>

@@ -1,9 +1,18 @@
 // Tela: criar conta
 
+import { criarAviso, matriculaValida } from '../utilitarios/formulario.js';
+
 // Ajuste aqui conforme a API do back-end (Spring Boot)
 const ENDPOINT_CADASTRO = '/api/usuarios';
 const PAGINA_LOGIN = '/entrar.html';
 const TAMANHO_MINIMO_SENHA = 8;
+const TAMANHO_MAXIMO_SENHA = 72;
+const TAMANHO_MAXIMO_NOME = 100;
+
+// ⚠️ Protótipo: enquanto o back-end não existe, a conta é salva só neste navegador.
+// Quando a API estiver pronta, troque para false.
+const SEM_BACKEND = true;
+const CHAVE_CONTAS = 'estoquehosp:contas';
 
 // Texto do botão (como aparece na tela) -> valor enviado para a API + explicação do perfil
 const PERFIS = {
@@ -31,30 +40,13 @@ const dicaPerfil = form.querySelector('.dica');
 const botaoCriar = document.getElementById('criar');
 
 // Mensagem de erro (criada aqui para não precisar mexer no HTML)
-const erro = document.createElement('p');
-erro.className = 'erro';
-erro.setAttribute('role', 'alert');
-erro.hidden = true;
-form.insertBefore(erro, botaoCriar);
+const aviso = criarAviso(form, botaoCriar);
+const mostrarErro = aviso.erro;
+const limparErro = aviso.limpar;
 
 function perfilSelecionado() {
   const botao = document.querySelector('#roles .role.on');
   return botao.textContent.trim();
-}
-
-function mostrarErro(mensagem, campo) {
-  erro.textContent = mensagem;
-  erro.hidden = false;
-  if (campo) {
-    campo.setAttribute('aria-invalid', 'true');
-    campo.focus();
-  }
-}
-
-function limparErro() {
-  erro.hidden = true;
-  erro.textContent = '';
-  form.querySelectorAll('[aria-invalid]').forEach((campo) => campo.removeAttribute('aria-invalid'));
 }
 
 function validar() {
@@ -64,14 +56,30 @@ function validar() {
   if (nome.split(/\s+/).length < 2) {
     return { mensagem: 'Informe nome e sobrenome.', campo: campoNome };
   }
-  if (!matricula || /\s/.test(matricula)) {
-    return { mensagem: 'Informe seu usuário ou matrícula, sem espaços.', campo: campoMatricula };
+  // Só letras (com acento), espaço, apóstrofo e hífen — ex.: "Ana D'Ávila Souza-Lima"
+  if (!/^[\p{L}' -]+$/u.test(nome)) {
+    return { mensagem: 'O nome deve conter apenas letras.', campo: campoNome };
+  }
+  if (nome.length > TAMANHO_MAXIMO_NOME) {
+    return { mensagem: `O nome pode ter no máximo ${TAMANHO_MAXIMO_NOME} caracteres.`, campo: campoNome };
+  }
+  if (!matriculaValida(matricula)) {
+    return {
+      mensagem: 'Usuário ou matrícula inválido: use de 3 a 30 letras, números, ponto, hífen ou sublinhado, sem espaços.',
+      campo: campoMatricula,
+    };
   }
   if (campoSenha.value.length < TAMANHO_MINIMO_SENHA) {
     return {
       mensagem: `A senha precisa ter pelo menos ${TAMANHO_MINIMO_SENHA} caracteres.`,
       campo: campoSenha,
     };
+  }
+  if (campoSenha.value.length > TAMANHO_MAXIMO_SENHA) {
+    return { mensagem: `A senha pode ter no máximo ${TAMANHO_MAXIMO_SENHA} caracteres.`, campo: campoSenha };
+  }
+  if (!/[\p{L}]/u.test(campoSenha.value) || !/\d/.test(campoSenha.value)) {
+    return { mensagem: 'A senha precisa ter pelo menos uma letra e um número.', campo: campoSenha };
   }
   if (campoSenha.value !== campoConfirmacao.value) {
     return { mensagem: 'As senhas não conferem.', campo: campoConfirmacao };
@@ -100,7 +108,40 @@ function aoEnviar(evento) {
   enviarCadastro();
 }
 
+function lerContasLocais() {
+  try {
+    const contas = JSON.parse(localStorage.getItem(CHAVE_CONTAS));
+    return Array.isArray(contas) ? contas : [];
+  } catch {
+    return [];
+  }
+}
+
+// Salva a conta no localStorage (sem a senha). Devolve false se a matrícula já existir.
+function salvarContaLocal(conta) {
+  const contas = lerContasLocais();
+  const matricula = conta.matricula.toLowerCase();
+  if (contas.some((c) => c.matricula.toLowerCase() === matricula)) return false;
+  contas.push(conta);
+  localStorage.setItem(CHAVE_CONTAS, JSON.stringify(contas));
+  return true;
+}
+
 async function enviarCadastro() {
+  if (SEM_BACKEND) {
+    const salvou = salvarContaLocal({
+      nome: campoNome.value.trim().replace(/\s+/g, ' '),
+      matricula: campoMatricula.value.trim(),
+      perfil: PERFIS[perfilSelecionado()].codigo,
+    });
+    if (!salvou) {
+      mostrarErro('Já existe uma conta com esse usuário ou matrícula.', campoMatricula);
+      return;
+    }
+    window.location.href = PAGINA_LOGIN;
+    return;
+  }
+
   const textoOriginal = botaoCriar.textContent;
   botaoCriar.disabled = true;
   botaoCriar.textContent = 'Criando conta...';

@@ -24,9 +24,9 @@
         <h1>Criar conta</h1>
         <p>Cadastre-se para acessar a gestão de estoque do seu hospital.</p>
         <label for="nome">Nome completo</label>
-        <input class="field" id="nome" placeholder="Nome e sobrenome" autocomplete="name">
+        <input class="field" id="nome" placeholder="Nome e sobrenome" autocomplete="name" maxlength="100">
         <label for="mat">Usuário ou matrícula</label>
-        <input class="field" id="mat" placeholder="Ex.: 104532" autocomplete="username">
+        <input class="field" id="mat" placeholder="Ex.: 104532" autocomplete="username" maxlength="30">
         <label>Perfil de acesso</label>
         <div class="roles" id="roles">
           <button class="role on" type="button">Almoxarifado</button>
@@ -35,9 +35,9 @@
         </div>
         <p class="dica">Almoxarifado cadastra materiais e registra entradas e saídas.</p>
         <label for="pw">Senha</label>
-        <input class="field" id="pw" type="password" placeholder="••••••••" autocomplete="new-password">
+        <input class="field" id="pw" type="password" placeholder="••••••••" autocomplete="new-password" maxlength="72">
         <label for="pw2">Confirmar senha</label>
-        <input class="field" id="pw2" type="password" placeholder="••••••••" autocomplete="new-password">
+        <input class="field" id="pw2" type="password" placeholder="••••••••" autocomplete="new-password" maxlength="72">
         <button class="btn" id="criar" type="submit">Criar conta</button>
       </form>
     </section>
