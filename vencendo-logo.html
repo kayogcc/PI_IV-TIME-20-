@@ -32,7 +32,7 @@
               <path d="M12 7v5l3 2"/>
             </svg>
           </div>
-          <strong>2 itens</strong>
+          <strong id="qtd-alta"></strong>
           <em style="color:var(--red)">Vencem em até 7 dias</em>
         </div>
         <div class="card stat">
@@ -43,7 +43,7 @@
               <path d="M12 7v5l3 2"/>
             </svg>
           </div>
-          <strong>3 itens</strong>
+          <strong id="qtd-media"></strong>
           <em style="color:var(--amber)">Vencem em 8 a 15 dias</em>
         </div>
         <div class="card stat">
@@ -54,7 +54,7 @@
               <path d="M12 7v5l3 2"/>
             </svg>
           </div>
-          <strong>7 itens</strong>
+          <strong id="qtd-baixa"></strong>
           <em style="color:var(--blue)">Vencem em 16 a 30 dias</em>
         </div>
       </div>
@@ -63,7 +63,13 @@
         <div class="head">
           <div>
             <h3>Itens com validade próxima</h3>
-            <p>12 itens encontrados</p>
+            <p id="qtd-registros"></p>
+          </div>
+          <div class="seg" id="filtro-venc">
+            <button type="button" class="on" data-f="">Todos</button>
+            <button type="button" data-f="ex">Até 7 dias</button>
+            <button type="button" data-f="lo">8 a 15 dias</button>
+            <button type="button" data-f="in">16 a 30 dias</button>
           </div>
         </div>
 
@@ -79,113 +85,11 @@
                 <th>Vence em</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>Heparina 5.000 UI/ml</td>
-                <td>LT-1182H</td>
-                <td>Almoxarifado A</td>
-                <td>24 un.</td>
-                <td>31/10/2026</td>
-                <td><span class="b ex">3 dias</span></td>
-              </tr>
-              <tr>
-                <td>Luva cirúrgica M</td>
-                <td>LT-2406A</td>
-                <td>Centro Cirúrgico</td>
-                <td>180 un.</td>
-                <td>03/11/2026</td>
-                <td><span class="b ex">6 dias</span></td>
-              </tr>
-              <tr>
-                <td>Dipirona 500 mg/ml</td>
-                <td>LT-0931D</td>
-                <td>Almoxarifado B</td>
-                <td>60 un.</td>
-                <td>06/11/2026</td>
-                <td><span class="b lo">9 dias</span></td>
-              </tr>
-              <tr>
-                <td>Soro glicosado 5% 500 ml</td>
-                <td>LT-3310S</td>
-                <td>Almoxarifado B</td>
-                <td>45 un.</td>
-                <td>09/11/2026</td>
-                <td><span class="b lo">12 dias</span></td>
-              </tr>
-              <tr>
-                <td>Atadura de crepom 10 cm</td>
-                <td>LT-2275C</td>
-                <td>Almoxarifado A</td>
-                <td>90 un.</td>
-                <td>11/11/2026</td>
-                <td><span class="b lo">14 dias</span></td>
-              </tr>
-              <tr>
-                <td>Clorexidina degermante 2%</td>
-                <td>LT-0418K</td>
-                <td>Centro Cirúrgico</td>
-                <td>32 un.</td>
-                <td>14/11/2026</td>
-                <td><span class="b in">17 dias</span></td>
-              </tr>
-              <tr>
-                <td>Fio de sutura 3-0</td>
-                <td>LT-5521F</td>
-                <td>Centro Cirúrgico</td>
-                <td>75 un.</td>
-                <td>16/11/2026</td>
-                <td><span class="b in">19 dias</span></td>
-              </tr>
-              <tr>
-                <td>Esparadrapo 10 cm</td>
-                <td>LT-0657E</td>
-                <td>Almoxarifado A</td>
-                <td>35 un.</td>
-                <td>18/11/2026</td>
-                <td><span class="b in">21 dias</span></td>
-              </tr>
-              <tr>
-                <td>Soro fisiológico 500 ml</td>
-                <td>LT-7743R</td>
-                <td>Almoxarifado B</td>
-                <td>120 un.</td>
-                <td>21/11/2026</td>
-                <td><span class="b in">24 dias</span></td>
-              </tr>
-              <tr>
-                <td>Gaze estéril</td>
-                <td>LT-3089G</td>
-                <td>Almoxarifado B</td>
-                <td>200 un.</td>
-                <td>23/11/2026</td>
-                <td><span class="b in">26 dias</span></td>
-              </tr>
-              <tr>
-                <td>Álcool 70% 1 L</td>
-                <td>LT-1904L</td>
-                <td>Almoxarifado A</td>
-                <td>50 un.</td>
-                <td>25/11/2026</td>
-                <td><span class="b in">28 dias</span></td>
-              </tr>
-              <tr>
-                <td>Água destilada 500 ml</td>
-                <td>LT-6612W</td>
-                <td>Almoxarifado B</td>
-                <td>40 un.</td>
-                <td>27/11/2026</td>
-                <td><span class="b in">30 dias</span></td>
-              </tr>
-            </tbody>
+            <tbody id="t-vencendo"></tbody>
           </table>
         </div>
       </div>
     </main>
-
-    <!-- Só monta o cabeçalho/menu, igual às outras telas (arquivo já existente) -->
-    <script type="module">
-      import { montarLayout } from './src/componentes/estrutura.js'
-      montarLayout()
-    </script>
+    <script type="module" src="src/paginas/vencendo-logo.js"></script>
   </body>
 </html>

@@ -69,3 +69,19 @@ export const alertas = [
   { nivel: 'lo', titulo: 'Gaze estéril', detalhe: 'Estoque baixo · 60 un. (mín. 120)', prioridade: 'Média', tipoAlerta: 'estoque' },
   { nivel: 'in', titulo: 'Soro fisiológico 500 ml', detalhe: 'Validade próxima · vence em 24 dias', prioridade: 'Baixa', tipoAlerta: 'validade' }
 ]
+
+
+export const itensVencendo = [
+  { material: 'Heparina 5.000 UI/ml', lote: 'LT-1182H', local: 'Almoxarifado A', quantidade: 24, dias: 3 },
+  { material: 'Luva cirúrgica M', lote: 'LT-2406A', local: 'Centro Cirúrgico', quantidade: 180, dias: 6 },
+  { material: 'Dipirona 500 mg/ml', lote: 'LT-0931D', local: 'Almoxarifado B', quantidade: 60, dias: 9 },
+  { material: 'Soro glicosado 5% 500 ml', lote: 'LT-3310S', local: 'Almoxarifado B', quantidade: 45, dias: 12 },
+  { material: 'Atadura de crepom 10 cm', lote: 'LT-2275C', local: 'Almoxarifado A', quantidade: 90, dias: 14 },
+  { material: 'Clorexidina degermante 2%', lote: 'LT-0418K', local: 'Centro Cirúrgico', quantidade: 32, dias: 17 },
+  { material: 'Fio de sutura 3-0', lote: 'LT-5521F', local: 'Centro Cirúrgico', quantidade: 75, dias: 19 },
+  { material: 'Esparadrapo 10 cm', lote: 'LT-0657E', local: 'Almoxarifado A', quantidade: 35, dias: 21 },
+  { material: 'Soro fisiológico 500 ml', lote: 'LT-7743R', local: 'Almoxarifado B', quantidade: 120, dias: 24 },
+  { material: 'Gaze estéril', lote: 'LT-3089G', local: 'Almoxarifado B', quantidade: 200, dias: 26 },
+  { material: 'Álcool 70% 1 L', lote: 'LT-1904L', local: 'Almoxarifado A', quantidade: 50, dias: 28 },
+  { material: 'Água destilada 500 ml', lote: 'LT-6612W', local: 'Almoxarifado B', quantidade: 40, dias: 30 }
+]
