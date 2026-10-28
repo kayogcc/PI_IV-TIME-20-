@@ -1,205 +1,78 @@
-import { montarLayout } from "../componentes/estrutura.js";
-
-/*
- * Histórico de movimentações - EstoqueHosp
- * Dados de exemplo até a integração com o backend.
- */
-
-const listaHistorico = document.getElementById("l-hist");
-const filtros = document.getElementById("fm");
-
-// Dados fictícios para testar a interface.
-const movimentacoes = [
-  {
-    id: 1,
-    tipo: "e",
-    material: "Luvas cirúrgicas",
-    descricao: "Reposição de estoque",
-    quantidade: 50,
-    unidade: "caixas",
-    responsavel: "Carlos Eduardo",
-    data: "2026-10-20T08:30:00"
-  },
-  {
-    id: 2,
-    tipo: "s",
-    material: "Seringas descartáveis",
-    descricao: "Utilização no centro cirúrgico",
-    quantidade: 20,
-    unidade: "unidades",
-    responsavel: "Mariana Costa",
-    data: "2026-10-19T14:15:00"
-  },
-  {
-    id: 3,
-    tipo: "e",
-    material: "Máscaras cirúrgicas",
-    descricao: "Entrada por reposição",
-    quantidade: 100,
-    unidade: "unidades",
-    responsavel: "Carlos Eduardo",
-    data: "2026-10-18T10:00:00"
-  },
-  {
-    id: 4,
-    tipo: "s",
-    material: "Gazes esterilizadas",
-    descricao: "Separação de materiais",
-    quantidade: 30,
-    unidade: "pacotes",
-    responsavel: "Ana Souza",
-    data: "2026-10-17T16:45:00"
-  },
-  {
-    id: 5,
-    tipo: "e",
-    material: "Soro fisiológico",
-    descricao: "Recebimento de materiais",
-    quantidade: 40,
-    unidade: "frascos",
-    responsavel: "Mariana Costa",
-    data: "2026-10-16T09:20:00"
-  }
-];
-
-// Formata a data para o padrão brasileiro.
-function formatarData(data) {
-  return new Date(data).toLocaleString("pt-BR", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit"
-  });
-}
-
-// Cria um elemento HTML com texto seguro.
-function criarElemento(tag, classe, texto) {
-  const elemento = document.createElement(tag);
-
-  if (classe) {
-    elemento.className = classe;
-  }
-
-  if (texto !== undefined) {
-    elemento.textContent = texto;
-  }
-
-  return elemento;
-}
-
-// Monta um item da lista de movimentações.
-function criarItem(movimentacao) {
-  const item = document.createElement("li");
-  item.className = "movimentacao-item";
-
-  const conteudo = criarElemento("div", "movimentacao-conteudo");
-
-  const cabecalho = criarElemento("div", "movimentacao-cabecalho");
-
-  const material = criarElemento(
-    "h3",
-    "movimentacao-material",
-    movimentacao.material
-  );
-
-  const tipoTexto =
-    movimentacao.tipo === "e" ? "Entrada" : "Saída";
-
-  const tipo = criarElemento(
-    "span",
-    `movimentacao-tipo ${movimentacao.tipo === "e" ? "entrada" : "saida"}`,
-    tipoTexto
-  );
-
-  cabecalho.append(material, tipo);
-
-  const descricao = criarElemento(
-    "p",
-    "movimentacao-descricao",
-    movimentacao.descricao
-  );
-
-  const detalhes = criarElemento("div", "movimentacao-detalhes");
-
-  detalhes.append(
-    criarElemento(
-      "span",
-      "movimentacao-quantidade",
-      `${movimentacao.tipo === "e" ? "+" : "−"}${movimentacao.quantidade} ${movimentacao.unidade}`
-    ),
-    criarElemento(
-      "span",
-      "movimentacao-responsavel",
-      `Responsável: ${movimentacao.responsavel}`
-    ),
-    criarElemento(
-      "time",
-      "movimentacao-data",
-      formatarData(movimentacao.data)
-    )
-  );
-
-  item.append(conteudo);
-  conteudo.append(cabecalho, descricao, detalhes);
-
-  return item;
-}
-
-// Exibe as movimentações de acordo com o filtro selecionado.
-function renderizarHistorico(filtro = "") {
-  listaHistorico.replaceChildren();
-
-  const resultados = movimentacoes.filter((movimentacao) => {
-    return filtro === "" || movimentacao.tipo === filtro;
-  });
-
-  if (resultados.length === 0) {
-    const mensagem = criarElemento(
-      "li",
-      "historico-vazio",
-      "Nenhuma movimentação encontrada."
-    );
-
-    listaHistorico.appendChild(mensagem);
-    return;
-  }
-
-  resultados.forEach((movimentacao) => {
-    listaHistorico.appendChild(criarItem(movimentacao));
-  });
-}
-
-// Configura os botões Todas, Entradas e Saídas.
-function configurarFiltros() {
-  const botoes = filtros.querySelectorAll("button[data-f]");
-
-  botoes.forEach((botao) => {
-    botao.addEventListener("click", () => {
-      botoes.forEach((outroBotao) => {
-        outroBotao.classList.remove("on");
-      });
-
-      botao.classList.add("on");
-
-      renderizarHistorico(botao.dataset.f);
-    });
-  });
-}
-
-// Inicializa a página.
-function inicializarHistorico() {
-  if (!listaHistorico || !filtros) {
-    console.error(
-      "Não foi possível inicializar o histórico: elementos HTML não encontrados."
-    );
-    return;
-  }
-
-  configurarFiltros();
-  renderizarHistorico();
-}
+import { montarLayout } from '../componentes/estrutura.js'
+import { esc } from '../utilitarios/textos.js'
+import { datasSemana, diasSemana, movimentacoesSemana } from '../dados/dadosExemplo.js'
 
 if (montarLayout()) {
-  inicializarHistorico();
+  const $ = (id) => document.getElementById(id)
+  const num = (v) => v.toLocaleString('pt-BR')
+  // Compara sem diferenciar maiúsculas e acentos ("mascara" encontra "Máscara")
+  const normalizar = (t) => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+
+  // Mais recentes primeiro
+  const registros = [...movimentacoesSemana].reverse()
+
+  let filtroTipo = ''
+  let busca = ''
+
+  function rotuloDoDia(dia) {
+    const i = datasSemana.indexOf(dia)
+    return i >= 0 ? `${diasSemana[i]}, ${dia}` : dia
+  }
+
+  function itemHtml(m) {
+    const entrada = m.tipo === 'Entrada'
+    return `
+      <li>
+        <div class="dot ${entrada ? 'in' : 'nt'}">${entrada ? '↓' : '↑'}</div>
+        <div><b>${esc(m.material)}</b><small>${esc(m.tipo)} · ${esc(m.origem)} · ${esc(m.local)}</small></div>
+        <div class="hist-qtd">
+          <b class="${entrada ? 'entrada' : 'saida'}">${entrada ? '+' : '−'}${num(m.quantidade)} un.</b>
+          <small>${esc(m.data.split(' ')[1])}</small>
+        </div>
+      </li>`
+  }
+
+  function renderizar() {
+    const termo = normalizar(busca.trim())
+    const lista = registros.filter((m) =>
+      (!filtroTipo || m.tipo === filtroTipo) && (!termo || normalizar(m.material).includes(termo)))
+
+    $('hist-total').textContent = lista.length === 1 ? '1 movimentação' : `${lista.length} movimentações`
+
+    if (!lista.length) {
+      $('hist-dias').innerHTML = '<p class="hist-vazio">Nenhuma movimentação encontrada.</p>'
+      return
+    }
+
+    // Agrupa por dia, mantendo a ordem
+    const dias = new Map()
+    lista.forEach((m) => {
+      const dia = m.data.split(' ')[0]
+      if (!dias.has(dia)) dias.set(dia, [])
+      dias.get(dia).push(m)
+    })
+
+    $('hist-dias').innerHTML = [...dias].map(([dia, itens]) => {
+      const somar = (tipo) => itens.filter((m) => m.tipo === tipo).reduce((t, m) => t + m.quantidade, 0)
+      return `
+        <section class="hist-dia">
+          <h4><span>${esc(rotuloDoDia(dia))}</span><small>↓ ${num(somar('Entrada'))} · ↑ ${num(somar('Saída'))}</small></h4>
+          <ul class="list">${itens.map(itemHtml).join('')}</ul>
+        </section>`
+    }).join('')
+  }
+
+  $('fm').addEventListener('click', (e) => {
+    const botao = e.target.closest('button[data-f]')
+    if (!botao) return
+    filtroTipo = botao.dataset.f
+    renderizar()
+  })
+
+  $('hist-busca').addEventListener('input', (e) => {
+    busca = e.target.value
+    renderizar()
+  })
+
+  renderizar()
 }
