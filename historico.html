@@ -22,14 +22,18 @@
         </div>
         <div class="seg" id="fm">
           <button type="button" class="on" data-f="">Todas</button>
-          <button type="button" data-f="e">Entradas</button>
-          <button type="button" data-f="s">Saídas</button>
+          <button type="button" data-f="Entrada">Entradas</button>
+          <button type="button" data-f="Saída">Saídas</button>
         </div>
       </div>
       <div class="card">
-        <ul class="list" id="l-hist"></ul>
+        <div class="hist-head">
+          <p id="hist-total"></p>
+          <input class="field hist-busca" id="hist-busca" type="search" placeholder="Buscar material..." maxlength="120" autocomplete="off">
+        </div>
+        <div id="hist-dias"></div>
       </div>
     </main>
-    <script type="module" src="/src/paginas/historico.js"></script>
+    <script type="module" src="src/paginas/historico.js"></script>
   </body>
 </html>

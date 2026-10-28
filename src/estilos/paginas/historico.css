@@ -42,3 +42,66 @@
   min-width: 300px;
   max-width: 100%;
 }
+
+.hist-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.hist-head p {
+  margin: 0;
+  color: var(--mute);
+  font-size: 14px;
+}
+
+.hist-busca {
+  width: 280px;
+  max-width: 100%;
+  height: 40px;
+}
+
+.hist-dia h4 {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 24px 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.hist-dia h4 small {
+  color: var(--mute);
+  font-weight: 500;
+}
+
+.hist-qtd {
+  margin-left: auto;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.hist-qtd .entrada {
+  color: var(--blue);
+}
+
+.hist-qtd .saida {
+  color: var(--ink);
+}
+
+.hist-vazio {
+  margin: 24px 0 0;
+  color: var(--mute);
+  font-size: 14px;
+  text-align: center;
+}
+
+@media (max-width: 860px) {
+  .hist-busca {
+    width: 100%;
+  }
+}
