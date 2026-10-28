@@ -1,0 +1,40 @@
+/* Tela: itens vencendo logo + card clicável do painel */
+
+/* Card "Vencendo logo" do painel (mesmo comportamento do .stat-link, com destaque vermelho) */
+.stat-link-venc:hover {
+  border-color: var(--red);
+}
+
+.stat-link-venc:focus-visible {
+  outline-color: var(--red-soft);
+}
+
+/* Tabela de itens */
+.tabela-venc {
+  overflow-x: auto;
+}
+
+.tabela-venc table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.tabela-venc th,
+.tabela-venc td {
+  padding: 12px;
+  border-top: 1px solid var(--line);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.tabela-venc th {
+  border-top: 0;
+  color: var(--mute);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.tabela-venc td:first-child {
+  font-weight: 600;
+}
