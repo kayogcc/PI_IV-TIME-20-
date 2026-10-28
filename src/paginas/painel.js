@@ -19,9 +19,11 @@ if (usuario) {
 
   $('l-alertas').innerHTML = alertas.slice(0, 4).map((a) => `
     <li>
-      <div class="dot ${a.nivel}">!</div>
-      <div><b>${esc(a.titulo)}</b><small>${esc(a.detalhe)}</small></div>
-      <span class="tag" style="color:${corNivel[a.nivel]}">${esc(a.prioridade)}</span>
+      <a class="alerta-link" href="${a.tipoAlerta === 'estoque' ? 'estoque-baixo.html' : 'vencendo-logo.html'}" aria-label="${esc(`${a.titulo}: ${a.detalhe}`)}" title="Ver itens relacionados">
+        <div class="dot ${a.nivel}">!</div>
+        <div><b>${esc(a.titulo)}</b><small>${esc(a.detalhe)}</small></div>
+        <span class="tag" style="color:${corNivel[a.nivel]}">${esc(a.prioridade)}</span>
+      </a>
     </li>`).join('')
 
   $('l-mov').innerHTML = historico.slice(0, 3).map((h) => `

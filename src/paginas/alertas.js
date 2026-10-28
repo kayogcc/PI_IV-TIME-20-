@@ -12,9 +12,11 @@ if (montarLayout()) {
       .filter((a) => !tipo || a.tipoAlerta === tipo)
       .map((a) => `
         <li>
-          <div class="dot ${a.nivel}">!</div>
-          <div><b>${esc(a.titulo)}</b><small>${esc(a.detalhe)}</small></div>
-          <span class="tag">${badge(a.nivel, a.prioridade)}</span>
+          <a class="alerta-link" href="${a.tipoAlerta === 'estoque' ? 'estoque-baixo.html' : 'vencendo-logo.html'}" aria-label="${esc(`${a.titulo}: ${a.detalhe}`)}" title="Ver itens relacionados">
+            <div class="dot ${a.nivel}">!</div>
+            <div><b>${esc(a.titulo)}</b><small>${esc(a.detalhe)}</small></div>
+            <span class="tag">${badge(a.nivel, a.prioridade)}</span>
+          </a>
         </li>`).join('')
   }
 
