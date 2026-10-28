@@ -1,4 +1,3 @@
-# PI_IV-TIME-20-
 # EstoqueHosp — Plataforma de Automação e Gestão de Estoque Hospitalar
 
 **Projeto Integrador IV — Engenharia de Software**
@@ -56,14 +55,15 @@ O hospital começa no nível Bronze e pode evoluir sem trocar de sistema nem per
 
 | Tecnologia / Ferramenta | Descrição |
 |---|---|
-| Java 17+ | Linguagem de programação principal |
-| Spring Boot | Framework da API REST em camadas |
-| MongoDB | Banco de dados NoSQL orientado a documentos |
-| Spring Data MongoDB | Integração entre Java e MongoDB |
-| Spring Security | Autenticação e controle de acesso por perfil |
-| Maven | Gerenciamento de dependências e build |
-| React | Front-end web responsivo (leitura de código de barras pela câmera do celular) |
-| JUnit | Testes unitários e de integração |
+| Java 17+ | Linguagem de programação principal do back-end |
+| HttpServer (JDK) | Servidor da API REST, sem frameworks externos |
+| MongoDB Atlas | Banco de dados NoSQL orientado a documentos, hospedado na nuvem |
+| MongoDB Java Driver | Conexão entre o Java e o MongoDB |
+| Gson | Conversão entre objetos Java e JSON |
+| Maven | Gerenciamento de dependências e build do back-end |
+| JUnit 5 | Testes automatizados |
+| HTML, CSS e JavaScript | Front-end web responsivo |
+| Vite | Servidor de desenvolvimento e build do front-end |
 | Git + GitHub | Controle de versão e repositório |
 | GitHub Projects | Gerenciamento de tarefas e apontamento de esforço |
 | VSCode | IDE de desenvolvimento |
@@ -72,46 +72,54 @@ O hospital começa no nível Bronze e pode evoluir sem trocar de sistema nem per
 
 ### Pré-requisitos
 
-- Java JDK 17 ou superior instalado
-- Maven instalado
-- MongoDB instalado e em execução (porta padrão `27017`)
-- Node.js e npm instalados (front-end)
+- Java JDK 17 ou superior
+- Maven
+- Node.js 20.19 ou superior e npm
+- Acesso ao projeto do grupo no MongoDB Atlas
 
 ### Configuração do Banco de Dados
 
-1. Inicie o MongoDB. O banco do projeto é criado no primeiro uso; para criá-lo manualmente no `mongosh`:
+O banco fica no **MongoDB Atlas**. A string de conexão contém usuário e senha, por isso **nunca é colocada no código nem no repositório**: ela é lida da variável de ambiente `MONGO_URI`.
 
-```javascript
-use estoquehosp
+1. No Atlas, crie o seu usuário em **Database Access** (permissão *Read and write to any database*).
+2. Em **Network Access**, libere o seu IP atual (**Add Current IP Address**).
+3. Em **Connect → Drivers → Java**, copie a connection string e substitua `<db_password>` pela sua senha.
+4. Crie a variável de ambiente `MONGO_URI` com essa string. No Windows (PowerShell), uma linha por vez:
+
+```powershell
+$uri = Read-Host "Cole a connection string do Atlas"
+[Environment]::SetEnvironmentVariable("MONGO_URI", $uri, "User")
+Remove-Variable uri
 ```
 
-2. Configure a conexão no arquivo `src/main/resources/application.properties`:
-
-```properties
-spring.data.mongodb.uri=mongodb://localhost:27017/estoquehosp
-```
+5. Feche e abra o terminal (ou o VSCode) para a variável passar a valer.
 
 ### Executando o Sistema
 
 1. Clone o repositório: <https://github.com/kayogcc/PI_IV-TIME-20-.git>
 
-2. Execute a API (back-end):
+2. Teste a conexão com o banco (back-end):
 
 ```bash
-mvn spring-boot:run
+cd backend
+mvn test
 ```
 
-3. Execute o front-end:
+O resultado esperado é `BUILD SUCCESS`. O teste grava e lê um documento no banco `estoquehosp_teste`, separado dos dados reais.
+
+3. Execute o front-end, a partir da raiz do projeto:
 
 ```bash
-npm install
-npm start
+npm ci
+npm run dev
 ```
+
+O navegador abre na tela inicial do sistema.
+
+> **Situação atual:** a conexão com o banco já está funcionando e testada. A API REST está em desenvolvimento; até ela ficar pronta, as telas usam dados de exemplo (`src/dados/dadosExemplo.js`).
 
 4. Após o login, o sistema libera as telas conforme o perfil:
 
     - **Almoxarifado** — cadastro de materiais e registro de entradas e saídas
     - **Centro Cirúrgico** — consulta de materiais e registro de saídas
     - **Gestão** — usuários, limites de alerta, dashboard e histórico
-
-
