@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Itens cadastrados — EstoqueHosp</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🏥%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="src/estilos/principal.css" />
+  </head>
+  <body>
+    <header id="header"></header>
+
+    <main id="conteudo">
+      <div class="top">
+        <div>
+          <a class="voltar" href="index.html">Voltar ao painel</a>
+          <div class="eyebrow">Catálogo</div>
+          <h2>Itens cadastrados</h2>
+          <p class="sub">Consulte os materiais e seus níveis atuais de estoque.</p>
+        </div>
+      </div>
+
+      <section class="card">
+        <div class="head">
+          <div>
+            <h3>Todos os itens</h3>
+            <p id="qtd-itens"></p>
+          </div>
+          <label class="busca-itens">
+            <span class="sr-only">Buscar item pelo nome</span>
+            <input id="busca-itens" type="search" placeholder="Buscar item..." autocomplete="off" />
+          </label>
+        </div>
+
+        <div class="tabela-venc">
+          <table>
+            <thead>
+              <tr>
+                <th>Material</th>
+                <th>Quantidade atual</th>
+                <th>Mínimo permitido</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="t-itens"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="src/paginas/itens-cadastrados.js"></script>
+  </body>
+</html>

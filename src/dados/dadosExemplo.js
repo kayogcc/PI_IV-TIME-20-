@@ -10,6 +10,13 @@ export const resumo = {
   vencendoLogo: 12
 }
 
+export const itensCadastrados = [
+  { id: 1, nome: 'Cateter venoso 20G', quantidade: 4, minimo: 30 },
+  { id: 2, nome: 'Seringa 10 ml', quantidade: 85, minimo: 150 },
+  { id: 3, nome: 'Máscara cirúrgica', quantidade: 420, minimo: 200 },
+  { id: 4, nome: 'Gaze estéril', quantidade: 60, minimo: 120 }
+]
+
 // Datas dos últimos 7 dias, na mesma ordem de diasSemana
 export const datasSemana = ['12/10', '13/10', '14/10', '15/10', '16/10', '17/10', '18/10']
 

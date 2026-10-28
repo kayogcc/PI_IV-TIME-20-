@@ -26,6 +26,7 @@
 @import url('./paginas/movimentacao-estoque.css');
 @import url('./paginas/criar-conta.css');
 @import url('./paginas/vencendo-logo.css');
+@import url('./paginas/itens-cadastrados.css');
 
 /* 5. Responsivo (por último, para sobrescrever) */
 @import url('./responsivo.css');
