@@ -55,7 +55,7 @@ O hospital começa no nível Bronze e pode evoluir sem trocar de sistema nem per
 
 | Tecnologia / Ferramenta | Descrição |
 |---|---|
-| Java 17+ | Linguagem de programação principal do back-end |
+| Java 25 (LTS) | Linguagem de programação principal do back-end |
 | HttpServer (JDK) | Servidor da API REST, sem frameworks externos |
 | MongoDB Atlas | Banco de dados NoSQL orientado a documentos, hospedado na nuvem |
 | MongoDB Java Driver | Conexão entre o Java e o MongoDB |
@@ -72,7 +72,7 @@ O hospital começa no nível Bronze e pode evoluir sem trocar de sistema nem per
 
 ### Pré-requisitos
 
-- Java JDK 17 ou superior
+- Java JDK 25 (LTS) ou superior
 - Maven
 - Node.js 20.19 ou superior e npm
 - Acesso ao projeto do grupo no MongoDB Atlas
