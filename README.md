@@ -107,16 +107,55 @@ mvn test
 
 O resultado esperado é `BUILD SUCCESS`. O teste grava e lê um documento no banco `estoquehosp_teste`, separado dos dados reais.
 
-3. Execute o front-end, a partir da raiz do projeto:
+3. Na raiz do projeto, instale as dependências do front-end (só na primeira vez) e inicie o sistema:
 
 ```bash
 npm ci
+npm start
+```
+
+O `npm start` sobe a API (`http://localhost:8080/api`) e o front-end juntos, e o navegador abre na tela inicial. Para desligar tudo, aperte **Ctrl+C**.
+
+<details>
+<summary>Rodar a API e o front-end separados (dois terminais)</summary>
+
+```bash
+# Terminal 1 — API (para mudar a porta, defina a variável PORTA)
+cd backend
+mvn compile exec:java
+
+# Terminal 2 — front-end, na raiz do projeto
 npm run dev
 ```
 
-O navegador abre na tela inicial do sistema.
+O Vite repassa as chamadas para `/api` à API Java.
+</details>
 
-> **Situação atual:** a conexão com o banco já está funcionando e testada. A API REST está em desenvolvimento; até ela ficar pronta, as telas usam dados de exemplo (`src/dados/dadosExemplo.js`).
+> Todas as telas usam a API: não há mais dados de exemplo no front-end.
+
+### API REST
+
+Todas as respostas são JSON. Erros vêm como `{ "mensagem": "..." }`. Exceto cadastro e login, as rotas exigem o header `Authorization: Bearer <token>`, com o token devolvido pelo login (vale 8 horas).
+
+| Método | Rota | Quem pode | Descrição |
+|---|---|---|---|
+| POST | `/api/usuarios` | público | Cria conta: `{ nome, matricula, perfil, senha }`. 409 se a matrícula já existir |
+| POST | `/api/login` | público | `{ matricula, senha }` → `{ token, usuario }` |
+| POST | `/api/logout` | logado | Encerra a sessão |
+| GET | `/api/eu` | logado | Usuário do token |
+| GET | `/api/materiais?busca=` | logado | Lista materiais ativos (busca por nome ou código de barras) |
+| GET | `/api/materiais/{id}` | logado | Detalhe do material, com saldo por local |
+| POST | `/api/materiais` | Almoxarifado, Gestão | `{ nome, codigoBarras, lote, validade: "AAAA-MM-DD", quantidadeMinima }` |
+| PUT | `/api/materiais/{id}` | Almoxarifado, Gestão | Edita (mesmo corpo do POST) |
+| DELETE | `/api/materiais/{id}` | Almoxarifado, Gestão | Inativa o material (o histórico é mantido) |
+| POST | `/api/movimentacoes` | Almoxarifado, Centro Cirúrgico (só saída) | `{ material, tipo, origem, quantidade, local }`. 409 se o saldo no local for insuficiente |
+| GET | `/api/movimentacoes?dias=30&materialId=` | logado | Histórico, mais recentes primeiro |
+| GET | `/api/alertas` | logado | Estoque baixo e validade próxima (até 30 dias), mais urgentes primeiro |
+| GET | `/api/dashboard` | logado | Totais e entradas/saídas dos últimos 7 dias |
+
+Valores aceitos: `perfil` = `ALMOXARIFADO`, `CENTRO_CIRURGICO` ou `GESTAO`; `tipo` = `Entrada` ou `Saída`; `origem` = `Código de barras` ou `Manual`; `local` = `Almoxarifado A`, `Almoxarifado B` ou `Centro Cirúrgico`. Em movimentações, `material` pode ser o código de barras ou o nome do material.
+
+O código segue as camadas `controlador` → `servico` → `repositorio`, em `backend/src/main/java/br/puc/estoquehosp/`.
 
 4. Após o login, o sistema libera as telas conforme o perfil:
 
