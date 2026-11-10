@@ -45,6 +45,15 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.5.2</version>
       </plugin>
+      <!-- Sobe a API: mvn compile exec:java -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.5.0</version>
+        <configuration>
+          <mainClass>br.puc.estoquehosp.Aplicacao</mainClass>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 </project>
