@@ -29,3 +29,14 @@ dist/
 
 # Maven
 target/
+
+# Variáveis de ambiente (ex.: MONGO_URI com senha do Atlas)
+.env
+.env.*
+
+# Editores e sistema
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db
