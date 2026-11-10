@@ -1,23 +1,22 @@
 import { montarLayout } from '../componentes/estrutura.js'
+import { api } from '../servicos/api.js'
+import { diaMes, diaSemana, hora } from '../utilitarios/datas.js'
 import { esc } from '../utilitarios/textos.js'
-import { datasSemana, diasSemana, movimentacoesSemana } from '../dados/dadosExemplo.js'
+
+// Maior período que a API aceita em /movimentacoes
+const DIAS_HISTORICO = 365
 
 if (montarLayout()) {
   const $ = (id) => document.getElementById(id)
   const num = (v) => v.toLocaleString('pt-BR')
   // Compara sem diferenciar maiúsculas e acentos ("mascara" encontra "Máscara")
-  const normalizar = (t) => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+  const normalizar = (t) => t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
 
-  // Mais recentes primeiro
-  const registros = [...movimentacoesSemana].reverse()
+  // A API devolve os mais recentes primeiro
+  let registros = []
 
   let filtroTipo = ''
   let busca = ''
-
-  function rotuloDoDia(dia) {
-    const i = datasSemana.indexOf(dia)
-    return i >= 0 ? `${diasSemana[i]}, ${dia}` : dia
-  }
 
   function itemHtml(m) {
     const entrada = m.tipo === 'Entrada'
@@ -27,7 +26,7 @@ if (montarLayout()) {
         <div><b>${esc(m.material)}</b><small>${esc(m.tipo)} · ${esc(m.origem)} · ${esc(m.local)}</small></div>
         <div class="hist-qtd">
           <b class="${entrada ? 'entrada' : 'saida'}">${entrada ? '+' : '−'}${num(m.quantidade)} un.</b>
-          <small>${esc(m.data.split(' ')[1])}</small>
+          <small>${esc(hora(m.quando))}</small>
         </div>
       </li>`
   }
@@ -47,7 +46,7 @@ if (montarLayout()) {
     // Agrupa por dia, mantendo a ordem
     const dias = new Map()
     lista.forEach((m) => {
-      const dia = m.data.split(' ')[0]
+      const dia = `${diaSemana(m.quando)}, ${diaMes(m.quando)}`
       if (!dias.has(dia)) dias.set(dia, [])
       dias.get(dia).push(m)
     })
@@ -56,10 +55,21 @@ if (montarLayout()) {
       const somar = (tipo) => itens.filter((m) => m.tipo === tipo).reduce((t, m) => t + m.quantidade, 0)
       return `
         <section class="hist-dia">
-          <h4><span>${esc(rotuloDoDia(dia))}</span><small>↓ ${num(somar('Entrada'))} · ↑ ${num(somar('Saída'))}</small></h4>
+          <h4><span>${esc(dia)}</span><small>↓ ${num(somar('Entrada'))} · ↑ ${num(somar('Saída'))}</small></h4>
           <ul class="list">${itens.map(itemHtml).join('')}</ul>
         </section>`
     }).join('')
+  }
+
+  async function carregar() {
+    try {
+      const dados = await api('GET', `/movimentacoes?dias=${DIAS_HISTORICO}`)
+      registros = dados.map((m) => ({ ...m, quando: new Date(m.data) }))
+      renderizar()
+    } catch (erro) {
+      $('hist-total').textContent = ''
+      $('hist-dias').innerHTML = `<p class="hist-vazio">${esc(erro.message)}</p>`
+    }
   }
 
   $('fm').addEventListener('click', (e) => {
@@ -74,5 +84,5 @@ if (montarLayout()) {
     renderizar()
   })
 
-  renderizar()
+  carregar()
 }
