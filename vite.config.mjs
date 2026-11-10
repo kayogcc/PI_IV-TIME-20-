@@ -4,6 +4,12 @@ import { fileURLToPath } from 'node:url'
 const pagina = (arquivo) => fileURLToPath(new URL(`./${arquivo}`, import.meta.url))
 
 export default defineConfig({
+  // Em desenvolvimento, as chamadas para /api vão para a API Java (mvn compile exec:java, na pasta backend)
+  server: {
+    proxy: {
+      '/api': 'http://localhost:8080'
+    }
+  },
   build: {
     rollupOptions: {
       input: {

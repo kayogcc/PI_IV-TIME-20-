@@ -4,19 +4,7 @@ import { criarAviso, matriculaValida } from '../utilitarios/formulario.js'
 // Já está logado? Vai direto para o dashboard.
 if (usuarioAtual()) location.replace('index.html')
 
-// ⚠️ Protótipo: o seletor de perfil existe só na demonstração.
-// No sistema real o perfil vem da conta, definido pela Gestão (ver servicos/autenticacao.js).
-let perfil = 'Almoxarifado'
-const botoes = document.querySelectorAll('.role')
-
-botoes.forEach((botao) => {
-  botao.addEventListener('click', () => {
-    botoes.forEach((b) => b.classList.remove('on'))
-    botao.classList.add('on')
-    perfil = botao.textContent.trim()
-  })
-})
-
+// O perfil não é escolhido aqui: vem da conta, definido no cadastro.
 const form = document.getElementById('form-login')
 const campoMatricula = document.getElementById('mat')
 const campoSenha = document.getElementById('pw')
@@ -36,7 +24,7 @@ function validar() {
 }
 
 form.addEventListener('input', aviso.limpar)
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', async (e) => {
   e.preventDefault()
   aviso.limpar()
 
@@ -46,7 +34,15 @@ form.addEventListener('submit', (e) => {
     return
   }
 
-  // TODO: conferir matrícula e senha na API antes de entrar (ex.: POST /api/login)
-  login(perfil)
-  location.href = 'index.html'
+  const botao = document.getElementById('enter')
+  botao.disabled = true
+  botao.textContent = 'Entrando...'
+  try {
+    await login(campoMatricula.value.trim(), campoSenha.value)
+    location.href = 'index.html'
+  } catch (erro) {
+    aviso.erro(erro.message, erro.status === 401 ? campoSenha : null)
+    botao.disabled = false
+    botao.textContent = 'Entrar'
+  }
 })

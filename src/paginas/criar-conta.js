@@ -2,16 +2,15 @@
 
 import { criarAviso, matriculaValida } from '../utilitarios/formulario.js';
 
-// Ajuste aqui conforme a API do back-end (Spring Boot)
+// Ajuste aqui conforme a API do back-end (backend/, Java)
 const ENDPOINT_CADASTRO = '/api/usuarios';
 const PAGINA_LOGIN = '/entrar.html';
 const TAMANHO_MINIMO_SENHA = 8;
 const TAMANHO_MAXIMO_SENHA = 72;
 const TAMANHO_MAXIMO_NOME = 100;
 
-// ⚠️ Protótipo: enquanto o back-end não existe, a conta é salva só neste navegador.
-// Quando a API estiver pronta, troque para false.
-const SEM_BACKEND = true;
+// true: salva a conta só neste navegador (modo protótipo, sem a API rodando)
+const SEM_BACKEND = false;
 const CHAVE_CONTAS = 'estoquehosp:contas';
 
 // Texto do botão (como aparece na tela) -> valor enviado para a API + explicação do perfil

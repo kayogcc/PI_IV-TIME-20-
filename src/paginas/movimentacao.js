@@ -1,4 +1,5 @@
 import { montarLayout } from '../componentes/estrutura.js'
+import { api } from '../servicos/api.js'
 import { criarAviso } from '../utilitarios/formulario.js'
 
 const QUANTIDADE_MAXIMA = 100000
@@ -46,7 +47,7 @@ if (montarLayout()) {
   }
 
   form.addEventListener('input', aviso.limpar)
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault()
     aviso.limpar()
 
@@ -64,13 +65,19 @@ if (montarLayout()) {
       local: campoLocal.value
     }
 
-    // TODO: enviar para a API (ex.: POST /api/movimentacoes). Lá também é preciso
-    // recusar saída maior que o saldo do material no local.
-    console.log('Movimentação (demonstração):', dados)
-
-    aviso.sucesso(`${dados.tipo} de ${dados.quantidade} un. de ${dados.material} registrada.`)
-    campoMaterial.value = ''
-    campoQuantidade.value = ''
-    campoMaterial.focus()
+    // A API confere o saldo do local e recusa saída maior que ele (409)
+    const botao = $('confirmar')
+    botao.disabled = true
+    try {
+      const mov = await api('POST', '/movimentacoes', dados)
+      aviso.sucesso(`${mov.tipo} de ${mov.quantidade} un. de ${mov.material} registrada.`)
+      campoMaterial.value = ''
+      campoQuantidade.value = ''
+      campoMaterial.focus()
+    } catch (erro) {
+      const campo = erro.status === 404 ? campoMaterial : erro.status === 409 ? campoQuantidade : null
+      aviso.erro(erro.message, campo)
+    }
+    botao.disabled = false
   })
 }

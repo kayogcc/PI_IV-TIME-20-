@@ -22,6 +22,36 @@
         </div>
       </div>
 
+      <!-- Só aparece para Almoxarifado e Gestão (ver itens-cadastrados.js) -->
+      <form class="card" id="form-material" style="max-width:640px; margin-bottom:22px" novalidate hidden>
+        <h3>Cadastrar material</h3>
+        <label for="mat-nome">Nome do material</label>
+        <input class="field" id="mat-nome" placeholder="Ex.: Gaze estéril" maxlength="100" autocomplete="off">
+        <div class="fg">
+          <div>
+            <label for="mat-codigo">Código de barras <small>(opcional)</small></label>
+            <input class="field" id="mat-codigo" placeholder="Ex.: 7891234567890" maxlength="50" autocomplete="off">
+          </div>
+          <div>
+            <label for="mat-lote">Lote <small>(opcional)</small></label>
+            <input class="field" id="mat-lote" placeholder="Ex.: LT-3089G" maxlength="30" autocomplete="off">
+          </div>
+        </div>
+        <div class="fg">
+          <div>
+            <label for="mat-validade">Validade <small>(opcional)</small></label>
+            <input class="field" id="mat-validade" type="date">
+          </div>
+          <div>
+            <label for="mat-minimo">Quantidade mínima</label>
+            <input class="field" id="mat-minimo" type="number" min="0" max="100000" step="1" inputmode="numeric" placeholder="0">
+          </div>
+        </div>
+        <div class="acts">
+          <button class="btn" id="salvar-material" type="submit">Cadastrar material</button>
+        </div>
+      </form>
+
       <section class="card">
         <div class="head">
           <div>
@@ -41,6 +71,7 @@
                 <th>Material</th>
                 <th>Quantidade atual</th>
                 <th>Mínimo permitido</th>
+                <th>Validade</th>
                 <th>Status</th>
               </tr>
             </thead>

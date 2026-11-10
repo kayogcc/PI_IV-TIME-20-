@@ -1,31 +1,119 @@
 import { montarLayout } from '../componentes/estrutura.js'
-import { itensCadastrados } from '../dados/dadosExemplo.js'
+import { api } from '../servicos/api.js'
+import { criarAviso } from '../utilitarios/formulario.js'
 import { esc } from '../utilitarios/textos.js'
 
-if (montarLayout()) {
+const QUANTIDADE_MAXIMA = 100000
+const PERFIS_QUE_CADASTRAM = ['ALMOXARIFADO', 'GESTAO']
+
+const usuario = montarLayout()
+if (usuario) {
   const $ = (id) => document.getElementById(id)
   const num = (valor) => valor.toLocaleString('pt-BR')
+  // "2026-12-01" -> "01/12/2026"
+  const data = (iso) => (iso ? iso.split('-').reverse().join('/') : '—')
 
-  function renderizar(termo = '') {
-    const itens = itensCadastrados.filter((item) =>
-      item.nome.toLocaleLowerCase('pt-BR').includes(termo.trim().toLocaleLowerCase('pt-BR'))
+  let itens = []
+
+  function renderizar() {
+    const termo = $('busca-itens').value.trim().toLocaleLowerCase('pt-BR')
+    const filtrados = itens.filter((item) =>
+      item.nome.toLocaleLowerCase('pt-BR').includes(termo) || item.codigoBarras === termo
     )
 
-    $('qtd-itens').textContent = `${itens.length} ${itens.length === 1 ? 'item encontrado' : 'itens encontrados'}`
-    $('t-itens').innerHTML = itens.length
-      ? itens.map((item) => {
-        const estoqueBaixo = item.quantidade <= item.minimo
+    $('qtd-itens').textContent = `${filtrados.length} ${filtrados.length === 1 ? 'item encontrado' : 'itens encontrados'}`
+    $('t-itens').innerHTML = filtrados.length
+      ? filtrados.map((item) => {
+        const estoqueBaixo = item.quantidade <= item.quantidadeMinima
         return `
           <tr>
             <td>${esc(item.nome)}</td>
             <td>${esc(num(item.quantidade))} un.</td>
-            <td>${esc(num(item.minimo))} un.</td>
+            <td>${esc(num(item.quantidadeMinima))} un.</td>
+            <td>${esc(data(item.validade))}</td>
             <td><span class="tag" style="color:${estoqueBaixo ? 'var(--amber)' : 'var(--green)'}">${estoqueBaixo ? 'Estoque baixo' : 'Normal'}</span></td>
           </tr>`
       }).join('')
-      : '<tr><td class="vazio" colspan="4">Nenhum item encontrado.</td></tr>'
+      : '<tr><td class="vazio" colspan="5">Nenhum item encontrado.</td></tr>'
   }
 
-  $('busca-itens').addEventListener('input', (e) => renderizar(e.target.value))
-  renderizar()
+  async function carregar() {
+    try {
+      itens = await api('GET', '/materiais')
+      renderizar()
+    } catch (erro) {
+      $('qtd-itens').textContent = ''
+      $('t-itens').innerHTML = `<tr><td class="vazio" colspan="5">${esc(erro.message)}</td></tr>`
+    }
+  }
+
+  $('busca-itens').addEventListener('input', renderizar)
+  carregar()
+
+  if (PERFIS_QUE_CADASTRAM.includes(usuario.perfil)) {
+    const form = $('form-material')
+    const campoNome = $('mat-nome')
+    const campoCodigo = $('mat-codigo')
+    const campoLote = $('mat-lote')
+    const campoValidade = $('mat-validade')
+    const campoMinimo = $('mat-minimo')
+    const botao = $('salvar-material')
+    const aviso = criarAviso(form, form.querySelector('.acts'))
+    form.hidden = false
+
+    // Mesmas regras da API (MaterialServico.java)
+    function validar() {
+      const nome = campoNome.value.trim()
+      const codigo = campoCodigo.value.trim()
+      const minimo = Number(campoMinimo.value)
+
+      if (nome.length < 2) return { mensagem: 'Informe o nome do material.', campo: campoNome }
+      if (codigo && !/^[A-Za-z0-9-]{4,50}$/.test(codigo)) {
+        return { mensagem: 'Código de barras inválido: use de 4 a 50 letras, números ou hífen.', campo: campoCodigo }
+      }
+      if (campoValidade.validity.badInput) return { mensagem: 'Validade inválida.', campo: campoValidade }
+      if (!campoMinimo.value.trim()) {
+        const mensagem = campoMinimo.validity.badInput ? 'A quantidade mínima deve ser um número.' : 'Informe a quantidade mínima.'
+        return { mensagem, campo: campoMinimo }
+      }
+      if (!Number.isInteger(minimo) || minimo < 0 || minimo > QUANTIDADE_MAXIMA) {
+        return { mensagem: `A quantidade mínima deve ser um número inteiro de 0 a ${num(QUANTIDADE_MAXIMA)}.`, campo: campoMinimo }
+      }
+      return null
+    }
+
+    form.addEventListener('input', aviso.limpar)
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault()
+      aviso.limpar()
+
+      const problema = validar()
+      if (problema) {
+        aviso.erro(problema.mensagem, problema.campo)
+        return
+      }
+
+      botao.disabled = true
+      botao.textContent = 'Cadastrando...'
+      try {
+        const material = await api('POST', '/materiais', {
+          nome: campoNome.value.trim(),
+          codigoBarras: campoCodigo.value.trim() || null,
+          lote: campoLote.value.trim() || null,
+          validade: campoValidade.value || null,
+          quantidadeMinima: Number(campoMinimo.value)
+        })
+        form.reset()
+        aviso.sucesso(`${material.nome} cadastrado. Registre uma entrada para lançar o estoque inicial.`)
+        await carregar()
+        campoNome.focus()
+      } catch (erro) {
+        // 409: nome ou código de barras repetido
+        const campo = erro.status === 409 ? (/código/i.test(erro.message) ? campoCodigo : campoNome) : null
+        aviso.erro(erro.message, campo)
+      }
+      botao.disabled = false
+      botao.textContent = 'Cadastrar material'
+    })
+  }
 }
