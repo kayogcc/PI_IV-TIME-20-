@@ -1,4 +1,3 @@
-
 package br.puc.estoquehosp.banco;
 
 import org.junit.jupiter.api.Test;
@@ -56,9 +55,6 @@ class ConexaoMongoTest {
             assertNotNull(conexao.banco());
         }
     }
-}
-
-
 
     // CT-06: Verifica se a conexão identifica servidor indisponível
     @Test
@@ -73,3 +69,4 @@ class ConexaoMongoTest {
             );
         }
     }
+}
