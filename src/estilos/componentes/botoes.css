@@ -16,3 +16,14 @@
 .btn:hover {
   filter: brightness(1.08);
 }
+
+.btn-secundario {
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+}
+
+.btn-secundario:focus-visible {
+  outline: 3px solid var(--blue-soft);
+  outline-offset: 2px;
+}

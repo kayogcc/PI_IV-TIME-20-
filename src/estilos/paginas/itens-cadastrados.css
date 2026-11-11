@@ -50,3 +50,40 @@
     width: 100%;
   }
 }
+
+
+/* Botões de editar / inativar em cada linha da tabela */
+.acoes-item {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.btn-texto {
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--card);
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-texto:hover {
+  background: var(--blue-soft);
+}
+
+.btn-texto.perigo {
+  color: var(--red);
+}
+
+.btn-texto.perigo:hover {
+  background: var(--red-soft);
+}
+
+.btn-texto:focus-visible {
+  outline: 3px solid var(--blue-soft);
+  outline-offset: 2px;
+}
