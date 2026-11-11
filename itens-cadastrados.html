@@ -24,7 +24,7 @@
 
       <!-- Só aparece para Almoxarifado e Gestão (ver itens-cadastrados.js) -->
       <form class="card" id="form-material" style="max-width:640px; margin-bottom:22px" novalidate hidden>
-        <h3>Cadastrar material</h3>
+        <h3 id="titulo-form">Cadastrar material</h3>
         <label for="mat-nome">Nome do material</label>
         <input class="field" id="mat-nome" placeholder="Ex.: Gaze estéril" maxlength="100" autocomplete="off">
         <div class="fg">
@@ -49,6 +49,7 @@
         </div>
         <div class="acts">
           <button class="btn" id="salvar-material" type="submit">Cadastrar material</button>
+          <button class="btn btn-secundario" id="cancelar-edicao" type="button" hidden>Cancelar edição</button>
         </div>
       </form>
 
@@ -73,6 +74,8 @@
                 <th>Mínimo permitido</th>
                 <th>Validade</th>
                 <th>Status</th>
+                <th class="col-acoes" hidden><span class="sr-only">Ações</span></th>
+
               </tr>
             </thead>
             <tbody id="t-itens"></tbody>
