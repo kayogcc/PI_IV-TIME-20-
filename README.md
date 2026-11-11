@@ -94,6 +94,14 @@ Remove-Variable uri
 
 5. Feche e abra o terminal (ou o VSCode) para a variável passar a valer.
 
+Para criar/preparar as coleções no Atlas, faça backup dos dados existentes e execute o script a partir da raiz do projeto:
+
+```powershell
+mongosh "<URI_DO_ATLAS>" --file backend/scripts/configurar-atlas.js
+```
+
+Substitua `<URI_DO_ATLAS>` localmente pela URI do Atlas; não a salve no repositório nem a envie no chat. O script configura `usuarios`, `materiais` e `movimentacoes`, aplica validadores e cria índices. Coleções novas recebem validação estrita; coleções existentes ficam inicialmente em `moderate/warn` para não bloquear dados antigos. Revise os documentos e logs antes de mudar as coleções existentes para `strict/error`. A aplicação também cria os índices necessários ao iniciar.
+
 ### Executando o Sistema
 
 1. Clone o repositório: <https://github.com/kayogcc/PI_IV-TIME-20-.git>
