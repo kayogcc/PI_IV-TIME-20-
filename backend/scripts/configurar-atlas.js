@@ -11,7 +11,7 @@ const esquemas = {
       nome: { bsonType: "string", minLength: 3, maxLength: 100 },
       matricula: { bsonType: "string", minLength: 3, maxLength: 30 },
       matriculaChave: { bsonType: "string", minLength: 3, maxLength: 30 },
-      perfil: { enum: ["ALMOXARIFADO", "CENTRO_CIRURGICO", "GESTAO"] },
+      perfil: { bsonType: "string", enum: ["ALMOXARIFADO", "CENTRO_CIRURGICO", "GESTAO"] },
       hashSenha: { bsonType: "string", minLength: 1 }
     }
   },
@@ -20,7 +20,10 @@ const esquemas = {
     required: ["nome", "codigoBarras", "lote", "validade", "quantidadeMinima", "saldos", "ativo"],
     properties: {
       nome: { bsonType: "string", minLength: 2, maxLength: 100 },
-      codigoBarras: { bsonType: ["string", "null"], maxLength: 50 },
+      codigoBarras: {
+        bsonType: ["string", "null"],
+        pattern: "^[A-Za-z0-9-]{4,50}$"
+      },
       lote: { bsonType: ["string", "null"], maxLength: 30 },
       validade: { bsonType: ["string", "null"], pattern: "^\\d{4}-\\d{2}-\\d{2}$" },
       quantidadeMinima: { bsonType: "int", minimum: 0, maximum: 100000 },
@@ -38,10 +41,13 @@ const esquemas = {
       data: { bsonType: "date" },
       materialId: { bsonType: "string", minLength: 1 },
       material: { bsonType: "string", minLength: 1, maxLength: 100 },
-      tipo: { enum: ["Entrada", "Saída"] },
+      tipo: { bsonType: "string", enum: ["Entrada", "Saída"] },
       quantidade: { bsonType: "int", minimum: 1, maximum: 100000 },
-      origem: { enum: ["Código de barras", "Manual"] },
-      local: { bsonType: "string", minLength: 1, maxLength: 100 },
+      origem: { bsonType: "string", enum: ["Código de barras", "Manual"] },
+      local: {
+        bsonType: "string",
+        enum: ["Almoxarifado A", "Almoxarifado B", "Centro Cirúrgico"]
+      },
       usuario: { bsonType: "string", minLength: 1, maxLength: 100 }
     }
   }
