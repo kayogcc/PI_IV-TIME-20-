@@ -4,7 +4,8 @@
   "description": "**Projeto Integrador IV — Engenharia de Software**\r **PUC Campinas — 2026**",
   "main": "inicio.js",
   "scripts": {
-    "start": "node scripts/iniciar.mjs",    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node scripts/iniciar.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite --host 127.0.0.1 --open /inicio.html",
     "build": "vite build",
     "preview": "vite preview"
@@ -23,5 +24,9 @@
   "homepage": "https://github.com/kayogcc/PI_IV-TIME-20-#readme",
   "devDependencies": {
     "vite": "^8.3.4"
+  },
+  "dependencies": {
+    "@zxing/browser": "^0.1.5",
+    "@zxing/library": "^0.21.3"
   }
 }
