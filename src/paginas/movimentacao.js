@@ -1,3 +1,4 @@
+import { BrowserMultiFormatReader } from '@zxing/browser'
 import { montarLayout } from '../componentes/estrutura.js'
 import { api } from '../servicos/api.js'
 import { criarAviso } from '../utilitarios/formulario.js'
@@ -14,6 +15,46 @@ if (montarLayout()) {
   const aviso = criarAviso(form, form.querySelector('.acts'))
 
   const opcaoSelecionada = (idGrupo) => $(idGrupo).querySelector('button.on').textContent.trim()
+
+  // ---------- Leitura do código de barras pela câmera ----------
+
+  const leitorDeCodigo = new BrowserMultiFormatReader()
+  let camera = null // controles da câmera enquanto ela está ligada
+
+  function fecharCamera() {
+    if (camera) camera.stop()
+    camera = null
+    $('leitor').hidden = true
+  }
+
+  $('abrir-camera').addEventListener('click', async () => {
+    aviso.limpar()
+    $('leitor').hidden = false
+    try {
+      // facingMode "environment": câmera de trás no celular; no notebook, usa a webcam
+      camera = await leitorDeCodigo.decodeFromConstraints(
+        { video: { facingMode: 'environment' } },
+        $('video-leitor'),
+        (resultado, erro, controles) => {
+          if (!resultado) return // ainda não achou um código neste quadro
+          controles.stop()
+          camera = null
+          $('leitor').hidden = true
+          campoMaterial.value = resultado.getText()
+          // Marca a origem como "Código de barras"
+          $('seg-origem').querySelectorAll('button').forEach((b) => b.classList.toggle('on', b.textContent.trim() === 'Código de barras'))
+          campoQuantidade.focus()
+        }
+      )
+    } catch {
+      fecharCamera()
+      aviso.erro('Não foi possível abrir a câmera. Verifique se o navegador tem permissão para usá-la.')
+    }
+  })
+
+  $('fechar-camera').addEventListener('click', fecharCamera)
+
+  // ---------- Registro da movimentação ----------
 
   function validar() {
     const material = campoMaterial.value.trim()

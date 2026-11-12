@@ -32,7 +32,14 @@
           <button type="button">Manual</button>
         </div>
         <label for="material">Material</label>
-        <input class="field" id="material" placeholder="Leia o código ou busque pelo nome..." maxlength="120" autocomplete="off">
+        <div class="campo-com-botao">
+          <input class="field" id="material" placeholder="Leia o código ou busque pelo nome..." maxlength="120" autocomplete="off">
+          <button type="button" class="btn-camera" id="abrir-camera">📷 Câmera</button>
+        </div>
+        <div id="leitor" hidden>
+          <video class="video-leitor" id="video-leitor" muted playsinline></video>
+          <button type="button" class="btn btn-secundario" id="fechar-camera">Cancelar</button>
+        </div>
         <div class="fg">
           <div>
             <label for="quantidade">Quantidade</label>
