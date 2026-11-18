@@ -4,6 +4,7 @@ import br.puc.estoquehosp.http.ErroApi;
 import br.puc.estoquehosp.http.Sessoes;
 import br.puc.estoquehosp.banco.ConexaoMongo;
 import br.puc.estoquehosp.modelo.Alerta;
+import br.puc.estoquehosp.modelo.Entradas.DadosMaterial;
 import br.puc.estoquehosp.modelo.Entradas.Login;
 import br.puc.estoquehosp.modelo.Entradas.NovaMovimentacao;
 import br.puc.estoquehosp.modelo.Material;
@@ -22,6 +23,9 @@ import com.mongodb.client.MongoDatabase;
 import java.io.*;
 import java.net.*;
 import java.util.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.concurrent.Semaphore;
 
 // Servidor e cliente de sockets do EstoqueHosp, no modelo do "Fazedor de Continhas".
@@ -107,6 +111,31 @@ public class SocketEstoque {
         public String  getOrigem()     { return this.origem; }
         public Integer getQuantidade() { return this.quantidade; }
         public String  getLocal()      { return this.local; }
+    }
+
+    // Cadastro de um material novo. codigoBarras, lote e validade são opcionais (null).
+    // validade no formato AAAA-MM-DD (o cliente converte do DD/MM/AAAA digitado)
+    public static class PedidoDeCadastro extends Comunicado {
+        private static final long serialVersionUID = 1L;
+        private final String  nome;
+        private final String  codigoBarras;
+        private final String  lote;
+        private final String  validade;
+        private final Integer quantidadeMinima;
+
+        public PedidoDeCadastro(String nome, String codigoBarras, String lote, String validade, Integer quantidadeMinima) {
+            this.nome             = nome;
+            this.codigoBarras     = codigoBarras;
+            this.lote             = lote;
+            this.validade         = validade;
+            this.quantidadeMinima = quantidadeMinima;
+        }
+
+        public String  getNome()             { return this.nome; }
+        public String  getCodigoBarras()     { return this.codigoBarras; }
+        public String  getLote()             { return this.lote; }
+        public String  getValidade()         { return this.validade; }
+        public Integer getQuantidadeMinima() { return this.quantidadeMinima; }
     }
 
     // Resposta do servidor para qualquer pedido
@@ -365,6 +394,8 @@ public class SocketEstoque {
                     ArrayList<String> linhas = new ArrayList<>();
                     for (Material m : servicos.materiais().listar(pedido.getBusca()))
                         linhas.add(m.nome() + " | cód. " + (m.codigoBarras() == null ? "-" : m.codigoBarras())
+                                + " | lote " + (m.lote() == null ? "-" : m.lote())
+                                + " | validade " + formatarValidade(m.validade())
                                 + " | total " + m.quantidade() + " un. (mín. " + m.quantidadeMinima() + ") | " + m.saldos());
                     return Resultado.ok(linhas.isEmpty() ? "Nenhum material encontrado." : null, linhas);
                 }
@@ -388,6 +419,18 @@ public class SocketEstoque {
                             + " un. de " + mov.material() + " (" + mov.local() + ").");
                 }
 
+                if (comunicado instanceof PedidoDeCadastro pedido) {
+                    // Mesma regra da API: só Almoxarifado e Gestão cadastram materiais
+                    if (this.usuarioLogado.perfil() == Perfil.CENTRO_CIRURGICO)
+                        return Resultado.falha("Seu perfil não tem permissão para esta ação.");
+
+                    Material m = servicos.materiais().criar(new DadosMaterial(
+                            pedido.getNome(), pedido.getCodigoBarras(), pedido.getLote(),
+                            pedido.getValidade(), pedido.getQuantidadeMinima()));
+                    return Resultado.ok("Material cadastrado: " + m.nome() + " (validade "
+                            + formatarValidade(m.validade()) + "). Registre uma entrada para lançar o estoque inicial.");
+                }
+
                 return Resultado.falha("Pedido desconhecido.");
             } catch (ErroApi erro) {
                 return Resultado.falha(erro.getMessage()); // saldo insuficiente, material não encontrado...
@@ -395,6 +438,16 @@ public class SocketEstoque {
                 erro.printStackTrace();
                 return Resultado.falha("Erro interno no servidor.");
             }
+        }
+    }
+
+    // AAAA-MM-DD (banco) -> DD/MM/AAAA (tela)
+    private static String formatarValidade(String validade) {
+        if (validade == null) return "-";
+        try {
+            return LocalDate.parse(validade).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        } catch (Exception erro) {
+            return validade;
         }
     }
 
@@ -533,7 +586,7 @@ public class SocketEstoque {
                 // ----- MENU -----
                 char opcao = ' ';
                 do {
-                    System.out.print("Sua opcao ([M]ateriais, [E]ntrada, [S]aida, [A]lertas, [T]erminar)? ");
+                    System.out.print("Sua opcao ([M]ateriais, [C]adastrar, [E]ntrada, [S]aida, [A]lertas, [T]erminar)? ");
                     try {
                         opcao = Character.toUpperCase(Teclado.getUmChar());
                     } catch (Exception erro) {
@@ -541,7 +594,7 @@ public class SocketEstoque {
                         continue;
                     }
 
-                    if ("MESAT".indexOf(opcao) == -1) {
+                    if ("MCESAT".indexOf(opcao) == -1) {
                         System.err.println("Opcao invalida!\n");
                         continue;
                     }
@@ -554,6 +607,7 @@ public class SocketEstoque {
                                 mostrar(pedir(servidor, new PedidoDeMateriais(
                                         busca == null || busca.isBlank() ? null : busca)));
                                 break;
+                            case 'C': cadastrar(servidor); break;
                             case 'E': movimentar(servidor, "Entrada"); break;
                             case 'S': movimentar(servidor, "Saída");   break;
                             case 'A': mostrar(pedir(servidor, new PedidoDeAlertas())); break;
@@ -622,6 +676,48 @@ public class SocketEstoque {
             }
 
             mostrar(pedir(servidor, new PedidoDeMovimentacao(material, tipo, origem, quantidade, LOCAIS[local - 1])));
+        }
+
+        private static final DateTimeFormatter DATA_DIGITADA =
+                DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
+
+        private static void cadastrar(Parceiro servidor) throws Exception {
+            System.out.print("Nome do material? ");
+            String nome = Teclado.getUmString();
+
+            System.out.print("Codigo de barras (enter = sem codigo)? ");
+            String codigo = Teclado.getUmString();
+
+            System.out.print("Lote (enter = sem lote)? ");
+            String lote = Teclado.getUmString();
+
+            String validade = null;
+            for (;;) {
+                System.out.print("Validade DD/MM/AAAA (enter = sem validade)? ");
+                String digitada = Teclado.getUmString();
+                if (digitada == null || digitada.isBlank()) break;
+                try {
+                    validade = LocalDate.parse(digitada.trim(), DATA_DIGITADA).toString(); // AAAA-MM-DD
+                    break;
+                } catch (Exception erro) {
+                    System.err.println("Data invalida! Use o formato DD/MM/AAAA, ex.: 31/12/2027.");
+                }
+            }
+
+            int minimo;
+            try {
+                System.out.print("Quantidade minima? ");
+                minimo = Teclado.getUmInt();
+            } catch (Exception erro) {
+                System.err.println("Quantidade minima invalida!\n");
+                return;
+            }
+
+            mostrar(pedir(servidor, new PedidoDeCadastro(nome, vazioParaNull(codigo), vazioParaNull(lote), validade, minimo)));
+        }
+
+        private static String vazioParaNull(String texto) {
+            return texto == null || texto.isBlank() ? null : texto.trim();
         }
 
         private static String lerSenha() {
