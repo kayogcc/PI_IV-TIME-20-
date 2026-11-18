@@ -1,7 +1,7 @@
 import { montarLayout } from '../componentes/estrutura.js'
 import { api } from '../servicos/api.js'
 import { criarAviso } from '../utilitarios/formulario.js'
-import { esc } from '../utilitarios/textos.js'
+import { esc, normalizar } from '../utilitarios/textos.js'
 
 const QUANTIDADE_MAXIMA = 100000
 const PERFIS_QUE_CADASTRAM = ['ALMOXARIFADO', 'GESTAO']
@@ -29,9 +29,10 @@ if (usuario) {
   }
 
   function renderizar() {
-    const termo = $('busca-itens').value.trim().toLocaleLowerCase('pt-BR')
+    // Ignora maiúsculas, acentos e espaços extras: "gaze esteril" encontra "Gaze Estéril"
+    const termo = normalizar($('busca-itens').value)
     const filtrados = itens.filter((item) =>
-      item.nome.toLocaleLowerCase('pt-BR').includes(termo) || item.codigoBarras === termo
+      !termo || normalizar(item.nome).includes(termo) || normalizar(item.codigoBarras).includes(termo)
     )
 
     $('qtd-itens').textContent = `${filtrados.length} ${filtrados.length === 1 ? 'item encontrado' : 'itens encontrados'}`

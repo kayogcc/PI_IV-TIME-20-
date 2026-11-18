@@ -14,12 +14,13 @@ import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
-import java.util.regex.Pattern;
 
 // Coleção "materiais". O saldo fica em "saldos": { "Almoxarifado A": 120, "Centro Cirúrgico": 30 }.
 public class MaterialRepositorio {
@@ -34,28 +35,54 @@ public class MaterialRepositorio {
         colecao.createIndex(Indexes.ascending("codigoBarras"));
     }
 
+    // Busca por parte do nome ou do código de barras, sem diferenciar maiúsculas nem acentos
+    // ("gaze esteril" encontra "Gaze Estéril"). O filtro é feito aqui no Java porque o regex
+    // do MongoDB não ignora acentos.
     public List<Material> listarAtivos(String busca) {
-        Bson filtro = Filters.eq("ativo", true);
-        if (busca != null && !busca.isBlank()) {
-            Pattern contem = Pattern.compile(Pattern.quote(busca.trim()), Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
-            filtro = Filters.and(filtro, Filters.or(Filters.regex("nome", contem), Filters.eq("codigoBarras", busca.trim())));
-        }
+        String termo = busca == null ? "" : normalizar(busca);
         List<Material> materiais = new ArrayList<>();
-        colecao.find(filtro).collation(SEM_ACENTO).sort(Sorts.ascending("nome")).forEach(d -> materiais.add(paraMaterial(d)));
+        colecao.find(Filters.eq("ativo", true)).collation(SEM_ACENTO).sort(Sorts.ascending("nome"))
+                .forEach(d -> {
+                    Material m = paraMaterial(d);
+                    if (termo.isEmpty() || corresponde(m, termo)) materiais.add(m);
+                });
         return materiais;
+    }
+
+    // true se o termo (já normalizado) aparece no nome ou no código de barras do material
+    static boolean corresponde(Material m, String termoNormalizado) {
+        return normalizar(m.nome()).contains(termoNormalizado)
+                || normalizar(m.codigoBarras()).contains(termoNormalizado);
+    }
+
+    // "  Gaze  Estéril " -> "gaze esteril"
+    public static String normalizar(String texto) {
+        if (texto == null) return "";
+        String semAcento = Normalizer.normalize(texto, Normalizer.Form.NFD).replaceAll("\\p{M}+", "");
+        return semAcento.trim().replaceAll("\\s+", " ").toLowerCase(Locale.ROOT);
     }
 
     public Optional<Material> buscarPorId(String id) {
         return UsuarioRepositorio.idValido(id).map(oid -> colecao.find(Filters.eq("_id", oid)).first()).map(MaterialRepositorio::paraMaterial);
     }
 
-    // Procura primeiro pelo código de barras e, se não achar, pelo nome exato (sem diferenciar maiúsculas/acentos)
+    // Procura pelo código de barras e, se não achar, pelo nome exato (sem diferenciar maiúsculas/acentos).
+    // Se ainda não achar, aceita parte do nome desde que só um material corresponda (ex.: "luva" -> "Luva de procedimento").
     public Optional<Material> buscarAtivoPorCodigoOuNome(String texto) {
-        Document doc = colecao.find(Filters.and(Filters.eq("ativo", true), Filters.eq("codigoBarras", texto))).first();
+        String limpo = texto == null ? "" : texto.trim();
+        Document doc = colecao.find(Filters.and(Filters.eq("ativo", true), Filters.eq("codigoBarras", limpo))).first();
         if (doc == null) {
-            doc = colecao.find(Filters.and(Filters.eq("ativo", true), Filters.eq("nome", texto))).collation(SEM_ACENTO).first();
+            doc = colecao.find(Filters.and(Filters.eq("ativo", true), Filters.eq("nome", limpo))).collation(SEM_ACENTO).first();
         }
-        return Optional.ofNullable(doc).map(MaterialRepositorio::paraMaterial);
+        if (doc != null) return Optional.of(paraMaterial(doc));
+
+        String termo = normalizar(limpo);
+        List<Material> parecidos = listarAtivos(limpo);
+        Optional<Material> exato = parecidos.stream()
+                .filter(m -> normalizar(m.nome()).equals(termo) || normalizar(m.codigoBarras()).equals(termo))
+                .findFirst();
+        if (exato.isPresent()) return exato;
+        return parecidos.size() == 1 ? Optional.of(parecidos.get(0)) : Optional.empty();
     }
 
     public boolean existeAtivoComCodigo(String codigoBarras, String ignorarId) {

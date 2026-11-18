@@ -2,6 +2,7 @@ import { BrowserMultiFormatReader } from '@zxing/browser'
 import { montarLayout } from '../componentes/estrutura.js'
 import { api } from '../servicos/api.js'
 import { criarAviso } from '../utilitarios/formulario.js'
+import { esc } from '../utilitarios/textos.js'
 
 const QUANTIDADE_MAXIMA = 100000
 const LOCAIS = ['Almoxarifado A', 'Almoxarifado B', 'Centro Cirúrgico']
@@ -15,6 +16,17 @@ if (montarLayout()) {
   const aviso = criarAviso(form, form.querySelector('.acts'))
 
   const opcaoSelecionada = (idGrupo) => $(idGrupo).querySelector('button.on').textContent.trim()
+
+  // ---------- Sugestões de materiais (busca pelo nome) ----------
+
+  // Preenche a lista de sugestões do campo Material com os materiais ativos
+  api('GET', '/materiais')
+    .then((materiais) => {
+      $('lista-materiais').innerHTML = materiais
+        .map((m) => `<option value="${esc(m.nome)}">${m.codigoBarras ? esc(m.codigoBarras) : ''}</option>`)
+        .join('')
+    })
+    .catch(() => {}) // sem sugestões, o campo continua funcionando digitando o nome
 
   // ---------- Leitura do código de barras pela câmera ----------
 
