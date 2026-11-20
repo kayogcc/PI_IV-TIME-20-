@@ -40,13 +40,14 @@ public class MovimentacaoServico {
         String textoMaterial = dados.material() == null ? "" : dados.material().trim();
         Integer quantidade = dados.quantidade();
 
-        if (!TIPOS.contains(dados.tipo())) throw ErroApi.requisicaoInvalida("Tipo inválido. Use Entrada ou Saída.");
-        if (!ORIGENS.contains(dados.origem())) throw ErroApi.requisicaoInvalida("Origem inválida. Use Código de barras ou Manual.");
+        // O "== null" vem antes porque List.of(...).contains(null) lança NullPointerException (viraria erro 500)
+        if (dados.tipo() == null || !TIPOS.contains(dados.tipo())) throw ErroApi.requisicaoInvalida("Tipo inválido. Use Entrada ou Saída.");
+        if (dados.origem() == null || !ORIGENS.contains(dados.origem())) throw ErroApi.requisicaoInvalida("Origem inválida. Use Código de barras ou Manual.");
         if (textoMaterial.isEmpty()) throw ErroApi.requisicaoInvalida("Informe o material (código de barras ou nome).");
         if (quantidade == null || quantidade <= 0 || quantidade > QUANTIDADE_MAXIMA) {
             throw ErroApi.requisicaoInvalida("A quantidade deve ser um número inteiro de 1 a " + QUANTIDADE_MAXIMA + ".");
         }
-        if (!LOCAIS.contains(dados.local())) throw ErroApi.requisicaoInvalida("Selecione um local válido.");
+        if (dados.local() == null || !LOCAIS.contains(dados.local())) throw ErroApi.requisicaoInvalida("Selecione um local válido.");
         if (usuario.perfil() == Perfil.CENTRO_CIRURGICO && dados.tipo().equals(ENTRADA)) {
             throw new ErroApi(403, "O perfil Centro Cirúrgico só pode registrar saídas.");
         }

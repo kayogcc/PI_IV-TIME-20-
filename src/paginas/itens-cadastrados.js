@@ -39,7 +39,8 @@ if (usuario) {
     $('qtd-itens').textContent = `${filtrados.length} ${filtrados.length === 1 ? 'item encontrado' : 'itens encontrados'}`
     $('t-itens').innerHTML = filtrados.length
       ? filtrados.map((item) => {
-        const estoqueBaixo = item.quantidade <= item.quantidadeMinima
+        // Mesma regra da API (AlertaServico.java): só conta se houver mínimo definido (> 0)
+        const estoqueBaixo = item.quantidadeMinima > 0 && item.quantidade <= item.quantidadeMinima
         return `
           <tr>
             <td>${esc(item.nome)}</td>
