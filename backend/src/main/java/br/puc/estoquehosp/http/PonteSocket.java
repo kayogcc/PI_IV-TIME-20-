@@ -11,7 +11,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-// Cliente do servidor de sockets usado pela API HTTP (Opção A).
+// Cliente do servidor de sockets usado pela API HTTP.
 // O navegador não fala socket com objetos Java, então a API faz a ponte:
 // recebe o pedido HTTP do site, manda um Comunicado ao Servidor e devolve o Resultado como resposta HTTP.
 // Cada requisição HTTP abre uma conexão, como um Cliente do Fazedor de Continhas que faz um pedido e sai.

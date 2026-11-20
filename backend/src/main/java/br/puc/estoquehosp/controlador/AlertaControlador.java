@@ -6,7 +6,7 @@ import br.puc.estoquehosp.http.Roteador;
 import br.puc.estoquehosp.socket.comum.PedidoDeAlertas;
 import br.puc.estoquehosp.socket.comum.PedidoDeDashboard;
 
-// Opção A: só traduz o HTTP em pedidos para o Servidor de sockets.
+// Só traduz o HTTP em pedidos para o Servidor de sockets.
 public class AlertaControlador {
 
     private final PonteSocket servidor;

@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.concurrent.Executors;
 
-// API HTTP do EstoqueHosp — Opção A: é só a ponte entre o site e o Servidor de sockets.
+// API HTTP do EstoqueHosp: é só a ponte entre o site e o Servidor de sockets.
 // Não conecta no MongoDB nem tem regras de negócio: cada requisição vira um pedido para o Servidor
 // (br.puc.estoquehosp.socket.servidor.Servidor), que precisa estar rodando.
 public class Aplicacao {

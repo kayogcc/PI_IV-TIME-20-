@@ -71,7 +71,7 @@ O hospital começa no nível Bronze e pode evoluir sem trocar de sistema nem per
 | GitHub Projects | Gerenciamento de tarefas e apontamento de esforço |
 | VSCode | IDE de desenvolvimento |
 
-## Arquitetura do back-end (Opção A)
+## Arquitetura do back-end
 
 O servidor segue o modelo **"Fazedor de Continhas"** passado em aula (cliente-servidor com sockets e objetos `Comunicado`). Ele é o **centro do sistema**: todas as regras de negócio, o login e as permissões por perfil ficam nele. O site, que só fala HTTP, passa por uma API que apenas faz a ponte:
 

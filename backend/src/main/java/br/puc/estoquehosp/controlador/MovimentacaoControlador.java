@@ -7,7 +7,7 @@ import br.puc.estoquehosp.modelo.Entradas.NovaMovimentacao;
 import br.puc.estoquehosp.socket.comum.PedidoDeHistorico;
 import br.puc.estoquehosp.socket.comum.PedidoDeMovimentacao;
 
-// Opção A: só traduz o HTTP em pedidos para o Servidor de sockets.
+// Só traduz o HTTP em pedidos para o Servidor de sockets.
 // Quem confere perfil e saldo é o Servidor.
 public class MovimentacaoControlador {
 

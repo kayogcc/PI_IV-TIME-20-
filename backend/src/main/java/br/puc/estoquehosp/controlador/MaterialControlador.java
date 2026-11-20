@@ -10,7 +10,7 @@ import br.puc.estoquehosp.socket.comum.PedidoDeInativacaoDeMaterial;
 import br.puc.estoquehosp.socket.comum.PedidoDeMaterial;
 import br.puc.estoquehosp.socket.comum.PedidoDeMateriais;
 
-// Opção A: só traduz o HTTP em pedidos para o Servidor de sockets.
+// Só traduz o HTTP em pedidos para o Servidor de sockets.
 // Quem confere o perfil (Almoxarifado e Gestão para cadastrar/editar/inativar) é o Servidor.
 public class MaterialControlador {
 

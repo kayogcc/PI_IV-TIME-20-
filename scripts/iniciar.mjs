@@ -1,5 +1,5 @@
 // Gabriel Figueira Albasini
-// npm start (Opção A): sobe o Servidor de sockets, a API HTTP (ponte) e o front-end juntos.
+// npm start: sobe o Servidor de sockets, a API HTTP (ponte) e o front-end juntos.
 // Site → API HTTP (8080) → Servidor de sockets (3000) → MongoDB.
 // Ctrl+C (ou qualquer um dos três parar) encerra todos.
 import { spawn, spawnSync } from 'node:child_process'

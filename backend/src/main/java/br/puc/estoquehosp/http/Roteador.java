@@ -16,7 +16,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 // Recebe todas as chamadas em /api, encontra a rota e devolve JSON.
-// Opção A: não confere login nem perfil aqui. Quem decide é o Servidor de sockets (SupervisoraDeConexao),
+// Não confere login nem perfil aqui. Quem decide é o Servidor de sockets (SupervisoraDeConexao),
 // que recebe o token dentro de cada pedido.
 public class Roteador implements HttpHandler {
 

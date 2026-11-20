@@ -10,7 +10,7 @@ import br.puc.estoquehosp.socket.comum.PedidoDeLogin;
 import br.puc.estoquehosp.socket.comum.PedidoDeLogout;
 import br.puc.estoquehosp.socket.comum.PedidoDeUsuarioAtual;
 
-// Opção A: só traduz o HTTP em pedidos para o Servidor de sockets. As regras ficam lá.
+// Só traduz o HTTP em pedidos para o Servidor de sockets. As regras ficam lá.
 public class UsuarioControlador {
 
     private final PonteSocket servidor;
