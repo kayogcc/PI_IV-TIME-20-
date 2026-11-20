@@ -1,11 +1,7 @@
-// Autor: Bruno Lobo
+// Autores: Bruno Lobo, Gabriel Figueira Albasini
 
 // Palavras-chave: parâmetros do caminho ({id}) · query string (?busca=) · corpo JSON com Gson · token · limite 64 KB
 package br.puc.estoquehosp.http;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonParseException;
-import com.sun.net.httpserver.HttpExchange;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,6 +9,10 @@ import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonParseException;
+import com.sun.net.httpserver.HttpExchange;
 
 // O que a ação do controlador recebe: parâmetros do caminho, da URL, corpo JSON e token de login.
 public class Requisicao {
