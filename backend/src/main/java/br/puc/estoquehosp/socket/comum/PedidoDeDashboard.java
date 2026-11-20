@@ -1,4 +1,5 @@
-// Gabriel Figueira Albasini
+// Autor: Gabriel Figueira Albasini
+
 // Palavras-chave: pedido · números do dashboard · últimos 7 dias
 package br.puc.estoquehosp.socket.comum;
 

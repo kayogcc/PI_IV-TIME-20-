@@ -1,3 +1,5 @@
+// Autor: Bruno Lobo
+
 // Palavras-chave: mensagens de erro/sucesso · role="alert" (acessibilidade) · validação de matrícula
 // Mensagem de erro/sucesso de formulário, inserida antes de `referencia`.
 // Devolve { erro, sucesso, limpar } para usar na validação.

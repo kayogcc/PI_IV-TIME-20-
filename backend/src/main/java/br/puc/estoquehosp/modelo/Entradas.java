@@ -1,4 +1,5 @@
-// Gabriel Figueira Albasini
+// Autores: Bruno Lobo(dados de entrada da API), Gabriel Figueira Albasini (senha oculta no toString)
+
 // Palavras-chave: DTOs · corpos JSON recebidos · toString esconde a senha
 package br.puc.estoquehosp.modelo;
 

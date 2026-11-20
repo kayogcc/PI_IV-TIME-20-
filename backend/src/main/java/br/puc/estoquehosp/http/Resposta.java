@@ -1,3 +1,5 @@
+// Autor: Bruno Lobo
+
 // Palavras-chave: record · status + corpo · 201 Created · 204 No Content
 package br.puc.estoquehosp.http;
 

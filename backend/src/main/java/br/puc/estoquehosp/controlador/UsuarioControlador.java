@@ -1,4 +1,5 @@
-// Gabriel Figueira Albasini
+// Autores: Bruno Lobo(rotas da API), Gabriel Figueira Albasini (envio dos pedidos ao servidor de sockets)
+
 // Palavras-chave: controlador · cadastro · login · logout · /api/eu (usuário atual)
 package br.puc.estoquehosp.controlador;
 

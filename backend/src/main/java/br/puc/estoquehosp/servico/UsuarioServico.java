@@ -1,4 +1,5 @@
-// Gabriel Figueira Albasini
+// Autor: Gabriel Figueira Albasini
+
 // Palavras-chave: cadastro e login · validação de nome/matrícula/senha · senha com letra e número · 401 · token de sessão
 package br.puc.estoquehosp.servico;
 

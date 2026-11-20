@@ -1,3 +1,5 @@
+// Autores: Carlos Eduardo Marins Fonseca (tela), Bruno Lobo (integração com a API)
+
 // Palavras-chave: tela de validade · vence em até 30 dias · filtro por prazo · saldo por local
 import { montarLayout } from '../componentes/estrutura.js'
 import { badge } from '../componentes/selo.js'

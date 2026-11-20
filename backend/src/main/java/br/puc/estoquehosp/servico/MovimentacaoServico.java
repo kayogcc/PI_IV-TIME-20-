@@ -1,3 +1,5 @@
+//Autor: Bruno Lobo
+
 // Palavras-chave: regras de entrada/saída · locais fixos · Centro Cirúrgico só faz saída (403) · saldo insuficiente (409) · desfaz o saldo se falhar
 package br.puc.estoquehosp.servico;
 

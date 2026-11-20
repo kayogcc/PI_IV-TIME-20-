@@ -1,3 +1,5 @@
+// Autores: Bruno (acesso aos materiais no banco), Leonardo Fonseca de Oliveira (busca sem acento)
+
 // Palavras-chave: coleção "materiais" · busca sem acento (Collation + Normalizer) · saldo atômico com $inc · não deixa saldo negativo
 package br.puc.estoquehosp.repositorio;
 

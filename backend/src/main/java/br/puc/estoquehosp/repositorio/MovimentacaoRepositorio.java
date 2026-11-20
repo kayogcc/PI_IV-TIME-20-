@@ -1,3 +1,5 @@
+//Autor: Bruno Lobo
+
 // Palavras-chave: coleção "movimentacoes" · registro imutável · índice por data · mais recentes primeiro
 package br.puc.estoquehosp.repositorio;
 

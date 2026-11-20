@@ -1,3 +1,5 @@
+// Autores: Bruno Lobo (registro da movimentação), Kayo Camargo (leitura pela câmera)
+
 // Palavras-chave: registro de entrada/saída · leitura de código de barras pela câmera (ZXing) · sugestões de materiais
 import { BrowserMultiFormatReader } from '@zxing/browser'
 import { montarLayout } from '../componentes/estrutura.js'

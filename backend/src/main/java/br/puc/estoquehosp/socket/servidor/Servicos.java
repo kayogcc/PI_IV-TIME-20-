@@ -1,4 +1,5 @@
-// Gabriel Figueira Albasini
+// Autor: Gabriel Figueira Albasini
+
 // Palavras-chave: classe nova · reúne repositórios e serviços · criada uma vez e compartilhada pelas conexões
 package br.puc.estoquehosp.socket.servidor;
 

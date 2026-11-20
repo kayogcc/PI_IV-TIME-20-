@@ -1,4 +1,5 @@
-// Gabriel Figueira Albasini
+// Autores: Bruno (servidor HTTP da API), Gabriel Figueira Albasini (ligação com o servidor de sockets)
+
 // Palavras-chave: ponto de entrada da API · HttpServer na porta 8080 · /api · registra controladores · virtual threads · ponte para o Servidor (3000)
 package br.puc.estoquehosp;
 

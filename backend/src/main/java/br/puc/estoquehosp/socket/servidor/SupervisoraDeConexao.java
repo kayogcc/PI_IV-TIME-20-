@@ -1,4 +1,5 @@
-// Gabriel Figueira Albasini
+// Autor: Gabriel Figueira Albasini
+
 // Palavras-chave: Thread por cliente · ObjectInputFilter (lista branca contra desserialização maliciosa) · atenda · confere token e perfil (exija)
 package br.puc.estoquehosp.socket.servidor;
 

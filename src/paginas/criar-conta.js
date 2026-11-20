@@ -1,3 +1,5 @@
+// Autores: Carlos Eduardo Marins Fonseca (tela e validações), Bruno Lobo (cadastro pela API)
+
 // Palavras-chave: tela de cadastro · POST /api/usuarios · validação no front · escolha de perfil
 // Tela: criar conta
 

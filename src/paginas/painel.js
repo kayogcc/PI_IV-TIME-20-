@@ -1,3 +1,5 @@
+// Autores: Gabriel Figueira Albasini (dashboard), Bruno Lobo (integração com a API)
+
 // Palavras-chave: dashboard · GET /api/dashboard · indicadores · gráfico de 7 dias · últimos alertas
 import { montarLayout } from '../componentes/estrutura.js'
 import { desenharGrafico } from '../componentes/grafico.js'

@@ -1,4 +1,5 @@
-// Gabriel Figueira Albasini
+ // Autores: Bruno Lobo(modelo de dados), Gabriel Figueira Albasini (adaptação para o servidor de sockets)
+
 // Palavras-chave: record · Serializable · saldos por local · quantidade total · ativo (inativação lógica)
 package br.puc.estoquehosp.modelo;
 

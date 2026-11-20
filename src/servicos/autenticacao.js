@@ -1,3 +1,5 @@
+// Autores: Gabriel Figueira Albasini (sessão do usuário), Bruno Lobo (login pela API)
+
 // Palavras-chave: login/logout · token no sessionStorage · nomes dos perfis · exigirLogin
 import { api } from './api.js'
 
