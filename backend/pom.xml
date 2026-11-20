@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Autores: Kayo Camargo (configuração do Maven e do driver do MongoDB), Gabriel Figueira Albasini (configuração do servidor de sockets) -->
+<!-- Autores: Kayo Camargo (configuração do Maven e do driver do MongoDB), Gabriel Figueira Albasini (configuração do servidor de sockets), Leonardo Fonseca de Oliveira (atualização para o Java 25) -->
 
 <!-- Palavras-chave: Maven · dependências (MongoDB driver, Gson, JUnit) · Java 25 · exec:java -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
