@@ -1,3 +1,4 @@
+// Gabriel Figueira Albasini
 package br.puc.estoquehosp.banco;
 
 import com.mongodb.ConnectionString;
@@ -28,7 +29,8 @@ public class ConexaoMongo implements AutoCloseable {
     }
 
     public static ConexaoMongo doAmbiente() {
-        return new ConexaoMongo(System.getenv("MONGO_URI"), "estoquehosp");
+        // MONGO_BANCO é opcional (ex.: estoquehosp_teste para testar sem mexer nos dados reais)
+        return new ConexaoMongo(System.getenv("MONGO_URI"), System.getenv().getOrDefault("MONGO_BANCO", "estoquehosp"));
     }
 
     public MongoDatabase banco() {

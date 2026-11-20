@@ -1,26 +1,29 @@
+// Gabriel Figueira Albasini
 package br.puc.estoquehosp.controlador;
 
-import br.puc.estoquehosp.http.Resposta;
+import br.puc.estoquehosp.http.PonteSocket;
 import br.puc.estoquehosp.http.Roteador;
 import br.puc.estoquehosp.modelo.Entradas.NovaMovimentacao;
-import br.puc.estoquehosp.servico.MovimentacaoServico;
+import br.puc.estoquehosp.socket.comum.PedidoDeHistorico;
+import br.puc.estoquehosp.socket.comum.PedidoDeMovimentacao;
 
-import static br.puc.estoquehosp.modelo.Perfil.ALMOXARIFADO;
-import static br.puc.estoquehosp.modelo.Perfil.CENTRO_CIRURGICO;
-
-// Registro: Almoxarifado (entrada e saída) e Centro Cirúrgico (só saída, conferido no serviço).
+// Opção A: só traduz o HTTP em pedidos para o Servidor de sockets.
+// Quem confere perfil e saldo é o Servidor.
 public class MovimentacaoControlador {
 
-    private final MovimentacaoServico servico;
+    private final PonteSocket servidor;
 
-    public MovimentacaoControlador(MovimentacaoServico servico) {
-        this.servico = servico;
+    public MovimentacaoControlador(PonteSocket servidor) {
+        this.servidor = servidor;
     }
 
     public void registrar(Roteador r) {
-        r.logado("GET", "/api/movimentacoes", req -> servico.listar(req.url("dias"), req.url("materialId")));
-        r.logado("POST", "/api/movimentacoes",
-                req -> Resposta.criado(servico.registrar(req.corpo(NovaMovimentacao.class), req.usuario())),
-                ALMOXARIFADO, CENTRO_CIRURGICO);
+        r.rota("GET", "/api/movimentacoes",
+                req -> servidor.pedir(new PedidoDeHistorico(req.token(), req.url("dias"), req.url("materialId"))));
+        r.rota("POST", "/api/movimentacoes", req -> {
+            NovaMovimentacao d = req.corpo(NovaMovimentacao.class);
+            return servidor.pedir(new PedidoDeMovimentacao(req.token(),
+                    d.material(), d.tipo(), d.origem(), d.quantidade(), d.local()));
+        });
     }
 }

@@ -1,4 +1,7 @@
+// Gabriel Figueira Albasini
 package br.puc.estoquehosp.modelo;
+
+import java.io.Serializable;
 
 // data em ISO-8601 (UTC). tipo: Entrada | Saída — origem: Código de barras | Manual
 public record Movimentacao(
@@ -11,4 +14,4 @@ public record Movimentacao(
         String origem,
         String local,
         String usuario
-) {}
+) implements Serializable {}

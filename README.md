@@ -1,3 +1,5 @@
+<!-- Gabriel Figueira Albasini -->
+
 # EstoqueHosp — Plataforma de Automação e Gestão de Estoque Hospitalar
 
 **Projeto Integrador IV — Engenharia de Software**
@@ -56,7 +58,8 @@ O hospital começa no nível Bronze e pode evoluir sem trocar de sistema nem per
 | Tecnologia / Ferramenta | Descrição |
 |---|---|
 | Java 25 (LTS) | Linguagem de programação principal do back-end |
-| HttpServer (JDK) | Servidor da API REST, sem frameworks externos |
+| Sockets (java.net) | Servidor cliente-servidor no modelo do "Fazedor de Continhas", com todas as regras de negócio |
+| HttpServer (JDK) | API REST que faz a ponte entre o site e o servidor de sockets |
 | MongoDB Atlas | Banco de dados NoSQL orientado a documentos, hospedado na nuvem |
 | MongoDB Java Driver | Conexão entre o Java e o MongoDB |
 | Gson | Conversão entre objetos Java e JSON |
@@ -67,6 +70,26 @@ O hospital começa no nível Bronze e pode evoluir sem trocar de sistema nem per
 | Git + GitHub | Controle de versão e repositório |
 | GitHub Projects | Gerenciamento de tarefas e apontamento de esforço |
 | VSCode | IDE de desenvolvimento |
+
+## Arquitetura do back-end (Opção A)
+
+O servidor segue o modelo **"Fazedor de Continhas"** passado em aula (cliente-servidor com sockets e objetos `Comunicado`). Ele é o **centro do sistema**: todas as regras de negócio, o login e as permissões por perfil ficam nele. O site, que só fala HTTP, passa por uma API que apenas faz a ponte:
+
+```
+Site ──HTTP──► API HTTP (8080, ponte) ──socket──► Servidor (3000) ──► MongoDB Atlas
+                                                    ▲
+                     Cliente de console ──socket────┘
+```
+
+Código em `backend/src/main/java/br/puc/estoquehosp/`:
+
+| Pasta | Conteúdo |
+|---|---|
+| `socket/comum/` | Classes que trafegam pelo socket. `Comunicado`, `ComunicadoDeDesligamento`, `PedidoParaSair`, `Parceiro` e `Teclado` são **iguais às do professor**. No lugar de `PedidoDeOperacao`/`PedidoDeResultado`, há um pedido para cada ação do estoque (`PedidoDeLogin`, `PedidoDeMovimentacao`...), e o `Resultado` leva status, mensagem e dados |
+| `socket/servidor/` | `Servidor`, `AceitadoraDeConexao` e `SupervisoraDeConexao` do professor. Cada alteração está marcada com `// EstoqueHosp:`. O `switch` das contas virou o método `atenda`, que chama as regras do estoque |
+| `socket/cliente/` | `Cliente` e `TratadoraDeComunicadoDeDesligamento` do professor, com um menu do estoque |
+| `http/` + `controlador/` | API HTTP: cada rota monta um pedido e o envia ao Servidor pela `PonteSocket` |
+| `servico/`, `repositorio/`, `modelo/` | Regras de negócio e acesso ao MongoDB, usados pelo Servidor |
 
 ## Instruções para Execução do Sistema
 
@@ -122,21 +145,31 @@ npm ci
 npm start
 ```
 
-O `npm start` sobe a API (`http://localhost:8080/api`) e o front-end juntos, e o navegador abre na tela inicial. Para desligar tudo, aperte **Ctrl+C**.
+O `npm start` compila o back-end e sobe três programas juntos: o **Servidor de sockets** (porta 3000), a **API HTTP** (`http://localhost:8080/api`) e o **front-end**. O navegador abre na tela inicial. Para desligar tudo, aperte **Ctrl+C**.
 
 <details>
-<summary>Rodar a API e o front-end separados (dois terminais)</summary>
+<summary>Rodar cada parte separada (três terminais) e usar o cliente de console</summary>
 
 ```bash
-# Terminal 1 — API (para mudar a porta, defina a variável PORTA)
-cd backend
-mvn compile exec:java
+# Na pasta backend, compile uma vez:
+mvn compile
 
-# Terminal 2 — front-end, na raiz do projeto
+# Terminal 1 — Servidor de sockets (porta 3000; digite "desativar" para desligar)
+mvn exec:java@servidor
+
+# Terminal 2 — API HTTP (ponte). Variáveis opcionais: PORTA, SERVIDOR_HOST, SERVIDOR_PORTA
+mvn exec:java@api
+
+# Terminal 3 — front-end, na raiz do projeto
 npm run dev
+
+# Opcional — cliente de console do Fazedor de Continhas, adaptado ao estoque
+mvn exec:java@cliente
 ```
 
-O Vite repassa as chamadas para `/api` à API Java.
+O Vite repassa as chamadas para `/api` à API HTTP, que as repassa ao Servidor. Se o Servidor estiver desligado, a API responde 503.
+
+Para testar sem mexer nos dados reais, defina `MONGO_BANCO=estoquehosp_teste` antes de subir o Servidor.
 </details>
 
 > Todas as telas usam a API: não há mais dados de exemplo no front-end.

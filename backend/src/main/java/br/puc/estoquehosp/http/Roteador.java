@@ -1,7 +1,6 @@
+// Gabriel Figueira Albasini
 package br.puc.estoquehosp.http;
 
-import br.puc.estoquehosp.modelo.Perfil;
-import br.puc.estoquehosp.modelo.Usuario;
 import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -10,15 +9,15 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-// Recebe todas as chamadas em /api, encontra a rota, confere o login/perfil e devolve JSON.
+// Recebe todas as chamadas em /api, encontra a rota e devolve JSON.
+// Opção A: não confere login nem perfil aqui. Quem decide é o Servidor de sockets (SupervisoraDeConexao),
+// que recebe o token dentro de cada pedido.
 public class Roteador implements HttpHandler {
 
     @FunctionalInterface
@@ -26,36 +25,23 @@ public class Roteador implements HttpHandler {
         Object executar(Requisicao req);
     }
 
-    // perfis == null: rota pública (não exige login)
-    private record Rota(String metodo, Pattern padrao, List<String> nomes, Set<Perfil> perfis, Acao acao) {}
+    private record Rota(String metodo, Pattern padrao, List<String> nomes, Acao acao) {}
 
     private static final Pattern PARAMETRO = Pattern.compile("\\{(\\w+)}");
 
     private final List<Rota> rotas = new ArrayList<>();
-    private final Sessoes sessoes;
     private final Gson gson;
 
-    public Roteador(Sessoes sessoes, Gson gson) {
-        this.sessoes = sessoes;
+    public Roteador(Gson gson) {
         this.gson = gson;
     }
 
-    public void publica(String metodo, String caminho, Acao acao) {
-        adicionar(metodo, caminho, null, acao);
-    }
-
-    // Sem perfis informados: qualquer usuário logado pode acessar
-    public void logado(String metodo, String caminho, Acao acao, Perfil... perfis) {
-        Set<Perfil> permitidos = perfis.length == 0 ? EnumSet.allOf(Perfil.class) : EnumSet.copyOf(List.of(perfis));
-        adicionar(metodo, caminho, permitidos, acao);
-    }
-
-    private void adicionar(String metodo, String caminho, Set<Perfil> perfis, Acao acao) {
+    public void rota(String metodo, String caminho, Acao acao) {
         List<String> nomes = new ArrayList<>();
         Matcher m = PARAMETRO.matcher(caminho);
         while (m.find()) nomes.add(m.group(1));
         Pattern padrao = Pattern.compile(m.replaceAll("([^/]+)"));
-        rotas.add(new Rota(metodo, padrao, nomes, perfis, acao));
+        rotas.add(new Rota(metodo, padrao, nomes, acao));
     }
 
     @Override
@@ -88,15 +74,7 @@ public class Roteador implements HttpHandler {
             Map<String, String> parametros = new HashMap<>();
             for (int i = 0; i < rota.nomes().size(); i++) parametros.put(rota.nomes().get(i), m.group(i + 1));
 
-            String token = lerToken(troca);
-            Usuario usuario = sessoes.usuarioDoToken(token).orElse(null);
-            if (rota.perfis() != null) {
-                if (usuario == null) throw new ErroApi(401, "Faça login para continuar.");
-                if (!rota.perfis().contains(usuario.perfil())) {
-                    throw new ErroApi(403, "Seu perfil não tem permissão para esta ação.");
-                }
-            }
-            return rota.acao().executar(new Requisicao(troca, parametros, usuario, token, gson));
+            return rota.acao().executar(new Requisicao(troca, parametros, lerToken(troca), gson));
         }
 
         if (caminhoExiste) throw new ErroApi(405, "Método não permitido.");

@@ -1,32 +1,38 @@
+// Gabriel Figueira Albasini
 package br.puc.estoquehosp.controlador;
 
-import br.puc.estoquehosp.http.Resposta;
+import br.puc.estoquehosp.http.PonteSocket;
 import br.puc.estoquehosp.http.Roteador;
 import br.puc.estoquehosp.modelo.Entradas.DadosMaterial;
-import br.puc.estoquehosp.servico.MaterialServico;
+import br.puc.estoquehosp.socket.comum.PedidoDeCadastroDeMaterial;
+import br.puc.estoquehosp.socket.comum.PedidoDeEdicaoDeMaterial;
+import br.puc.estoquehosp.socket.comum.PedidoDeInativacaoDeMaterial;
+import br.puc.estoquehosp.socket.comum.PedidoDeMaterial;
+import br.puc.estoquehosp.socket.comum.PedidoDeMateriais;
 
-import static br.puc.estoquehosp.modelo.Perfil.ALMOXARIFADO;
-import static br.puc.estoquehosp.modelo.Perfil.GESTAO;
-
-// Consulta: todos os perfis. Cadastro, edição e inativação: Almoxarifado e Gestão.
+// Opção A: só traduz o HTTP em pedidos para o Servidor de sockets.
+// Quem confere o perfil (Almoxarifado e Gestão para cadastrar/editar/inativar) é o Servidor.
 public class MaterialControlador {
 
-    private final MaterialServico servico;
+    private final PonteSocket servidor;
 
-    public MaterialControlador(MaterialServico servico) {
-        this.servico = servico;
+    public MaterialControlador(PonteSocket servidor) {
+        this.servidor = servidor;
     }
 
     public void registrar(Roteador r) {
-        r.logado("GET", "/api/materiais", req -> servico.listar(req.url("busca")));
-        r.logado("GET", "/api/materiais/{id}", req -> servico.buscar(req.caminho("id")));
-        r.logado("POST", "/api/materiais",
-                req -> Resposta.criado(servico.criar(req.corpo(DadosMaterial.class))), ALMOXARIFADO, GESTAO);
-        r.logado("PUT", "/api/materiais/{id}",
-                req -> servico.atualizar(req.caminho("id"), req.corpo(DadosMaterial.class)), ALMOXARIFADO, GESTAO);
-        r.logado("DELETE", "/api/materiais/{id}", req -> {
-            servico.inativar(req.caminho("id"));
-            return Resposta.semConteudo();
-        }, ALMOXARIFADO, GESTAO);
+        r.rota("GET", "/api/materiais", req -> servidor.pedir(new PedidoDeMateriais(req.token(), req.url("busca"))));
+        r.rota("GET", "/api/materiais/{id}", req -> servidor.pedir(new PedidoDeMaterial(req.token(), req.caminho("id"))));
+        r.rota("POST", "/api/materiais", req -> {
+            DadosMaterial d = req.corpo(DadosMaterial.class);
+            return servidor.pedir(new PedidoDeCadastroDeMaterial(req.token(),
+                    d.nome(), d.codigoBarras(), d.lote(), d.validade(), d.quantidadeMinima()));
+        });
+        r.rota("PUT", "/api/materiais/{id}", req -> {
+            DadosMaterial d = req.corpo(DadosMaterial.class);
+            return servidor.pedir(new PedidoDeEdicaoDeMaterial(req.token(), req.caminho("id"),
+                    d.nome(), d.codigoBarras(), d.lote(), d.validade(), d.quantidadeMinima()));
+        });
+        r.rota("DELETE", "/api/materiais/{id}", req -> servidor.pedir(new PedidoDeInativacaoDeMaterial(req.token(), req.caminho("id"))));
     }
 }

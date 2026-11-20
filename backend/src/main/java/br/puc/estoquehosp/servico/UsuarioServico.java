@@ -1,3 +1,4 @@
+// Gabriel Figueira Albasini
 package br.puc.estoquehosp.servico;
 
 import br.puc.estoquehosp.http.ErroApi;
@@ -8,12 +9,19 @@ import br.puc.estoquehosp.modelo.Perfil;
 import br.puc.estoquehosp.modelo.Usuario;
 import br.puc.estoquehosp.repositorio.UsuarioRepositorio;
 
+import java.io.Serializable;
 import java.util.regex.Pattern;
 
 // Cadastro e login. As regras são as mesmas de criar-conta.js, porque o front-end pode ser contornado.
 public class UsuarioServico {
 
-    public record LoginFeito(String token, Usuario usuario) {}
+    public record LoginFeito(String token, Usuario usuario) implements Serializable {
+        // O toString automático do record mostraria o token; aqui ele fica oculto
+        @Override
+        public String toString() {
+            return "LoginFeito[token=(oculto), usuario=" + usuario + "]";
+        }
+    }
 
     private static final Pattern NOME = Pattern.compile("^[\\p{L}' -]+$");
     private static final Pattern MATRICULA = Pattern.compile("^[\\p{L}\\d._-]{3,30}$");

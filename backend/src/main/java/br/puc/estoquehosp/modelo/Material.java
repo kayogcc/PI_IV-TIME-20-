@@ -1,5 +1,7 @@
+// Gabriel Figueira Albasini
 package br.puc.estoquehosp.modelo;
 
+import java.io.Serializable;
 import java.util.Map;
 
 // validade no formato yyyy-MM-dd. saldos: quantidade por local; quantidade: soma de todos os locais.
@@ -13,4 +15,4 @@ public record Material(
         Map<String, Integer> saldos,
         int quantidade,
         boolean ativo
-) {}
+) implements Serializable {}

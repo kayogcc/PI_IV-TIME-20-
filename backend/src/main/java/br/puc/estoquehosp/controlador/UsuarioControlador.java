@@ -1,26 +1,34 @@
+// Gabriel Figueira Albasini
 package br.puc.estoquehosp.controlador;
 
-import br.puc.estoquehosp.http.Resposta;
+import br.puc.estoquehosp.http.PonteSocket;
 import br.puc.estoquehosp.http.Roteador;
 import br.puc.estoquehosp.modelo.Entradas.Login;
 import br.puc.estoquehosp.modelo.Entradas.NovoUsuario;
-import br.puc.estoquehosp.servico.UsuarioServico;
+import br.puc.estoquehosp.socket.comum.PedidoDeCadastroDeUsuario;
+import br.puc.estoquehosp.socket.comum.PedidoDeLogin;
+import br.puc.estoquehosp.socket.comum.PedidoDeLogout;
+import br.puc.estoquehosp.socket.comum.PedidoDeUsuarioAtual;
 
+// Opção A: só traduz o HTTP em pedidos para o Servidor de sockets. As regras ficam lá.
 public class UsuarioControlador {
 
-    private final UsuarioServico servico;
+    private final PonteSocket servidor;
 
-    public UsuarioControlador(UsuarioServico servico) {
-        this.servico = servico;
+    public UsuarioControlador(PonteSocket servidor) {
+        this.servidor = servidor;
     }
 
     public void registrar(Roteador r) {
-        r.publica("POST", "/api/usuarios", req -> Resposta.criado(servico.cadastrar(req.corpo(NovoUsuario.class))));
-        r.publica("POST", "/api/login", req -> servico.entrar(req.corpo(Login.class)));
-        r.logado("POST", "/api/logout", req -> {
-            servico.sair(req.token());
-            return Resposta.semConteudo();
+        r.rota("POST", "/api/usuarios", req -> {
+            NovoUsuario dados = req.corpo(NovoUsuario.class);
+            return servidor.pedir(new PedidoDeCadastroDeUsuario(dados.nome(), dados.matricula(), dados.perfil(), dados.senha()));
         });
-        r.logado("GET", "/api/eu", req -> req.usuario());
+        r.rota("POST", "/api/login", req -> {
+            Login dados = req.corpo(Login.class);
+            return servidor.pedir(new PedidoDeLogin(dados.matricula(), dados.senha()));
+        });
+        r.rota("POST", "/api/logout", req -> servidor.pedir(new PedidoDeLogout(req.token())));
+        r.rota("GET", "/api/eu", req -> servidor.pedir(new PedidoDeUsuarioAtual(req.token())));
     }
 }

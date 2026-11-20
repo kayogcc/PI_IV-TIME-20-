@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Gabriel Figueira Albasini -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -45,7 +46,10 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.5.2</version>
       </plugin>
-      <!-- Sobe a API: mvn compile exec:java -->
+      <!-- Programas (rode "mvn compile" antes):
+           API HTTP:             mvn exec:java       (ou exec:java@api)
+           Servidor de sockets:  mvn exec:java@servidor
+           Cliente de console:   mvn exec:java@cliente -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
@@ -53,6 +57,26 @@
         <configuration>
           <mainClass>br.puc.estoquehosp.Aplicacao</mainClass>
         </configuration>
+        <executions>
+          <execution>
+            <id>api</id>
+            <configuration>
+              <mainClass>br.puc.estoquehosp.Aplicacao</mainClass>
+            </configuration>
+          </execution>
+          <execution>
+            <id>servidor</id>
+            <configuration>
+              <mainClass>br.puc.estoquehosp.socket.servidor.Servidor</mainClass>
+            </configuration>
+          </execution>
+          <execution>
+            <id>cliente</id>
+            <configuration>
+              <mainClass>br.puc.estoquehosp.socket.cliente.Cliente</mainClass>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

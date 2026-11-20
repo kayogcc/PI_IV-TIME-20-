@@ -1,6 +1,6 @@
+// Gabriel Figueira Albasini
 package br.puc.estoquehosp.http;
 
-import br.puc.estoquehosp.modelo.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.sun.net.httpserver.HttpExchange;
@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-// O que a ação do controlador recebe: parâmetros do caminho, da URL, corpo JSON e usuário logado.
+// O que a ação do controlador recebe: parâmetros do caminho, da URL, corpo JSON e token de login.
 public class Requisicao {
 
     private static final int TAMANHO_MAXIMO_CORPO = 64 * 1024;
@@ -20,15 +20,13 @@ public class Requisicao {
     private final HttpExchange troca;
     private final Map<String, String> parametrosCaminho;
     private final Map<String, String> parametrosUrl;
-    private final Usuario usuario;
     private final String token;
     private final Gson gson;
 
-    Requisicao(HttpExchange troca, Map<String, String> parametrosCaminho, Usuario usuario, String token, Gson gson) {
+    Requisicao(HttpExchange troca, Map<String, String> parametrosCaminho, String token, Gson gson) {
         this.troca = troca;
         this.parametrosCaminho = parametrosCaminho;
         this.parametrosUrl = lerParametrosUrl(troca.getRequestURI().getRawQuery());
-        this.usuario = usuario;
         this.token = token;
         this.gson = gson;
     }
@@ -41,10 +39,6 @@ public class Requisicao {
     // Ex.: em /api/materiais?busca=gaze, url("busca")
     public String url(String nome) {
         return parametrosUrl.get(nome);
-    }
-
-    public Usuario usuario() {
-        return usuario;
     }
 
     public String token() {

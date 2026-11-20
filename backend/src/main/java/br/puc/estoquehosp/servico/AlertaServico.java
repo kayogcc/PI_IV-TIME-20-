@@ -1,3 +1,4 @@
+// Gabriel Figueira Albasini
 package br.puc.estoquehosp.servico;
 
 import br.puc.estoquehosp.modelo.Alerta;
@@ -6,6 +7,7 @@ import br.puc.estoquehosp.modelo.Movimentacao;
 import br.puc.estoquehosp.repositorio.MaterialRepositorio;
 import br.puc.estoquehosp.repositorio.MovimentacaoRepositorio;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -21,9 +23,9 @@ import java.util.Optional;
 // Alertas de estoque baixo e validade próxima, e os números do dashboard.
 public class AlertaServico {
 
-    public record DiaMovimentado(String dia, int entradas, int saidas) {}
+    public record DiaMovimentado(String dia, int entradas, int saidas) implements Serializable {}
 
-    public record Resumo(int itensCadastrados, int estoqueBaixo, int vencendoLogo, List<DiaMovimentado> movimentacaoSemanal) {}
+    public record Resumo(int itensCadastrados, int estoqueBaixo, int vencendoLogo, List<DiaMovimentado> movimentacaoSemanal) implements Serializable {}
 
     public static final int DIAS_VALIDADE_PROXIMA = 30;
     private static final ZoneId FUSO = ZoneId.of("America/Sao_Paulo");

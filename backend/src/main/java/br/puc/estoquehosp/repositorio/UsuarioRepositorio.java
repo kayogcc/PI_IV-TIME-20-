@@ -1,3 +1,4 @@
+// Gabriel Figueira Albasini
 package br.puc.estoquehosp.repositorio;
 
 import br.puc.estoquehosp.modelo.Perfil;
@@ -18,7 +19,13 @@ import java.util.Optional;
 // Coleção "usuarios". matriculaChave é a matrícula em minúsculas, para "Ana.Souza" e "ana.souza" serem a mesma conta.
 public class UsuarioRepositorio {
 
-    public record Credencial(Usuario usuario, String hashSenha) {}
+    public record Credencial(Usuario usuario, String hashSenha) {
+        // O hash da senha nunca aparece no terminal
+        @Override
+        public String toString() {
+            return "Credencial[usuario=" + usuario + ", hashSenha=(oculto)]";
+        }
+    }
 
     private final MongoCollection<Document> colecao;
 
