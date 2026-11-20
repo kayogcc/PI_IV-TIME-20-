@@ -1,4 +1,5 @@
-// Gabriel Figueira Albasini
+// Autor: Gabriel Figueira Albasini
+
 // Palavras-chave: pedido · listar/buscar materiais ativos
 package br.puc.estoquehosp.socket.comum;
 

@@ -1,3 +1,5 @@
+/* Autores: Leonardo Fonseca de Oliveira (tela), Kayo Camargo (botões de editar e inativar) */
+
 /* Palavras-chave: estilo da tela de itens cadastrados · card clicável */
 .stat-link-itens:hover {
   border-color: var(--blue);

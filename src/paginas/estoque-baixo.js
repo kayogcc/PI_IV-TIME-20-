@@ -1,3 +1,5 @@
+// Autores: Carlos Eduardo Marins Fonseca (tela), Bruno Lobo (integração com a API)
+
 // Palavras-chave: tela de estoque baixo · quantidade ≤ mínimo · tabela dinâmica
 import { montarLayout } from '../componentes/estrutura.js'
 import { api } from '../servicos/api.js'

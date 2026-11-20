@@ -1,4 +1,5 @@
-// Gabriel Figueira Albasini
+// Autor: Gabriel Figueira Albasini
+
 // Palavras-chave: pedido · quem é o usuário do token
 package br.puc.estoquehosp.socket.comum;
 

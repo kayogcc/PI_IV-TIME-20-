@@ -1,3 +1,5 @@
+ // Autores: Kayo Camargo (edição e inativação de materiais), Bruno Lobo (cadastro e integração com a API), Leonardo Fonseca de Oliveira (versão inicial)
+
 // Palavras-chave: tela de itens · CRUD de materiais · busca · editar/inativar · 409 duplicado
 import { montarLayout } from '../componentes/estrutura.js'
 import { api } from '../servicos/api.js'

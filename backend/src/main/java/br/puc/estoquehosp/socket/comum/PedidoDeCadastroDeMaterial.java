@@ -1,4 +1,5 @@
-// Gabriel Figueira Albasini
+// Autor: Gabriel Figueira Albasini
+
 // Palavras-chave: pedido · cadastrar material · exige login e perfil
 package br.puc.estoquehosp.socket.comum;
 

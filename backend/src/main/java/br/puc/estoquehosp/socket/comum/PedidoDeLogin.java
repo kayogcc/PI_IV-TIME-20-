@@ -1,4 +1,5 @@
-// Gabriel Figueira Albasini
+// Autor: Gabriel Figueira Albasini
+
 // Palavras-chave: pedido · login com matrícula e senha · devolve token
 package br.puc.estoquehosp.socket.comum;
 

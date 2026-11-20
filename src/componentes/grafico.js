@@ -1,3 +1,5 @@
+// Autores: Gabriel Figueira Albasini (versão inicial), Bruno Lobo(adaptação para os dados da API)
+
 // Palavras-chave: gráfico de barras em HTML/CSS · entradas x saídas · altura em % do maior valor
 import { esc } from '../utilitarios/textos.js'
 

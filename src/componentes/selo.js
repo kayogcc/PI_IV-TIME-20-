@@ -1,3 +1,5 @@
+// Autores: Gabriel Figueira Albasini (versão inicial), Bruno Lobo(adaptação para os dados da API)
+
 // Palavras-chave: badge/selo · prioridade -> cor (Alta, Média, Baixa)
 import { esc } from '../utilitarios/textos.js'
 

@@ -1,4 +1,5 @@
-// Gabriel Figueira Albasini
+// Autor: Gabriel Figueira Albasini
+
 // Palavras-chave: pedido · histórico de movimentações · filtro por dias e material
 package br.puc.estoquehosp.socket.comum;
 

@@ -1,3 +1,5 @@
+// Autor: Carlos Eduardo Marins Fonseca
+
 // Palavras-chave: testes unitários · JUnit · CT-01 a CT-06 · URI nula/vazia/malformada · servidor indisponível
 package br.puc.estoquehosp.banco;
 

@@ -1,3 +1,5 @@
+// Autor: Bruno Lobo
+
 // Palavras-chave: fetch · chamada à API Java · Authorization: Bearer · 401 volta ao login · ErroApi
 import { tokenAtual, logout } from './autenticacao.js'
 

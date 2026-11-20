@@ -1,4 +1,5 @@
-// Gabriel Figueira Albasini
+// Autores: Bruno Lobo(modelo de dados), Gabriel Figueira Albasini (adaptação para o servidor de sockets)
+
 // Palavras-chave: record · Serializable · histórico · Entrada/Saída · origem (código de barras | manual) · data ISO-8601
 package br.puc.estoquehosp.modelo;
 

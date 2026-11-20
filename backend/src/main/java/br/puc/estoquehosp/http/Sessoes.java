@@ -1,3 +1,5 @@
+// Autor: Bruno Lobo
+
 // Palavras-chave: sessões em memória · token aleatório (SecureRandom) · expira em 8h · ConcurrentHashMap
 package br.puc.estoquehosp.http;
 

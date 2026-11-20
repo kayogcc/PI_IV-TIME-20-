@@ -1,3 +1,5 @@
+// Autores: Leonardo Fonseca de Oliveira (build das páginas), Bruno Lobo(proxy da API)
+
 // Palavras-chave: Vite · proxy /api -> localhost:8080 · build multipágina (um HTML por tela)
 import { defineConfig } from 'vite'
 import { fileURLToPath } from 'node:url'

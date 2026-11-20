@@ -1,4 +1,5 @@
-// Gabriel Figueira Albasini
+// Autor: Gabriel Figueira Albasini
+
 // Palavras-chave: resposta do servidor · status (igual ao HTTP) · mensagem de erro · dados Serializable
 package br.puc.estoquehosp.socket.comum;
 

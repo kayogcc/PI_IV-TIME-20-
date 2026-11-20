@@ -1,3 +1,5 @@
+// Autor: Leonardo Fonseca de Oliveira
+
 // Palavras-chave: mongosh · cria coleções · validadores ($jsonSchema) · índices · moderate/warn
 // Execute com mongosh conectado ao Atlas.
 // Este script cria as coleções, validadores e índices usados pelo backend atual.
