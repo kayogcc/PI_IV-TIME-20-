@@ -66,6 +66,10 @@ if (usuario) {
     }
   }
 
+  // Vindo da busca do cabeçalho (itens-cadastrados.html?busca=...): já abre filtrado
+  const buscaDaUrl = new URLSearchParams(location.search).get('busca')
+  if (buscaDaUrl) $('busca-itens').value = buscaDaUrl
+
   $('busca-itens').addEventListener('input', renderizar)
   carregar()
 

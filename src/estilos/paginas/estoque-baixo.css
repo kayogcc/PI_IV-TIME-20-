@@ -1,46 +1,58 @@
-/* Autor: Carlos Eduardo Marins Fonseca */
+/* Autores: Carlos Eduardo Marins Fonseca, Leonardo Fonseca de Oliveira (novo visual da tabela e do filtro) */
 
-/* Estilos específicos para a página de estoque baixo */
-/* Palavras-chave: estilo da tela de estoque baixo */
-.pagina-conteudo {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+/* Tela: produtos com estoque baixo (mesmo visual da tela "Vencendo logo") */
+/* Palavras-chave: estilo da tela de estoque baixo · usa as variáveis de cor · tabela com rolagem no celular */
+
+/* Tabela: rola de lado em telas pequenas, em vez de quebrar o layout */
+.tabela-estoque {
+  overflow-x: auto;
 }
 
-.tabela-container {
-    margin-top: 20px;
-    overflow-x: auto;
+.tabela-estoque table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
 }
 
-table {
+.tabela-estoque th,
+.tabela-estoque td {
+  padding: 12px;
+  border-top: 1px solid var(--line);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.tabela-estoque th {
+  border-top: 0;
+  color: var(--mute);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.tabela-estoque td:first-child {
+  font-weight: 600;
+}
+
+/* Mensagem quando não há itens (ou quando a API dá erro) */
+.tabela-estoque .vazio {
+  text-align: center;
+  color: var(--mute);
+  padding: 28px 12px;
+}
+
+/* Filtro Todos / Alta / Média: ocupa a largura toda no celular */
+#filtro-estoque {
+  min-width: 280px;
+  max-width: 100%;
+}
+
+@media (max-width: 860px) {
+  #filtro-estoque {
+    min-width: 0;
     width: 100%;
-    border-collapse: collapse;
-    text-align: left;
-    font-family: inherit;
-}
+  }
 
-th, td {
-    padding: 12px 15px;
-    border-bottom: 1px solid #ddd;
-}
-
-th {
-    background-color: #f4f4f4;
-    font-weight: bold;
-    color: #333;
-}
-
-tr:hover {
-    background-color: #f9f9f9;
-}
-
-/* Exemplo de uso de selo/alerta visual simples */
-.selo-alerta {
-    background-color: #ffcccc;
-    color: #990000;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 0.85rem;
-    font-weight: bold;
+  .card .head:has(#filtro-estoque) {
+    flex-wrap: wrap;
+  }
 }

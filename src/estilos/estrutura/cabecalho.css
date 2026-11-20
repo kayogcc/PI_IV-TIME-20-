@@ -1,4 +1,4 @@
-/* Autor: Gabriel Figueira Albasini */
+/* Autores: Gabriel Figueira Albasini, Leonardo Fonseca de Oliveira e Carlos Eduardo Marins Fonseca (lista de sugestões da busca) */
 
 /* Layout: cabeçalho (logo, busca e usuário) */
 /* Palavras-chave: layout · cabeçalho (logo, busca, usuário) */
@@ -88,4 +88,102 @@ header {
   fill: none;
   stroke-width: 2;
   stroke-linecap: round;
+}
+
+/* Busca funcionando: caixa em foco e lista de sugestões */
+.search {
+  position: relative;
+}
+
+.search:focus-within {
+  border-color: var(--blue);
+}
+
+.search input::-webkit-search-cancel-button {
+  cursor: pointer;
+}
+
+/* Lista de sugestões: abre logo abaixo da caixa de busca, por cima da página */
+.search-resultados {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(15,23,42,.12);
+  max-height: 360px;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.search-resultados [role="option"] {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--ink);
+}
+
+/* Destaque ao passar o mouse ou ao escolher com as setas */
+.search-resultados [role="option"]:hover,
+.search-resultados [aria-selected="true"] {
+  background: var(--blue-soft);
+}
+
+.search-resultados b {
+  display: block;
+  font-size: 14px;
+}
+
+.search-resultados small {
+  color: var(--mute);
+  font-size: 12px;
+}
+
+/* Selo de cada sugestão: verde = Normal, amarelo = Estoque baixo */
+.search-selo {
+  flex: none;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 99px;
+}
+
+.search-selo.ok {
+  color: var(--green);
+  background: #e7f7f0;
+}
+
+.search-selo.baixo {
+  color: var(--amber);
+  background: var(--amber-soft);
+}
+
+/* Último item: "Ver todos os resultados" */
+.search-todos {
+  margin-top: 4px;
+  padding: 10px;
+  border-top: 1px solid var(--line);
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.search-todos:hover {
+  text-decoration: underline;
+}
+
+.search-aviso {
+  padding: 12px 10px;
+  color: var(--mute);
+  font-size: 13px;
 }

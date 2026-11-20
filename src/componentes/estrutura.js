@@ -1,8 +1,9 @@
- // Autor: Gabriel Figueira Albasini
+// Autores: Gabriel Figueira Albasini, Leonardo Fonseca de Oliveira e Carlos Eduardo Marins Fonseca (busca do cabeçalho)
 
 // Palavras-chave: layout comum · cabeçalho e menu de abas · exige login · data-href · controle segmentado
 import { exigirLogin, logout } from '../servicos/autenticacao.js'
 import { esc } from '../utilitarios/textos.js'
+import { ligarBusca } from './busca.js'
 
 // Abas do menu
 const menu = [
@@ -26,7 +27,10 @@ function htmlDoCabecalho(usuario) {
       </div>
       <div class="search">
         <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        <input placeholder="Buscar no estoque..."><kbd>⌘K</kbd>
+        <!-- Busca: as sugestões aparecem na lista abaixo (ver busca.js). role/aria-* ajudam leitores de tela -->
+        <input type="search" placeholder="Buscar no estoque..." autocomplete="off" aria-label="Buscar material no estoque"
+          role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="busca-resultados"><kbd>⌘K</kbd>
+        <ul class="search-resultados" id="busca-resultados" role="listbox" hidden></ul>
       </div>
       <div class="user" id="sair" title="Sair">
         <div class="av">${esc(iniciais)}</div>
@@ -43,6 +47,8 @@ export function montarLayout() {
   if (!usuario) return null
 
   document.getElementById('header').innerHTML = htmlDoCabecalho(usuario)
+  // Busca do cabeçalho funcionando: sugestões enquanto digita, Ctrl+K, setas e Enter (ver busca.js)
+  ligarBusca(document.querySelector('#header .search'))
 
   document.getElementById('sair').addEventListener('click', () => {
     logout()
