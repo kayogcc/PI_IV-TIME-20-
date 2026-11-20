@@ -1,3 +1,4 @@
+// Palavras-chave: exceção de negócio · status HTTP (400, 404, 409) · resposta JSON { mensagem }
 package br.puc.estoquehosp.http;
 
 // Erro de regra de negócio ou de requisição. Vira uma resposta JSON { "mensagem": ... } com o status informado.

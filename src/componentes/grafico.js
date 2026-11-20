@@ -1,3 +1,4 @@
+// Palavras-chave: gráfico de barras em HTML/CSS · entradas x saídas · altura em % do maior valor
 import { esc } from '../utilitarios/textos.js'
 
 // Gráfico de barras em HTML/CSS: duas séries lado a lado (entradas e saídas).

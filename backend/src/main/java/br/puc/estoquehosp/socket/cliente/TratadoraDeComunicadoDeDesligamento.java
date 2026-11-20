@@ -1,4 +1,5 @@
 // Gabriel Figueira Albasini
+// Palavras-chave: Thread · escuta o ComunicadoDeDesligamento · encerra o cliente
 package br.puc.estoquehosp.socket.cliente;
 
 import br.puc.estoquehosp.socket.comum.ComunicadoDeDesligamento;

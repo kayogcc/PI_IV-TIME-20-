@@ -1,3 +1,4 @@
+// Palavras-chave: tela de alertas · GET /api/alertas · filtro por tipo · selo de prioridade
 import { montarLayout } from '../componentes/estrutura.js'
 import { badge, NIVEL_PRIORIDADE } from '../componentes/selo.js'
 import { api } from '../servicos/api.js'

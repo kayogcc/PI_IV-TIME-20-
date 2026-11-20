@@ -1,3 +1,4 @@
+// Palavras-chave: segurança · hash PBKDF2 · sal aleatório · 210 mil iterações · comparação em tempo constante
 package br.puc.estoquehosp.servico;
 
 import javax.crypto.SecretKeyFactory;

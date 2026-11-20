@@ -1,3 +1,4 @@
+// Palavras-chave: badge/selo · prioridade -> cor (Alta, Média, Baixa)
 import { esc } from '../utilitarios/textos.js'
 
 // Prioridade do alerta na API -> classe de cor (ex = alta, lo = média, in = baixa)

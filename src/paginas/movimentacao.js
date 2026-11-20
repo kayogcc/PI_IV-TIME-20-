@@ -1,3 +1,4 @@
+// Palavras-chave: registro de entrada/saída · leitura de código de barras pela câmera (ZXing) · sugestões de materiais
 import { BrowserMultiFormatReader } from '@zxing/browser'
 import { montarLayout } from '../componentes/estrutura.js'
 import { api } from '../servicos/api.js'

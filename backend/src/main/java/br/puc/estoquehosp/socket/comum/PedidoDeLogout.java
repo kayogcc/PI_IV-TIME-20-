@@ -1,4 +1,5 @@
 // Gabriel Figueira Albasini
+// Palavras-chave: pedido · encerra a sessão · token oculto no toString
 package br.puc.estoquehosp.socket.comum;
 
 // Encerra a sessão do token

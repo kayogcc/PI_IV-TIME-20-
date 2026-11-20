@@ -1,4 +1,5 @@
 // Gabriel Figueira Albasini
+// Palavras-chave: pedido · inativar material (exclusão lógica) · histórico preservado
 package br.puc.estoquehosp.socket.comum;
 
 // Inativa um material (o histórico é mantido)

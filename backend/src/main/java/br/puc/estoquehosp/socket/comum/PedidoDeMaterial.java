@@ -1,4 +1,5 @@
 // Gabriel Figueira Albasini
+// Palavras-chave: pedido · detalhe de um material · saldo por local
 package br.puc.estoquehosp.socket.comum;
 
 // Detalhe de um material, com o saldo por local

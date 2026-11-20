@@ -1,4 +1,5 @@
 // Gabriel Figueira Albasini
+// Palavras-chave: cliente de terminal · menu · login antes do menu · token em todos os pedidos · Fazedor de Continhas adaptado
 package br.puc.estoquehosp.socket.cliente;
 
 import br.puc.estoquehosp.modelo.Alerta;

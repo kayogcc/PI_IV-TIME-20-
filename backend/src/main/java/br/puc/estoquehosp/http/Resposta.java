@@ -1,3 +1,4 @@
+// Palavras-chave: record · status + corpo · 201 Created · 204 No Content
 package br.puc.estoquehosp.http;
 
 // Use quando a ação precisa devolver um status diferente de 200 (ex.: 201 Created, 204 No Content).

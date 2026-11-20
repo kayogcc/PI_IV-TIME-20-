@@ -1,3 +1,4 @@
+// Palavras-chave: tela de validade · vence em até 30 dias · filtro por prazo · saldo por local
 import { montarLayout } from '../componentes/estrutura.js'
 import { badge } from '../componentes/selo.js'
 import { api } from '../servicos/api.js'

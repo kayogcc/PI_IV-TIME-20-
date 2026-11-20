@@ -1,4 +1,5 @@
 // Gabriel Figueira Albasini
+// Palavras-chave: ponto de entrada da API · HttpServer na porta 8080 · /api · registra controladores · virtual threads · ponte para o Servidor (3000)
 package br.puc.estoquehosp;
 
 import br.puc.estoquehosp.controlador.AlertaControlador;

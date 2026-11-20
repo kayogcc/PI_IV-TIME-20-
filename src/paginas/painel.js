@@ -1,3 +1,4 @@
+// Palavras-chave: dashboard · GET /api/dashboard · indicadores · gráfico de 7 dias · últimos alertas
 import { montarLayout } from '../componentes/estrutura.js'
 import { desenharGrafico } from '../componentes/grafico.js'
 import { NIVEL_PRIORIDADE } from '../componentes/selo.js'

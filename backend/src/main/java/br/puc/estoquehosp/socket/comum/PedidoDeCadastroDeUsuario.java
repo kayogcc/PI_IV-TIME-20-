@@ -1,4 +1,5 @@
 // Gabriel Figueira Albasini
+// Palavras-chave: pedido · criar conta · não exige login · toString sem senha
 package br.puc.estoquehosp.socket.comum;
 
 // Cria uma conta. perfil: ALMOXARIFADO, CENTRO_CIRURGICO ou GESTAO

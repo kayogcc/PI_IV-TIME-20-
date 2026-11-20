@@ -1,3 +1,4 @@
+// Palavras-chave: tela de itens · CRUD de materiais · busca · editar/inativar · 409 duplicado
 import { montarLayout } from '../componentes/estrutura.js'
 import { api } from '../servicos/api.js'
 import { criarAviso } from '../utilitarios/formulario.js'

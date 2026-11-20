@@ -1,4 +1,5 @@
 // Gabriel Figueira Albasini
+// Palavras-chave: regras de alerta · estoque baixo (≤ mínimo; Alta ≤ 25%) · validade em 30 dias (Alta ≤ 7, Média ≤ 15) · dashboard 7 dias
 package br.puc.estoquehosp.servico;
 
 import br.puc.estoquehosp.modelo.Alerta;

@@ -1,4 +1,5 @@
 // Gabriel Figueira Albasini
+// Palavras-chave: record · Serializable · histórico · Entrada/Saída · origem (código de barras | manual) · data ISO-8601
 package br.puc.estoquehosp.modelo;
 
 import java.io.Serializable;

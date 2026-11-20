@@ -1,4 +1,5 @@
 // Gabriel Figueira Albasini
+// Palavras-chave: controlador · cadastro · login · logout · /api/eu (usuário atual)
 package br.puc.estoquehosp.controlador;
 
 import br.puc.estoquehosp.http.PonteSocket;

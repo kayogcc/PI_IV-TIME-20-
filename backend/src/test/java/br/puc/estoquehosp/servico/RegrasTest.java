@@ -1,3 +1,4 @@
+// Palavras-chave: testes unitários · JUnit · hash de senha · regras de estoque baixo e validade · sem banco
 package br.puc.estoquehosp.servico;
 
 import br.puc.estoquehosp.modelo.Alerta;

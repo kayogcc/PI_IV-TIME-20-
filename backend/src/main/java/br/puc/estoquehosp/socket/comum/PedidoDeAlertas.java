@@ -1,4 +1,5 @@
 // Gabriel Figueira Albasini
+// Palavras-chave: pedido · lista de alertas · exige login
 package br.puc.estoquehosp.socket.comum;
 
 // Alertas de estoque baixo e validade próxima

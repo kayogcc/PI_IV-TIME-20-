@@ -1,3 +1,4 @@
+// Palavras-chave: regras do material · validação dos campos · nome/código únicos (409) · saldo só muda por movimentação
 package br.puc.estoquehosp.servico;
 
 import br.puc.estoquehosp.http.ErroApi;

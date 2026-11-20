@@ -1,3 +1,4 @@
+// Palavras-chave: tela de login · POST /api/login · redireciona se já logado
 import { login, usuarioAtual } from '../servicos/autenticacao.js'
 import { criarAviso, matriculaValida } from '../utilitarios/formulario.js'
 

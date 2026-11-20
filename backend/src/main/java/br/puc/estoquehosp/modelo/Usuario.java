@@ -1,4 +1,5 @@
 // Gabriel Figueira Albasini
+// Palavras-chave: record · Serializable · dados públicos (sem senha) · perfil
 package br.puc.estoquehosp.modelo;
 
 import java.io.Serializable;

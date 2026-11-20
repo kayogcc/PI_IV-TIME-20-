@@ -1,4 +1,5 @@
 // Gabriel Figueira Albasini
+// Palavras-chave: record · Serializable · saldos por local · quantidade total · ativo (inativação lógica)
 package br.puc.estoquehosp.modelo;
 
 import java.io.Serializable;

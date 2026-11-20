@@ -1,3 +1,4 @@
+// Palavras-chave: formatação de datas pt-BR · últimos 7 dias · dias até o vencimento
 const DIAS_SEMANA = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb']
 
 // Date -> "09/11"

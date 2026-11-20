@@ -1,4 +1,5 @@
 // Gabriel Figueira Albasini
+// Palavras-chave: teste de segurança · JUnit · toString não vaza senha, token nem hash
 package br.puc.estoquehosp.socket.comum;
 
 import br.puc.estoquehosp.modelo.Entradas.Login;

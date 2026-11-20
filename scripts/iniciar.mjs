@@ -1,4 +1,5 @@
 // Gabriel Figueira Albasini
+// Palavras-chave: npm start · sobe os 3 processos (Servidor 3000, API 8080, Vite) · spawn · Ctrl+C encerra tudo
 // npm start: sobe o Servidor de sockets, a API HTTP (ponte) e o front-end juntos.
 // Site → API HTTP (8080) → Servidor de sockets (3000) → MongoDB.
 // Ctrl+C (ou qualquer um dos três parar) encerra todos.

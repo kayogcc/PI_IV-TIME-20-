@@ -1,4 +1,5 @@
 // Gabriel Figueira Albasini
+// Palavras-chave: controlador · CRUD de materiais · GET/POST/PUT/DELETE /api/materiais · perfil conferido no Servidor
 package br.puc.estoquehosp.controlador;
 
 import br.puc.estoquehosp.http.PonteSocket;

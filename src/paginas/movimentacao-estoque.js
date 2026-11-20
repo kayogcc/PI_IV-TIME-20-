@@ -1,3 +1,4 @@
+// Palavras-chave: relatório da semana · indicadores · gráfico · agrupamento por material/local
 import { montarLayout } from '../componentes/estrutura.js'
 import { desenharGrafico } from '../componentes/grafico.js'
 import { api } from '../servicos/api.js'

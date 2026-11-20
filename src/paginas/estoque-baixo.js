@@ -1,3 +1,4 @@
+// Palavras-chave: tela de estoque baixo · quantidade ≤ mínimo · tabela dinâmica
 import { montarLayout } from '../componentes/estrutura.js'
 import { api } from '../servicos/api.js'
 import { esc } from '../utilitarios/textos.js'

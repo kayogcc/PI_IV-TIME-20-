@@ -1,4 +1,5 @@
 // Gabriel Figueira Albasini
+// Palavras-chave: pedido · histórico de movimentações · filtro por dias e material
 package br.puc.estoquehosp.socket.comum;
 
 // Movimentações dos últimos dias (null = 30). materialId null = todos os materiais

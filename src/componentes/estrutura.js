@@ -1,3 +1,4 @@
+// Palavras-chave: layout comum · cabeçalho e menu de abas · exige login · data-href · controle segmentado
 import { exigirLogin, logout } from '../servicos/autenticacao.js'
 import { esc } from '../utilitarios/textos.js'
 

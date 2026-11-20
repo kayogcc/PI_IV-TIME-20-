@@ -1,4 +1,5 @@
 // Gabriel Figueira Albasini
+// Palavras-chave: controlador · entrada/saída · GET/POST /api/movimentacoes · histórico
 package br.puc.estoquehosp.controlador;
 
 import br.puc.estoquehosp.http.PonteSocket;

@@ -1,4 +1,5 @@
 // Gabriel Figueira Albasini
+// Palavras-chave: DTOs · corpos JSON recebidos · toString esconde a senha
 package br.puc.estoquehosp.modelo;
 
 // Corpos JSON que a API recebe. Campos ausentes chegam como null.

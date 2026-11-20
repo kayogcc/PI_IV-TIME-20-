@@ -1,4 +1,5 @@
 // Gabriel Figueira Albasini
+// Palavras-chave: pedido · entrada ou saída de estoque · código de barras ou nome
 package br.puc.estoquehosp.socket.comum;
 
 // Entrada ou saída de estoque. material: código de barras ou nome; tipo: Entrada | Saída;

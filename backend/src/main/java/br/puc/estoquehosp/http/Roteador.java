@@ -1,4 +1,5 @@
 // Gabriel Figueira Albasini
+// Palavras-chave: roteamento · HttpHandler · regex nas rotas · 404/405 · Authorization: Bearer · resposta JSON
 package br.puc.estoquehosp.http;
 
 import com.google.gson.Gson;

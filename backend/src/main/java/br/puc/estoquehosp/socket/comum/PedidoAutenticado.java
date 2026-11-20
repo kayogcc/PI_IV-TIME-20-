@@ -1,4 +1,5 @@
 // Gabriel Figueira Albasini
+// Palavras-chave: herança · pedidos que exigem login · carregam o token
 package br.puc.estoquehosp.socket.comum;
 
 // Pedido que exige login: leva o token devolvido pelo PedidoDeLogin.

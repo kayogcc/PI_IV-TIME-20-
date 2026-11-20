@@ -1,4 +1,5 @@
 // Gabriel Figueira Albasini
+// Palavras-chave: MongoDB Atlas · MONGO_URI · MONGO_BANCO · ping · AutoCloseable · timeout 10s
 package br.puc.estoquehosp.banco;
 
 import com.mongodb.ConnectionString;

@@ -1,3 +1,4 @@
+// Palavras-chave: coleção "materiais" · busca sem acento (Collation + Normalizer) · saldo atômico com $inc · não deixa saldo negativo
 package br.puc.estoquehosp.repositorio;
 
 import br.puc.estoquehosp.modelo.Entradas.DadosMaterial;

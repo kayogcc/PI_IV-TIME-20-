@@ -1,3 +1,4 @@
+// Palavras-chave: fetch · chamada à API Java · Authorization: Bearer · 401 volta ao login · ErroApi
 import { tokenAtual, logout } from './autenticacao.js'
 
 // Erro devolvido pela API. status = 0 quando nem chegou no servidor.

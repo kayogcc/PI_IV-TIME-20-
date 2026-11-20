@@ -1,3 +1,4 @@
+// Palavras-chave: login/logout · token no sessionStorage · nomes dos perfis · exigirLogin
 import { api } from './api.js'
 
 const CHAVE = 'estoquehosp:usuario'

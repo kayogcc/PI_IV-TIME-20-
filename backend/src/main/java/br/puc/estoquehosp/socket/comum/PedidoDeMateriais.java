@@ -1,4 +1,5 @@
 // Gabriel Figueira Albasini
+// Palavras-chave: pedido · listar/buscar materiais ativos
 package br.puc.estoquehosp.socket.comum;
 
 // Lista os materiais ativos. busca: parte do nome ou código de barras (null = todos)

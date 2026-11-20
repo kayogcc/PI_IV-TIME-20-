@@ -1,4 +1,5 @@
 // Gabriel Figueira Albasini
+// Palavras-chave: controlador · rotas GET /api/alertas e /api/dashboard · HTTP -> pedido de socket
 package br.puc.estoquehosp.controlador;
 
 import br.puc.estoquehosp.http.PonteSocket;

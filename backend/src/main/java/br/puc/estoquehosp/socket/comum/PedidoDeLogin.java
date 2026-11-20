@@ -1,4 +1,5 @@
 // Gabriel Figueira Albasini
+// Palavras-chave: pedido · login com matrícula e senha · devolve token
 package br.puc.estoquehosp.socket.comum;
 
 // Confere matrícula e senha. O Resultado traz o token, que vai nos próximos pedidos

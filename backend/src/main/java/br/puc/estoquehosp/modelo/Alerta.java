@@ -1,4 +1,5 @@
 // Gabriel Figueira Albasini
+// Palavras-chave: record · Serializable · tipo (estoque | validade) · prioridade (Alta | Média | Baixa)
 package br.puc.estoquehosp.modelo;
 
 import java.io.Serializable;

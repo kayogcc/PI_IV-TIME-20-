@@ -1,4 +1,5 @@
 // Gabriel Figueira Albasini
+// Palavras-chave: pedido · quem é o usuário do token
 package br.puc.estoquehosp.socket.comum;
 
 // Devolve o usuário dono do token

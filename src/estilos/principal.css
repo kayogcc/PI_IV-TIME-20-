@@ -1,4 +1,5 @@
 /* EstoqueHosp — ponto de entrada do CSS. A ordem dos imports importa. */
+/* Palavras-chave: ponto de entrada do CSS · @import em ordem (base -> componentes -> estrutura -> páginas) */
 
 /* 1. Base */
 @import url('./base/variaveis.css');

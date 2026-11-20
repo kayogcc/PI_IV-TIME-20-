@@ -1,3 +1,4 @@
+// Palavras-chave: tela de histórico · GET /api/movimentacoes · agrupado por dia · busca sem acento
 import { montarLayout } from '../componentes/estrutura.js'
 import { api } from '../servicos/api.js'
 import { diaMes, diaSemana, hora } from '../utilitarios/datas.js'

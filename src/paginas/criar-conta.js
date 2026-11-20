@@ -1,3 +1,4 @@
+// Palavras-chave: tela de cadastro · POST /api/usuarios · validação no front · escolha de perfil
 // Tela: criar conta
 
 import { criarAviso, matriculaValida } from '../utilitarios/formulario.js';

@@ -1,4 +1,5 @@
 // Gabriel Figueira Albasini
+// Palavras-chave: coleção "usuarios" · índice único na matrícula · matriculaChave (minúsculas) · DUPLICATE_KEY
 package br.puc.estoquehosp.repositorio;
 
 import br.puc.estoquehosp.modelo.Perfil;
