@@ -1,4 +1,4 @@
-// Autor: Gabriel Figueira Albasini
+// Autores: Gabriel Figueira Albasini, Leonardo Fonseca de Oliveira (filtro de segurança dos objetos recebidos, vindo do primeiro servidor de sockets)
 
 // Palavras-chave: Thread por cliente · ObjectInputFilter (lista branca contra desserialização maliciosa) · atenda · confere token e perfil (exija)
 package br.puc.estoquehosp.socket.servidor;

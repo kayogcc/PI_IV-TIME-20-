@@ -1,4 +1,4 @@
-<!-- Gabriel Figueira Albasini -->
+<!-- Autores: Gabriel Figueira Albasini, Leonardo Fonseca de Oliveira (README inicial e levantamento de requisitos) -->
 
 # EstoqueHosp — Plataforma de Automação e Gestão de Estoque Hospitalar
 
