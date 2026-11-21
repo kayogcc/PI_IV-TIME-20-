@@ -1,4 +1,4 @@
-// Autores: Bruno Lobo de Jesus RA: 25019830 (dados de entrada da API), Gabriel Albasini RA: 25019916 (senha oculta no toString)
+// Autores: Bruno Lobo de Jesus RA: 25019830 (dados de entrada da API e alteração de usuário), Gabriel Albasini RA: 25019916 (senha oculta no toString)
 
 // Palavras-chave: DTOs · corpos JSON recebidos · toString esconde a senha
 package br.puc.estoquehosp.modelo;
@@ -22,6 +22,9 @@ public final class Entradas {
             return "Login[matricula=" + matricula + ", senha=(oculta)]";
         }
     }
+
+    // Feita pela Gestão. Campo null = não muda.
+    public record AlteracaoDeUsuario(String perfil, Boolean ativo) {}
 
     public record DadosMaterial(String nome, String codigoBarras, String lote, String validade, Integer quantidadeMinima) {}
 

@@ -1,4 +1,4 @@
-// Autor: Carlos Eduardo RA: 25020992
+// Autores: Carlos Eduardo RA: 25020992, Bruno Lobo de Jesus RA: 25019830 (encerrar as sessões de um usuário)
 
 package br.puc.estoquehosp.http;
 
@@ -32,6 +32,21 @@ class SessoesTest {
         sessoes.fechar(token);
 
         assertTrue(sessoes.usuarioDoToken(token).isEmpty());
+    }
+
+    @Test
+    void deveEncerrarTodasAsSessoesDoUsuario() {
+        Sessoes sessoes = new Sessoes();
+        Usuario ana = new Usuario("1", "Ana Souza", "ana", Perfil.ALMOXARIFADO);
+        String celular = sessoes.abrir(ana);
+        String computador = sessoes.abrir(ana);
+        String outraPessoa = sessoes.abrir(new Usuario("2", "Carlos Lima", "carlos", Perfil.GESTAO));
+
+        sessoes.fecharDoUsuario("1");
+
+        assertTrue(sessoes.usuarioDoToken(celular).isEmpty());
+        assertTrue(sessoes.usuarioDoToken(computador).isEmpty());
+        assertTrue(sessoes.usuarioDoToken(outraPessoa).isPresent());
     }
 
     @Test

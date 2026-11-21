@@ -34,6 +34,8 @@ export async function login(matricula, senha) {
   const resposta = await api('POST', '/login', { matricula, senha })
   // hospital e unidade ainda não existem na API: valores fixos até o cadastro de hospitais
   const usuario = {
+    // id: a tela de usuários usa para marcar a própria conta (sessões antigas não têm, e tudo bem)
+    id: resposta.usuario.id,
     nome: resposta.usuario.nome,
     perfil: resposta.usuario.perfil,
     hospital: 'Hospital Santa Clara',

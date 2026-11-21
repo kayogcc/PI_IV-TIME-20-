@@ -1,10 +1,11 @@
-// Autor: Gabriel Albasini RA: 25019916
+// Autores: Gabriel Albasini RA: 25019916, Bruno Lobo de Jesus RA: 25019830 (gestão de usuários: listar, mudar perfil, inativar)
 
-// Palavras-chave: cadastro e login · validação de nome/matrícula/senha · senha com letra e número · 401 · token de sessão
+// Palavras-chave: cadastro e login · validação de nome/matrícula/senha · senha com letra e número · 401 · token de sessão · conta inativa
 package br.puc.estoquehosp.servico;
 
 import br.puc.estoquehosp.http.ErroApi;
 import br.puc.estoquehosp.http.Sessoes;
+import br.puc.estoquehosp.modelo.Entradas.AlteracaoDeUsuario;
 import br.puc.estoquehosp.modelo.Entradas.Login;
 import br.puc.estoquehosp.modelo.Entradas.NovoUsuario;
 import br.puc.estoquehosp.modelo.Perfil;
@@ -12,9 +13,10 @@ import br.puc.estoquehosp.modelo.Usuario;
 import br.puc.estoquehosp.repositorio.UsuarioRepositorio;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.regex.Pattern;
 
-// Cadastro e login. As regras são as mesmas de criar-conta.js, porque o front-end pode ser contornado.
+// Cadastro, login e gestão de usuários. As regras são as mesmas de criar-conta.js, porque o front-end pode ser contornado.
 public class UsuarioServico {
 
     public record LoginFeito(String token, Usuario usuario) implements Serializable {
@@ -70,11 +72,37 @@ public class UsuarioServico {
         UsuarioRepositorio.Credencial credencial = repositorio.buscarPorMatricula(matricula)
                 .filter(c -> Senhas.confere(dados.senha(), c.hashSenha()))
                 .orElseThrow(() -> new ErroApi(401, "Usuário ou senha incorretos."));
+        // Só avisa da conta inativa depois de a senha conferir, para não revelar quais contas existem
+        if (!credencial.usuario().ativo()) {
+            throw new ErroApi(403, "Esta conta está inativa. Procure a Gestão para reativá-la.");
+        }
         return new LoginFeito(sessoes.abrir(credencial.usuario()), credencial.usuario());
     }
 
     public void sair(String token) {
         sessoes.fechar(token);
+    }
+
+    public List<Usuario> listar() {
+        return repositorio.listar();
+    }
+
+    // Muda o perfil e/ou ativa ou inativa a conta. A permissão (só Gestão) é conferida no Servidor.
+    // Ninguém mexe na própria conta: assim a Gestão não perde o acesso e sempre sobra pelo menos uma Gestão ativa.
+    public Usuario alterar(String id, AlteracaoDeUsuario dados, Usuario quemPediu) {
+        if (dados.perfil() == null && dados.ativo() == null) {
+            throw ErroApi.requisicaoInvalida("Informe o novo perfil ou se a conta fica ativa.");
+        }
+        Perfil perfil = dados.perfil() == null ? null : lerPerfil(dados.perfil());
+        if (quemPediu.id().equals(id)) {
+            throw ErroApi.requisicaoInvalida("Você não pode alterar o perfil nem inativar a sua própria conta.");
+        }
+
+        Usuario alterado = repositorio.alterar(id, perfil, dados.ativo())
+                .orElseThrow(() -> ErroApi.naoEncontrado("Usuário não encontrado."));
+        // A pessoa precisa entrar de novo para valer o perfil novo (ou fica de fora, se foi inativada)
+        sessoes.fecharDoUsuario(alterado.id());
+        return alterado;
     }
 
     private static Perfil lerPerfil(String perfil) {

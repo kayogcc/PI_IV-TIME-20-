@@ -26,6 +26,7 @@ export default defineConfig({
         'itens-cadastrados': pagina('itens-cadastrados.html'),
         'movimentacao-estoque': pagina('movimentacao-estoque.html'),
         movimentacao: pagina('movimentacao.html'),
+        usuarios: pagina('usuarios.html'),
         'vencendo-logo': pagina('vencendo-logo.html')
       }
     }

@@ -1,21 +1,23 @@
-// Autores: Gabriel Albasini RA: 25019916, Leonardo Fonseca RA: 25024579 e Carlos Eduardo RA: 25020992 (busca do cabeçalho)
+// Autores: Gabriel Albasini RA: 25019916, Leonardo Fonseca RA: 25024579 e Carlos Eduardo RA: 25020992 (busca do cabeçalho), Bruno Lobo de Jesus RA: 25019830 (aba de usuários só para a Gestão)
 
-// Palavras-chave: layout comum · cabeçalho e menu de abas · exige login · data-href · controle segmentado
+// Palavras-chave: layout comum · cabeçalho e menu de abas (filtradas por perfil) · exige login · data-href · controle segmentado
 import { exigirLogin, logout } from '../servicos/autenticacao.js'
 import { esc } from '../utilitarios/textos.js'
 import { ligarBusca } from './busca.js'
 
-// Abas do menu
+// Abas do menu. perfis: só aparece para esses perfis (sem perfis = todos)
 const menu = [
   { href: 'index.html', rotulo: 'Dashboard', ativoEm: ['index.html', ''] },
   { href: 'movimentacao.html', rotulo: 'Movimentação', ativoEm: ['movimentacao.html'] },
-  { href: 'alertas.html', rotulo: 'Alertas', ativoEm: ['alertas.html'] }
+  { href: 'alertas.html', rotulo: 'Alertas', ativoEm: ['alertas.html'] },
+  { href: 'usuarios.html', rotulo: 'Usuários', ativoEm: ['usuarios.html'], perfis: ['GESTAO'] }
 ]
 
 function htmlDoCabecalho(usuario) {
   const iniciais = usuario.nome.split(' ').map((p) => p[0]).join('').slice(0, 2).toUpperCase()
   const paginaAtual = location.pathname.split('/').pop()
   const abas = menu
+    .filter((m) => !m.perfis || m.perfis.includes(usuario.perfil))
     .map((m) => `<a href="${m.href}"${m.ativoEm.includes(paginaAtual) ? ' class="on"' : ''}>${m.rotulo}</a>`)
     .join('')
 
