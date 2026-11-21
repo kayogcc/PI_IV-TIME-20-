@@ -1,9 +1,10 @@
-// Autores: Gabriel Albasini RA: 25019916, Leonardo Fonseca RA: 25024579 (filtro de segurança dos objetos recebidos, vindo do primeiro servidor de sockets)
+// Autores: Gabriel Albasini RA: 25019916, Leonardo Fonseca RA: 25024579 (filtro de segurança dos objetos recebidos, vindo do primeiro servidor de sockets), Bruno Lobo de Jesus RA: 25019830 (pedidos de gestão de usuários)
 
 // Palavras-chave: Thread por cliente · ObjectInputFilter (lista branca contra desserialização maliciosa) · atenda · confere token e perfil (exija)
 package br.puc.estoquehosp.socket.servidor;
 
 import br.puc.estoquehosp.http.ErroApi;
+import br.puc.estoquehosp.modelo.Entradas.AlteracaoDeUsuario;
 import br.puc.estoquehosp.modelo.Entradas.DadosMaterial;
 import br.puc.estoquehosp.modelo.Entradas.Login;
 import br.puc.estoquehosp.modelo.Entradas.NovaMovimentacao;
@@ -182,6 +183,20 @@ public class SupervisoraDeConexao extends Thread
 
             if (comunicado instanceof PedidoDeUsuarioAtual)
                 return new Resultado (200, null, logado);
+
+            if (comunicado instanceof PedidoDeUsuarios)
+            {
+                exija (logado, Perfil.GESTAO);
+                return new Resultado (200, null, new ArrayList<> (this.servicos.getUsuarios().listar()));
+            }
+
+            if (comunicado instanceof PedidoDeAlteracaoDeUsuario)
+            {
+                exija (logado, Perfil.GESTAO);
+                PedidoDeAlteracaoDeUsuario pedido = (PedidoDeAlteracaoDeUsuario)comunicado;
+                return new Resultado (200, null, this.servicos.getUsuarios().alterar (pedido.getId(),
+                new AlteracaoDeUsuario (pedido.getPerfil(), pedido.getAtivo()), logado));
+            }
 
             if (comunicado instanceof PedidoDeMateriais)
             {

@@ -32,6 +32,7 @@
 @import url('./paginas/estoque-baixo.css'); /* antes ficava num <link> separado no HTML */
 @import url('./paginas/itens-cadastrados.css');
 @import url('./paginas/movimentacao.css');
+@import url('./paginas/usuarios.css');
 
 /* 5. Responsivo (por último, para sobrescrever) */
 @import url('./responsivo.css');

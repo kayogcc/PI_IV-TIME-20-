@@ -1,6 +1,6 @@
 // Autor: Bruno Lobo de Jesus RA: 25019830
 
-// Palavras-chave: sessões em memória · token aleatório (SecureRandom) · expira em 8h · ConcurrentHashMap
+// Palavras-chave: sessões em memória · token aleatório (SecureRandom) · expira em 8h · ConcurrentHashMap · deslogar usuário
 package br.puc.estoquehosp.http;
 
 import br.puc.estoquehosp.modelo.Usuario;
@@ -44,5 +44,11 @@ public class Sessoes {
 
     public void fechar(String token) {
         if (token != null) sessoes.remove(token);
+    }
+
+    // Desloga a pessoa em todos os aparelhos. Usado quando a Gestão muda o perfil ou inativa a conta,
+    // porque a sessão guarda uma cópia do usuário e continuaria com os dados antigos.
+    public void fecharDoUsuario(String idUsuario) {
+        sessoes.values().removeIf(sessao -> sessao.usuario().id().equals(idUsuario));
     }
 }

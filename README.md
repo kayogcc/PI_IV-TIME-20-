@@ -181,7 +181,9 @@ Todas as respostas são JSON. Erros vêm como `{ "mensagem": "..." }`. Exceto ca
 | Método | Rota | Quem pode | Descrição |
 |---|---|---|---|
 | POST | `/api/usuarios` | público | Cria conta: `{ nome, matricula, perfil, senha }`. 409 se a matrícula já existir |
-| POST | `/api/login` | público | `{ matricula, senha }` → `{ token, usuario }` |
+| GET | `/api/usuarios` | Gestão | Lista todas as contas, ativas e inativas |
+| PATCH | `/api/usuarios/{id}` | Gestão | `{ perfil, ativo }` (mande só o que muda). Ninguém altera a própria conta; a pessoa alterada precisa entrar de novo |
+| POST | `/api/login` | público | `{ matricula, senha }` → `{ token, usuario }`. 403 se a conta estiver inativa |
 | POST | `/api/logout` | logado | Encerra a sessão |
 | GET | `/api/eu` | logado | Usuário do token |
 | GET | `/api/materiais?busca=` | logado | Lista materiais ativos (busca por nome ou código de barras) |
@@ -202,4 +204,4 @@ O código segue as camadas `controlador` → `servico` → `repositorio`, em `ba
 
     - **Almoxarifado** — cadastro de materiais e registro de entradas e saídas
     - **Centro Cirúrgico** — consulta de materiais e registro de saídas
-    - **Gestão** — usuários, limites de alerta, dashboard e histórico
+    - **Gestão** — usuários (aba **Usuários**: mudar perfil, inativar e reativar contas), limites de alerta, dashboard e histórico

@@ -15,7 +15,9 @@ const esquemas = {
       matricula: { bsonType: "string", minLength: 3, maxLength: 30 },
       matriculaChave: { bsonType: "string", minLength: 3, maxLength: 30 },
       perfil: { bsonType: "string", enum: ["ALMOXARIFADO", "CENTRO_CIRURGICO", "GESTAO"] },
-      hashSenha: { bsonType: "string", minLength: 1 }
+      hashSenha: { bsonType: "string", minLength: 1 },
+      // Opcional: contas antigas não têm o campo e contam como ativas
+      ativo: { bsonType: "bool" }
     }
   },
   materiais: {

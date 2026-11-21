@@ -1,0 +1,58 @@
+<!-- Autor: Bruno Lobo de Jesus RA: 25019830 -->
+
+<!DOCTYPE html>
+<!-- Palavras-chave: tela de usuários · só Gestão · mudar perfil · inativar/reativar conta -->
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Usuários — EstoqueHosp</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🏥%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="src/estilos/principal.css" />
+  </head>
+  <body>
+    <header id="header"></header>
+
+    <main id="conteudo">
+      <div class="top">
+        <div>
+          <a class="voltar" href="index.html">Voltar ao painel</a>
+          <div class="eyebrow">Gestão</div>
+          <h2>Usuários</h2>
+          <p class="sub">Mude o perfil de acesso ou inative contas. A pessoa alterada precisa entrar de novo.</p>
+        </div>
+      </div>
+
+      <section class="card">
+        <div class="head">
+          <div>
+            <h3>Contas cadastradas</h3>
+            <p id="qtd-usuarios"></p>
+          </div>
+          <label class="busca-itens">
+            <span class="sr-only">Buscar usuário pelo nome ou matrícula</span>
+            <input id="busca-usuarios" type="search" placeholder="Buscar usuário..." autocomplete="off" />
+          </label>
+        </div>
+
+        <div class="tabela-venc">
+          <table>
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Usuário ou matrícula</th>
+                <th>Perfil de acesso</th>
+                <th>Status</th>
+                <th><span class="sr-only">Ações</span></th>
+              </tr>
+            </thead>
+            <tbody id="t-usuarios"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="src/paginas/usuarios.js"></script>
+  </body>
+</html>

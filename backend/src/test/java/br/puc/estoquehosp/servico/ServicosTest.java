@@ -1,4 +1,4 @@
-// Autores: Carlos Eduardo RA: 25020992, Gabriel Albasini RA: 25019916
+// Autores: Carlos Eduardo RA: 25020992, Gabriel Albasini RA: 25019916, Bruno Lobo de Jesus RA: 25019830 (testes da gestão de usuários)
 
 package br.puc.estoquehosp.servico;
 
@@ -10,6 +10,7 @@ import br.puc.estoquehosp.http.ErroApi;
 import br.puc.estoquehosp.http.PonteSocket;
 import br.puc.estoquehosp.http.Roteador;
 import br.puc.estoquehosp.http.Sessoes;
+import br.puc.estoquehosp.modelo.Entradas.AlteracaoDeUsuario;
 import br.puc.estoquehosp.modelo.Entradas.DadosMaterial;
 import br.puc.estoquehosp.modelo.Entradas.Login;
 import br.puc.estoquehosp.modelo.Entradas.NovaMovimentacao;
@@ -637,6 +638,83 @@ class ServicosTest {
 
             assertTrue(a.sessoes().usuarioDoToken(token).isEmpty());
         }
+
+        // ---- gestão de usuários (feita pela Gestão)
+
+        private static final Usuario GESTOR = new Usuario("aaaaaaaaaaaaaaaaaaaaaaaa", "Gil Gestor", "gil.gestor", Perfil.GESTAO);
+
+        @Test
+        @DisplayName("Alteração sem perfil nem ativo é rejeitada")
+        void alteracaoVazia() {
+            assertStatus(400, () -> semBanco.alterar("bbbbbbbbbbbbbbbbbbbbbbbb", new AlteracaoDeUsuario(null, null), GESTOR));
+        }
+
+        @ParameterizedTest(name = "novo perfil \"{0}\" é rejeitado")
+        @ValueSource(strings = {"", "ADMIN", "gestao"})
+        void alteracaoComPerfilInvalido(String perfil) {
+            assertStatus(400, () -> semBanco.alterar("bbbbbbbbbbbbbbbbbbbbbbbb", new AlteracaoDeUsuario(perfil, null), GESTOR));
+        }
+
+        @Test
+        @DisplayName("Ninguém altera a própria conta")
+        void naoAlteraAPropriaConta() {
+            assertStatus(400, () -> semBanco.alterar(GESTOR.id(), new AlteracaoDeUsuario("ALMOXARIFADO", null), GESTOR));
+            assertStatus(400, () -> semBanco.alterar(GESTOR.id(), new AlteracaoDeUsuario(null, false), GESTOR));
+        }
+
+        @Test
+        @DisplayName("Lista todos os usuários, ativos e inativos, em ordem de nome")
+        void listaUsuarios() {
+            Ambiente a = ambiente();
+            Usuario bruno = a.usuarioServico().cadastrar(new NovoUsuario("Bruno Lobo", "bruno.lobo", "GESTAO", "senha123"));
+            a.usuarioServico().cadastrar(new NovoUsuario("Ana Souza", "ana.souza", "ALMOXARIFADO", "senha123"));
+            a.usuarioServico().alterar(bruno.id(), new AlteracaoDeUsuario(null, false), GESTOR);
+
+            List<Usuario> lista = a.usuarioServico().listar();
+
+            assertEquals(List.of("Ana Souza", "Bruno Lobo"), lista.stream().map(Usuario::nome).toList());
+            assertFalse(lista.get(1).ativo());
+        }
+
+        @Test
+        @DisplayName("Mudar o perfil derruba a sessão da pessoa, que entra de novo com o perfil novo")
+        void mudarPerfil() {
+            Ambiente a = ambiente();
+            Usuario ana = a.usuarioServico().cadastrar(new NovoUsuario("Ana Souza", "ana.souza", "ALMOXARIFADO", "senha123"));
+            String token = a.usuarioServico().entrar(new Login("ana.souza", "senha123")).token();
+
+            Usuario alterada = a.usuarioServico().alterar(ana.id(), new AlteracaoDeUsuario("CENTRO_CIRURGICO", null), GESTOR);
+
+            assertEquals(Perfil.CENTRO_CIRURGICO, alterada.perfil());
+            assertTrue(a.sessoes().usuarioDoToken(token).isEmpty());
+            assertEquals(Perfil.CENTRO_CIRURGICO, a.usuarioServico().entrar(new Login("ana.souza", "senha123")).usuario().perfil());
+        }
+
+        @Test
+        @DisplayName("Conta inativa não entra (403) e volta a entrar depois de reativada")
+        void inativarEReativar() {
+            Ambiente a = ambiente();
+            Usuario ana = a.usuarioServico().cadastrar(new NovoUsuario("Ana Souza", "ana.souza", "ALMOXARIFADO", "senha123"));
+            String token = a.usuarioServico().entrar(new Login("ana.souza", "senha123")).token();
+
+            assertFalse(a.usuarioServico().alterar(ana.id(), new AlteracaoDeUsuario(null, false), GESTOR).ativo());
+            assertTrue(a.sessoes().usuarioDoToken(token).isEmpty());
+            assertStatus(403, () -> a.usuarioServico().entrar(new Login("ana.souza", "senha123")));
+            // Senha errada continua dando 401: não revela que a conta existe
+            assertStatus(401, () -> a.usuarioServico().entrar(new Login("ana.souza", "senha999")));
+
+            assertTrue(a.usuarioServico().alterar(ana.id(), new AlteracaoDeUsuario(null, true), GESTOR).ativo());
+            assertTrue(a.usuarioServico().entrar(new Login("ana.souza", "senha123")).usuario().ativo());
+        }
+
+        @ParameterizedTest(name = "id \"{0}\" não encontrado (404)")
+        @NullSource
+        @ValueSource(strings = {"abc", "bbbbbbbbbbbbbbbbbbbbbbbb"})
+        void alterarUsuarioInexistente(String id) {
+            Ambiente a = ambiente();
+
+            assertStatus(404, () -> a.usuarioServico().alterar(id, new AlteracaoDeUsuario("GESTAO", null), GESTOR));
+        }
     }
 
     // ============================================ 4. PERMISSÕES POR PERFIL (HTTP)
@@ -707,6 +785,8 @@ class ServicosTest {
         @ParameterizedTest(name = "{0} {1} sem login retorna 401")
         @CsvSource({
                 "GET,/api/eu",
+                "GET,/api/usuarios",
+                "PATCH,/api/usuarios/abc",
                 "GET,/api/materiais",
                 "POST,/api/materiais",
                 "GET,/api/movimentacoes",
@@ -758,6 +838,24 @@ class ServicosTest {
         @EnumSource(value = Perfil.class, names = {"ALMOXARIFADO", "GESTAO"})
         void almoxarifadoEGestaoCadastramMaterial(Perfil perfil) throws Exception {
             assertEquals(400, chamar("POST", "/api/materiais", tokenDe(perfil), "{}").statusCode());
+        }
+
+        @ParameterizedTest(name = "{0} não lista nem altera usuários (403)")
+        @EnumSource(value = Perfil.class, names = {"ALMOXARIFADO", "CENTRO_CIRURGICO"})
+        void soGestaoMexeEmUsuarios(Perfil perfil) throws Exception {
+            String token = tokenDe(perfil);
+
+            assertEquals(403, chamar("GET", "/api/usuarios", token, null).statusCode());
+            assertEquals(403, chamar("PATCH", "/api/usuarios/abc", token, "{\"ativo\":false}").statusCode());
+        }
+
+        @Test
+        @DisplayName("Gestão lista usuários e pode alterar (passa da permissão e cai na validação 400)")
+        void gestaoMexeEmUsuarios() throws Exception {
+            String token = tokenDe(Perfil.GESTAO);
+
+            assertEquals(200, chamar("GET", "/api/usuarios", token, null).statusCode());
+            assertEquals(400, chamar("PATCH", "/api/usuarios/abc", token, "{}").statusCode());
         }
 
         @Test

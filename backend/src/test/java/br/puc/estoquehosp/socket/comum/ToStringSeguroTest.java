@@ -41,6 +41,8 @@ class ToStringSeguroTest {
                 new PedidoAutenticado(TOKEN),
                 new PedidoDeLogout(TOKEN),
                 new PedidoDeUsuarioAtual(TOKEN),
+                new PedidoDeUsuarios(TOKEN),
+                new PedidoDeAlteracaoDeUsuario(TOKEN, "id1", "GESTAO", false),
                 new PedidoDeMateriais(TOKEN, "gaze"),
                 new PedidoDeMateriais(TOKEN, null),
                 new PedidoDeMaterial(TOKEN, "id1"),

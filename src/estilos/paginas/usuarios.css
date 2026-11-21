@@ -1,0 +1,26 @@
+/* Autor: Bruno Lobo de Jesus RA: 25019830 */
+
+/* Palavras-chave: estilo da tela de usuários · seletor de perfil na tabela · conta inativa */
+/* A busca e os botões Inativar/Reativar reaproveitam itens-cadastrados.css (.busca-itens, .btn-texto) */
+.perfil-usuario {
+  width: auto;
+  min-width: 170px;
+  height: 36px;
+  border-radius: 9px;
+  font-size: 13px;
+}
+
+.perfil-usuario:disabled {
+  cursor: not-allowed;
+  opacity: .7;
+}
+
+.tabela-venc tr.inativo td:first-child,
+.tabela-venc tr.inativo td:nth-child(2) {
+  color: var(--mute);
+}
+
+.tabela-venc td small {
+  color: var(--mute);
+  font-weight: 500;
+}
