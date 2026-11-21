@@ -1,4 +1,4 @@
-// Autor: Gabriel Figueira Albasini
+// Autor: Gabriel Albasini RA: 25019916
 
 // Palavras-chave: pedido · detalhe de um material · saldo por local
 package br.puc.estoquehosp.socket.comum;

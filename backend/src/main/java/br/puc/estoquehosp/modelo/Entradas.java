@@ -1,4 +1,4 @@
-// Autores: Bruno Lobo(dados de entrada da API), Gabriel Figueira Albasini (senha oculta no toString)
+// Autores: Bruno Lobo de Jesus RA: 25019830 (dados de entrada da API), Gabriel Albasini RA: 25019916 (senha oculta no toString)
 
 // Palavras-chave: DTOs · corpos JSON recebidos · toString esconde a senha
 package br.puc.estoquehosp.modelo;

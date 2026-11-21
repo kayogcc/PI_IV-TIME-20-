@@ -1,4 +1,4 @@
-// Autor: Leonardo Fonseca de Oliveira
+// Autor: Leonardo Fonseca RA: 25024579
 
 // Palavras-chave: mongosh · cria coleções · validadores ($jsonSchema) · índices · moderate/warn
 // Execute com mongosh conectado ao Atlas.

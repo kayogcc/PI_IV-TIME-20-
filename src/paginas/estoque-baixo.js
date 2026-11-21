@@ -1,4 +1,4 @@
-// Autores: Carlos Eduardo Marins Fonseca (tela), Bruno Lobo (integração com a API), Leonardo Fonseca de Oliveira (indicadores, prioridades e filtro)
+// Autores: Carlos Eduardo RA: 25020992 (tela), Bruno Lobo de Jesus RA: 25019830 (integração com a API), Leonardo Fonseca RA: 25024579 (indicadores, prioridades e filtro)
 
 // Palavras-chave: tela de estoque baixo · quantidade ≤ mínimo · Alta ≤ 25% do mínimo · filtro por prioridade · falta repor
 import { montarLayout } from '../componentes/estrutura.js'

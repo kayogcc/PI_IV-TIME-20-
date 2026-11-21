@@ -1,4 +1,4 @@
-// Autor: Bruno Lobo
+// Autor: Bruno Lobo de Jesus RA: 25019830
 
 // Palavras-chave: relatório da semana · indicadores · gráfico · agrupamento por material/local
 import { montarLayout } from '../componentes/estrutura.js'

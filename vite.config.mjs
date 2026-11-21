@@ -1,4 +1,4 @@
-// Autores: Leonardo Fonseca de Oliveira (build das páginas), Bruno Lobo(proxy da API)
+// Autores: Leonardo Fonseca RA: 25024579 (build das páginas), Bruno Lobo de Jesus RA: 25019830 (proxy da API)
 
 // Palavras-chave: Vite · proxy /api -> localhost:8080 · build multipágina (um HTML por tela)
 import { defineConfig } from 'vite'

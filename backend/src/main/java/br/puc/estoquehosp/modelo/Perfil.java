@@ -1,4 +1,4 @@
-// Autor: Bruno Lobo
+// Autor: Bruno Lobo de Jesus RA: 25019830
 
 // Palavras-chave: enum · perfis de acesso · ALMOXARIFADO · CENTRO_CIRURGICO · GESTAO
 package br.puc.estoquehosp.modelo;

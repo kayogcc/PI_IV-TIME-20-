@@ -1,4 +1,4 @@
-// Autor: Gabriel Figueira Albasini
+// Autor: Gabriel Albasini RA: 25019916
 
 // Palavras-chave: ponte HTTP -> socket · ObjectOutputStream/ObjectInputStream · Parceiro · espie/envie · Resultado · erro 503
 package br.puc.estoquehosp.http;

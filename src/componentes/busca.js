@@ -1,4 +1,4 @@
-// Autores: Leonardo Fonseca de Oliveira, Carlos Eduardo Marins Fonseca (busca do cabeçalho)
+// Autores: Leonardo Fonseca RA: 25024579, Carlos Eduardo RA: 25020992 (busca do cabeçalho)
 
 // Palavras-chave: busca do cabeçalho · sugestões enquanto digita · sem acento · Ctrl+K · setas e Enter · abre em itens cadastrados
 import { api } from '../servicos/api.js'

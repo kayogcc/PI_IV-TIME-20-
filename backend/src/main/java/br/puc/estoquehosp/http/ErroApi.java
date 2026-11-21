@@ -1,4 +1,4 @@
-// Autor: Bruno Lobo
+// Autor: Bruno Lobo de Jesus RA: 25019830
 
 // Palavras-chave: exceção de negócio · status HTTP (400, 404, 409) · resposta JSON { mensagem }
 package br.puc.estoquehosp.http;

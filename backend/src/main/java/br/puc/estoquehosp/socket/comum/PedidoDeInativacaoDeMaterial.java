@@ -1,4 +1,4 @@
-// Autor: Gabriel Figueira Albasini
+// Autor: Gabriel Albasini RA: 25019916
 
 // Palavras-chave: pedido · inativar material (exclusão lógica) · histórico preservado
 package br.puc.estoquehosp.socket.comum;

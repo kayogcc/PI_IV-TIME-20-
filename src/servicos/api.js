@@ -1,4 +1,4 @@
-// Autor: Bruno Lobo
+// Autor: Bruno Lobo de Jesus RA: 25019830
 
 // Palavras-chave: fetch · chamada à API Java · Authorization: Bearer · 401 volta ao login · ErroApi
 import { tokenAtual, logout } from './autenticacao.js'

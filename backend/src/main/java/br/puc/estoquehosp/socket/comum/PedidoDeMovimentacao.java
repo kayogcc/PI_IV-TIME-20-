@@ -1,4 +1,4 @@
-// Autor: Gabriel Figueira Albasini
+// Autor: Gabriel Albasini RA: 25019916
 
 // Palavras-chave: pedido · entrada ou saída de estoque · código de barras ou nome
 package br.puc.estoquehosp.socket.comum;

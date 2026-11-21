@@ -1,4 +1,4 @@
-// Autor: Kayo Camargo
+// Autor: Kayo Gabriel RA: 25022660
 
 // Palavras-chave: teste de integração · JUnit · Atlas · grava e lê · banco estoquehosp_teste
 package br.puc.estoquehosp;

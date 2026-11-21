@@ -1,4 +1,4 @@
-// Autor: Gabriel Figueira Albasini
+// Autor: Gabriel Albasini RA: 25019916
 
 // Palavras-chave: pedido · lista de alertas · exige login
 package br.puc.estoquehosp.socket.comum;

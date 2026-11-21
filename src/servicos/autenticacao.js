@@ -1,4 +1,4 @@
-// Autores: Gabriel Figueira Albasini (sessão do usuário), Bruno Lobo (login pela API)
+// Autores: Gabriel Albasini RA: 25019916 (sessão do usuário), Bruno Lobo de Jesus RA: 25019830 (login pela API)
 
 // Palavras-chave: login/logout · token no sessionStorage · nomes dos perfis · exigirLogin
 import { api } from './api.js'

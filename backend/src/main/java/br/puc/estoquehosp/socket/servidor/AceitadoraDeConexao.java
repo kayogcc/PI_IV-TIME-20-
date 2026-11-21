@@ -1,4 +1,4 @@
-// Autor: Gabriel Figueira Albasini
+// Autor: Gabriel Albasini RA: 25019916
 
 // Palavras-chave: Thread · ServerSocket.accept · cria uma SupervisoraDeConexao por cliente · Fazedor de Continhas
 package br.puc.estoquehosp.socket.servidor;

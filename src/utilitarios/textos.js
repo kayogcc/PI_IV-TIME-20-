@@ -1,4 +1,4 @@
-// Autores: Gabriel Figueira Albasini (esc), Leonardo Fonseca de Oliveira (normalizar)
+// Autores: Gabriel Albasini RA: 25019916 (esc), Leonardo Fonseca RA: 25024579 (normalizar)
 
 // Palavras-chave: esc (proteção contra XSS) · normalizar (busca sem acento)
 export function esc(texto) {

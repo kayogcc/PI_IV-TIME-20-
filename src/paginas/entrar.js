@@ -1,4 +1,4 @@
-// Autores: Gabriel Figueira Albasini (tela), Bruno Lobo (login pela API)
+// Autores: Gabriel Albasini RA: 25019916 (tela), Bruno Lobo de Jesus RA: 25019830 (login pela API)
 
 // Palavras-chave: tela de login · POST /api/login · redireciona se já logado
 import { login, usuarioAtual } from '../servicos/autenticacao.js'

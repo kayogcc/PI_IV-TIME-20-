@@ -1,4 +1,4 @@
-// Autor: Bruno Lobo
+// Autor: Bruno Lobo de Jesus RA: 25019830
 
 // Palavras-chave: mensagens de erro/sucesso · role="alert" (acessibilidade) · validação de matrícula
 // Mensagem de erro/sucesso de formulário, inserida antes de `referencia`.

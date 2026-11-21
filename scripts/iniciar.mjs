@@ -1,4 +1,4 @@
-// Autores: Bruno (inicia a API e o front-end), Gabriel Figueira Albasini (inicia também o servidor de sockets)
+// Autores: Bruno Lobo de Jesus RA: 25019830 (inicia a API e o front-end), Gabriel Albasini RA: 25019916 (inicia também o servidor de sockets)
 
 // Palavras-chave: npm start · sobe os 3 processos (Servidor 3000, API 8080, Vite) · spawn · Ctrl+C encerra tudo
 // npm start: sobe o Servidor de sockets, a API HTTP (ponte) e o front-end juntos.

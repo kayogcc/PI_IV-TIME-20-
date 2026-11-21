@@ -1,4 +1,4 @@
-// Autor: Bruno Lobo
+// Autor: Bruno Lobo de Jesus RA: 25019830
 
 // Palavras-chave: testes unitários · JUnit · hash de senha · regras de estoque baixo e validade · sem banco
 package br.puc.estoquehosp.servico;

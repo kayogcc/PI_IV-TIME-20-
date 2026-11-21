@@ -1,4 +1,4 @@
-// Autor: Gabriel Figueira Albasini
+// Autor: Gabriel Albasini RA: 25019916
 // Palavras-chave: coleção "usuarios" · índice único na matrícula · matriculaChave (minúsculas) · DUPLICATE_KEY
 package br.puc.estoquehosp.repositorio;
 

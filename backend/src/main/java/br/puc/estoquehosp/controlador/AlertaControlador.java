@@ -1,4 +1,4 @@
-// Autores: Bruno Lobo(rotas da API), Gabriel Figueira Albasini (envio dos pedidos ao servidor de sockets)
+// Autores: Bruno Lobo de Jesus RA: 25019830 (rotas da API), Gabriel Albasini RA: 25019916 (envio dos pedidos ao servidor de sockets)
 
 // Palavras-chave: controlador · rotas GET /api/alertas e /api/dashboard · HTTP -> pedido de socket
 package br.puc.estoquehosp.controlador;

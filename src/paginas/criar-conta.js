@@ -1,4 +1,4 @@
-// Autores: Carlos Eduardo Marins Fonseca (tela e validações), Bruno Lobo (cadastro pela API)
+// Autores: Carlos Eduardo RA: 25020992 (tela e validações), Bruno Lobo de Jesus RA: 25019830 (cadastro pela API)
 
 // Palavras-chave: tela de cadastro · POST /api/usuarios · validação no front · escolha de perfil
 // Tela: criar conta

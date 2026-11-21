@@ -1,4 +1,4 @@
-// Autores: Gabriel Figueira Albasini, Leonardo Fonseca de Oliveira (validade DD/MM/AAAA e leitura dos dados, vindas do primeiro servidor de sockets)
+// Autores: Gabriel Albasini RA: 25019916, Leonardo Fonseca RA: 25024579 (validade DD/MM/AAAA e leitura dos dados, vindas do primeiro servidor de sockets)
 
 // Palavras-chave: cliente de terminal · menu · login antes do menu · token em todos os pedidos · Fazedor de Continhas adaptado
 package br.puc.estoquehosp.socket.cliente;

@@ -1,4 +1,4 @@
-// Autores: Bruno Lobo, Gabriel Figueira Albasini
+// Autores: Bruno Lobo de Jesus RA: 25019830, Gabriel Albasini RA: 25019916
 
 // Palavras-chave: parâmetros do caminho ({id}) · query string (?busca=) · corpo JSON com Gson · token · limite 64 KB
 package br.puc.estoquehosp.http;

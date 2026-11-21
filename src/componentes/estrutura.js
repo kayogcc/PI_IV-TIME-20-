@@ -1,4 +1,4 @@
-// Autores: Gabriel Figueira Albasini, Leonardo Fonseca de Oliveira e Carlos Eduardo Marins Fonseca (busca do cabeçalho)
+// Autores: Gabriel Albasini RA: 25019916, Leonardo Fonseca RA: 25024579 e Carlos Eduardo RA: 25020992 (busca do cabeçalho)
 
 // Palavras-chave: layout comum · cabeçalho e menu de abas · exige login · data-href · controle segmentado
 import { exigirLogin, logout } from '../servicos/autenticacao.js'

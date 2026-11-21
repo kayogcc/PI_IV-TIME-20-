@@ -1,4 +1,4 @@
-// Autores: Gabriel Figueira Albasini (versão inicial), Bruno Lobo(adaptação para os dados da API)
+// Autores: Gabriel Albasini RA: 25019916 (versão inicial), Bruno Lobo de Jesus RA: 25019830 (adaptação para os dados da API)
 
 // Palavras-chave: gráfico de barras em HTML/CSS · entradas x saídas · altura em % do maior valor
 import { esc } from '../utilitarios/textos.js'

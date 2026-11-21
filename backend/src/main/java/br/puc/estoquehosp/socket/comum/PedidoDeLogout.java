@@ -1,4 +1,4 @@
-// Autor: Gabriel Figueira Albasini
+// Autor: Gabriel Albasini RA: 25019916
 
 // Palavras-chave: pedido · encerra a sessão · token oculto no toString
 package br.puc.estoquehosp.socket.comum;

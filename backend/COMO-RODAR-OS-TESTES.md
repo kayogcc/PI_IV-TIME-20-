@@ -1,4 +1,4 @@
-<!-- Autores: Carlos Eduardo Marins Fonseca, Gabriel Figueira Albasini -->
+<!-- Autores: Carlos Eduardo RA: 25020992, Gabriel Albasini RA: 25019916 -->
 
 # Como rodar os testes do back-end
 

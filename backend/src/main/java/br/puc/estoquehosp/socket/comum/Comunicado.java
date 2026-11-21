@@ -1,4 +1,4 @@
-// Autor: Gabriel Figueira Albasini
+// Autor: Gabriel Albasini RA: 25019916
 
 // Palavras-chave: classe base dos objetos trocados · Serializable · Fazedor de Continhas
 package br.puc.estoquehosp.socket.comum;

@@ -1,4 +1,4 @@
-// Autor: Gabriel Figueira Albasini
+// Autor: Gabriel Albasini RA: 25019916
 
 // Palavras-chave: main do Servidor de sockets · porta 3000 · conecta no MongoDB · comando "desativar" · Fazedor de Continhas adaptado
 package br.puc.estoquehosp.socket.servidor;

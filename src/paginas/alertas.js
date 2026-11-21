@@ -1,4 +1,4 @@
-// Autores: Gabriel Figueira Albasini (tela), Bruno Lobo (integração com a API), Leonardo Fonseca de Oliveira (alertas clicáveis)
+// Autores: Gabriel Albasini RA: 25019916 (tela), Bruno Lobo de Jesus RA: 25019830 (integração com a API), Leonardo Fonseca RA: 25024579 (alertas clicáveis)
 
 // Palavras-chave: tela de alertas · GET /api/alertas · filtro por tipo · selo de prioridade
 import { montarLayout } from '../componentes/estrutura.js'

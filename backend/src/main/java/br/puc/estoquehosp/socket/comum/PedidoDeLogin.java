@@ -1,4 +1,4 @@
-// Autor: Gabriel Figueira Albasini
+// Autor: Gabriel Albasini RA: 25019916
 
 // Palavras-chave: pedido · login com matrícula e senha · devolve token
 package br.puc.estoquehosp.socket.comum;

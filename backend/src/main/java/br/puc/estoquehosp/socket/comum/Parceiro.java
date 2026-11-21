@@ -1,4 +1,4 @@
-// Autor: Gabriel Figueira Albasini
+// Autor: Gabriel Albasini RA: 25019916
 
 // Palavras-chave: encapsula a conexão · receba (enviar) · envie (receber) · espie · Semaphore (mutex) · Fazedor de Continhas
 package br.puc.estoquehosp.socket.comum;

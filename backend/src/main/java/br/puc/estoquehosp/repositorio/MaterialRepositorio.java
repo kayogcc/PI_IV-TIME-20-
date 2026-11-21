@@ -1,4 +1,4 @@
-// Autores: Bruno (acesso aos materiais no banco), Leonardo Fonseca de Oliveira (busca sem acento)
+// Autores: Bruno Lobo de Jesus RA: 25019830 (acesso aos materiais no banco), Leonardo Fonseca RA: 25024579 (busca sem acento)
 
 // Palavras-chave: coleção "materiais" · busca sem acento (Collation + Normalizer) · saldo atômico com $inc · não deixa saldo negativo
 package br.puc.estoquehosp.repositorio;

@@ -1,4 +1,4 @@
-// Autores: Bruno (servidor HTTP da API), Gabriel Figueira Albasini (ligação com o servidor de sockets)
+// Autores: Bruno Lobo de Jesus RA: 25019830 (servidor HTTP da API), Gabriel Albasini RA: 25019916 (ligação com o servidor de sockets)
 
 // Palavras-chave: ponto de entrada da API · HttpServer na porta 8080 · /api · registra controladores · virtual threads · ponte para o Servidor (3000)
 package br.puc.estoquehosp;

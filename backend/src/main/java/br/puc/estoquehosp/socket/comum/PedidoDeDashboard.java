@@ -1,4 +1,4 @@
-// Autor: Gabriel Figueira Albasini
+// Autor: Gabriel Albasini RA: 25019916
 
 // Palavras-chave: pedido · números do dashboard · últimos 7 dias
 package br.puc.estoquehosp.socket.comum;

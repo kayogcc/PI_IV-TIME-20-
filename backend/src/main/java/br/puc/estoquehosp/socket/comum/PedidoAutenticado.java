@@ -1,4 +1,4 @@
-// Autor: Gabriel Figueira Albasini
+// Autor: Gabriel Albasini RA: 25019916
 
 // Palavras-chave: herança · pedidos que exigem login · carregam o token
 package br.puc.estoquehosp.socket.comum;

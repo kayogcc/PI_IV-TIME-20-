@@ -1,4 +1,4 @@
-// Autores: Carlos Eduardo Marins Fonseca (tela), Bruno Lobo (integração com a API)
+// Autores: Carlos Eduardo RA: 25020992 (tela), Bruno Lobo de Jesus RA: 25019830 (integração com a API)
 
 // Palavras-chave: tela de validade · vence em até 30 dias · filtro por prazo · saldo por local
 import { montarLayout } from '../componentes/estrutura.js'

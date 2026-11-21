@@ -1,4 +1,4 @@
-// Autor: Gabriel Figueira Albasini
+// Autor: Gabriel Albasini RA: 25019916
 
 // Palavras-chave: pedido · criar conta · não exige login · toString sem senha
 package br.puc.estoquehosp.socket.comum;

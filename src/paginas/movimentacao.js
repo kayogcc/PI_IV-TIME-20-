@@ -1,4 +1,4 @@
-// Autores: Bruno Lobo (registro da movimentação), Kayo Camargo (leitura pela câmera), Leonardo Fonseca de Oliveira (sugestões de materiais pelo nome)
+// Autores: Bruno Lobo de Jesus RA: 25019830 (registro da movimentação), Kayo Gabriel RA: 25022660 (leitura pela câmera), Leonardo Fonseca RA: 25024579 (sugestões de materiais pelo nome)
 
 // Palavras-chave: registro de entrada/saída · leitura de código de barras pela câmera (ZXing) · sugestões de materiais
 import { BrowserMultiFormatReader } from '@zxing/browser'

@@ -1,4 +1,4 @@
-//Autor: Bruno Lobo
+//Autor: Bruno Lobo de Jesus RA: 25019830
 
 // Palavras-chave: segurança · hash PBKDF2 · sal aleatório · 210 mil iterações · comparação em tempo constante
 package br.puc.estoquehosp.servico;

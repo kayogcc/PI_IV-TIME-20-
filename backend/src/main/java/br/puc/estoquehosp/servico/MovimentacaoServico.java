@@ -1,4 +1,4 @@
-// Autores: Bruno Lobo, Leonardo Fonseca de Oliveira (validação de campos vazios)
+// Autores: Bruno Lobo de Jesus RA: 25019830, Leonardo Fonseca RA: 25024579 (validação de campos vazios)
 
 // Palavras-chave: regras de entrada/saída · locais fixos · Centro Cirúrgico só faz saída (403) · saldo insuficiente (409) · desfaz o saldo se falhar
 package br.puc.estoquehosp.servico;

@@ -1,4 +1,4 @@
-// Autor: Gabriel Figueira Albasini
+// Autor: Gabriel Albasini RA: 25019916
 
 // Palavras-chave: teste de segurança · JUnit · toString não vaza senha, token nem hash
 package br.puc.estoquehosp.socket.comum;

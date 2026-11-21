@@ -1,4 +1,4 @@
- // Autores: Kayo Camargo (edição e inativação de materiais), Bruno Lobo (cadastro e integração com a API), Leonardo Fonseca de Oliveira (versão inicial)
+// Autores: Kayo Gabriel RA: 25022660 (edição e inativação de materiais), Bruno Lobo de Jesus RA: 25019830 (cadastro e integração com a API), Leonardo Fonseca RA: 25024579 (versão inicial)
 
 // Palavras-chave: tela de itens · CRUD de materiais · busca · editar/inativar · 409 duplicado
 import { montarLayout } from '../componentes/estrutura.js'

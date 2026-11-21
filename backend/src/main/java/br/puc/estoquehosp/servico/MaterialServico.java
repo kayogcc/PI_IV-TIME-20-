@@ -1,4 +1,4 @@
-//Autor: Bruno Lobo
+//Autor: Bruno Lobo de Jesus RA: 25019830
 
 // Palavras-chave: regras do material · validação dos campos · nome/código únicos (409) · saldo só muda por movimentação
 package br.puc.estoquehosp.servico;

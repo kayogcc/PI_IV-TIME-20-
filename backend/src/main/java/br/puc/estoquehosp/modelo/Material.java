@@ -1,4 +1,4 @@
- // Autores: Bruno Lobo(modelo de dados), Gabriel Figueira Albasini (adaptação para o servidor de sockets)
+// Autores: Bruno Lobo de Jesus RA: 25019830 (modelo de dados), Gabriel Albasini RA: 25019916 (adaptação para o servidor de sockets)
 
 // Palavras-chave: record · Serializable · saldos por local · quantidade total · ativo (inativação lógica)
 package br.puc.estoquehosp.modelo;

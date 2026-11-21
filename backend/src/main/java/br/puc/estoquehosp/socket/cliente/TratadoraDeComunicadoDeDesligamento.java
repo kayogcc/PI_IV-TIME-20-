@@ -1,4 +1,4 @@
-// Autor: Gabriel Figueira Albasini
+// Autor: Gabriel Albasini RA: 25019916
 // Palavras-chave: Thread · escuta o ComunicadoDeDesligamento · encerra o cliente
 package br.puc.estoquehosp.socket.cliente;
 

@@ -1,4 +1,4 @@
-<!-- Autores: Gabriel Figueira Albasini, Leonardo Fonseca de Oliveira (README inicial e levantamento de requisitos) -->
+<!-- Autores: Gabriel Albasini RA: 25019916, Leonardo Fonseca RA: 25024579 (README inicial e levantamento de requisitos) -->
 
 # EstoqueHosp — Plataforma de Automação e Gestão de Estoque Hospitalar
 
@@ -45,13 +45,13 @@ O hospital começa no nível Bronze e pode evoluir sem trocar de sistema nem per
 
 ## Integrantes
 
-| Nome | GitHub |
-|---|---|
-| *Bruno Lobo de Jesus* | *brunolobo-jesus* |
-| *Carlos Eduardo Marins Fonseca* | *Cadu-Marins* |
-| *Gabriel Figueira Albasini* | *GabrielAlbasini* |
-| *Kayo Gabriel* | *kayogcc* |
-| *Leonardo Fonseca de Oliveira* | *leo-fonseca-oliveira* |
+| Nome | RA | GitHub |
+|---|---|---|
+| *Bruno Lobo de Jesus* | *25019830* | *brunolobo-jesus* |
+| *Carlos Eduardo* | *25020992* | *Cadu-Marins* |
+| *Gabriel Albasini* | *25019916* | *GabrielAlbasini* |
+| *Kayo Gabriel* | *25022660* | *kayogcc* |
+| *Leonardo Fonseca* | *25024579* | *leo-fonseca-oliveira* |
 
 ## Tecnologias Utilizadas
 
