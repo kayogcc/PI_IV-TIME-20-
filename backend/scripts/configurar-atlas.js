@@ -4,7 +4,12 @@
 // Execute com mongosh conectado ao Atlas.
 // Este script cria as coleções, validadores e índices usados pelo backend atual.
 // Em coleções existentes, começa em moderate/warn para não interromper dados legados.
-const banco = db.getSiblingDB("estoquehosp");
+// Para testar sem mexer nos dados reais: mongosh "<uri>" --eval 'var nomeBanco = "outro"' --file scripts/configurar-atlas.js
+const banco = db.getSiblingDB(typeof nomeBanco !== "undefined" ? nomeBanco : "estoquehosp");
+
+// Mesmos locais de MovimentacaoServico.LOCAIS
+const LOCAIS = ["Almoxarifado A", "Almoxarifado B", "Centro Cirúrgico"];
+const saldoDoLocal = { bsonType: ["int", "long"], minimum: 0 };
 
 const esquemas = {
   usuarios: {
@@ -32,16 +37,18 @@ const esquemas = {
       lote: { bsonType: ["string", "null"], maxLength: 30 },
       validade: { bsonType: ["string", "null"], pattern: "^\\d{4}-\\d{2}-\\d{2}$" },
       quantidadeMinima: { bsonType: "int", minimum: 0, maximum: 100000 },
+      // Só aceita os 3 locais conhecidos; qualquer outra chave é rejeitada
       saldos: {
         bsonType: "object",
-        additionalProperties: { bsonType: ["int", "long"], minimum: 0 }
+        properties: Object.fromEntries(LOCAIS.map(local => [local, saldoDoLocal])),
+        additionalProperties: false
       },
       ativo: { bsonType: "bool" }
     }
   },
   movimentacoes: {
     bsonType: "object",
-    required: ["data", "materialId", "material", "tipo", "quantidade", "origem", "local", "usuario"],
+    required: ["data", "materialId", "material", "tipo", "quantidade", "origem", "local", "usuarioId", "usuario"],
     properties: {
       data: { bsonType: "date" },
       materialId: { bsonType: "string", minLength: 1 },
@@ -49,10 +56,9 @@ const esquemas = {
       tipo: { bsonType: "string", enum: ["Entrada", "Saída"] },
       quantidade: { bsonType: "int", minimum: 1, maximum: 100000 },
       origem: { bsonType: "string", enum: ["Código de barras", "Manual"] },
-      local: {
-        bsonType: "string",
-        enum: ["Almoxarifado A", "Almoxarifado B", "Centro Cirúrgico"]
-      },
+      local: { bsonType: "string", enum: LOCAIS },
+      // Id do usuário (rastreabilidade); o nome fica em "usuario" como era na época
+      usuarioId: { bsonType: "string", minLength: 1 },
       usuario: { bsonType: "string", minLength: 1, maxLength: 100 }
     }
   }
@@ -84,5 +90,5 @@ banco.usuarios.createIndex({ matriculaChave: 1 }, { unique: true });
 banco.materiais.createIndex({ codigoBarras: 1 });
 banco.movimentacoes.createIndex({ data: -1 });
 
-print("Índices criados/verificados. Banco preparado: estoquehosp.");
+print(`Índices criados/verificados. Banco preparado: ${banco.getName()}.`);
 print("Após revisar documentos antigos e logs de validação, altere as coleções existentes para strict/error.");

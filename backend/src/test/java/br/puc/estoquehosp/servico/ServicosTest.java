@@ -368,6 +368,7 @@ class ServicosTest {
             assertEquals(ENTRADA, feita.tipo());
             assertEquals(50, feita.quantidade());
             assertEquals("Ana Souza", feita.usuario());
+            assertEquals(ALMOX.id(), feita.usuarioId());
         }
 
         @Test
@@ -915,7 +916,26 @@ class ServicosTest {
             assertEquals(LOCAL_A, ultima.local());
             assertEquals("Código de barras", ultima.origem());
             assertEquals("Carlos Lima", ultima.usuario());
+            // Lido de volta do banco: prova que o id foi gravado, não só devolvido
+            assertEquals(CENTRO.id(), ultima.usuarioId());
+            assertEquals(ALMOX.id(), historico.get(1).usuarioId());
             assertEquals(ENTRADA, historico.get(1).tipo());
+        }
+
+        @Test
+        @DisplayName("Movimentação antiga sem usuarioId continua sendo lida (usuarioId = null)")
+        void movimentacaoAntigaSemUsuarioId() {
+            Ambiente a = ambiente();
+            conexao.banco().getCollection("movimentacoes").insertOne(new org.bson.Document("data", new java.util.Date())
+                    .append("materialId", "abc").append("material", "Gaze").append("tipo", ENTRADA)
+                    .append("quantidade", 1).append("origem", "Manual").append("local", LOCAL_A)
+                    .append("usuario", "Ana Souza"));
+
+            List<Movimentacao> historico = a.movimentacaoServico().listar(null, null);
+
+            assertEquals(1, historico.size());
+            assertEquals("Ana Souza", historico.get(0).usuario());
+            assertEquals(null, historico.get(0).usuarioId());
         }
 
         @Test
@@ -940,9 +960,9 @@ class ServicosTest {
             Ambiente a = ambiente();
             Material gaze = criarMaterial(a, "Gaze estéril", null);
             Instant agora = Instant.now();
-            a.historico().inserir(agora.minus(Duration.ofDays(40)), gaze.id(), gaze.nome(), ENTRADA, 1, "Manual", LOCAL_A, "Ana Souza");
-            a.historico().inserir(agora.minus(Duration.ofDays(10)), gaze.id(), gaze.nome(), ENTRADA, 2, "Manual", LOCAL_A, "Ana Souza");
-            a.historico().inserir(agora, gaze.id(), gaze.nome(), ENTRADA, 3, "Manual", LOCAL_A, "Ana Souza");
+            a.historico().inserir(agora.minus(Duration.ofDays(40)), gaze.id(), gaze.nome(), ENTRADA, 1, "Manual", LOCAL_A, "id-ana", "Ana Souza");
+            a.historico().inserir(agora.minus(Duration.ofDays(10)), gaze.id(), gaze.nome(), ENTRADA, 2, "Manual", LOCAL_A, "id-ana", "Ana Souza");
+            a.historico().inserir(agora, gaze.id(), gaze.nome(), ENTRADA, 3, "Manual", LOCAL_A, "id-ana", "Ana Souza");
 
             assertEquals(2, a.movimentacaoServico().listar(null, null).size(), "padrão = últimos 30 dias");
             assertEquals(2, a.movimentacaoServico().listar("", null).size());
@@ -959,9 +979,9 @@ class ServicosTest {
             Material gaze = criarMaterial(a, "Gaze estéril", null);
             Material seringa = criarMaterial(a, "Seringa 10ml", null);
             Instant agora = Instant.now();
-            a.historico().inserir(agora.minus(Duration.ofDays(20)), gaze.id(), gaze.nome(), ENTRADA, 1, "Manual", LOCAL_A, "Ana Souza");
-            a.historico().inserir(agora.minus(Duration.ofDays(2)), gaze.id(), gaze.nome(), ENTRADA, 2, "Manual", LOCAL_A, "Ana Souza");
-            a.historico().inserir(agora.minus(Duration.ofDays(2)), seringa.id(), seringa.nome(), ENTRADA, 3, "Manual", LOCAL_A, "Ana Souza");
+            a.historico().inserir(agora.minus(Duration.ofDays(20)), gaze.id(), gaze.nome(), ENTRADA, 1, "Manual", LOCAL_A, "id-ana", "Ana Souza");
+            a.historico().inserir(agora.minus(Duration.ofDays(2)), gaze.id(), gaze.nome(), ENTRADA, 2, "Manual", LOCAL_A, "id-ana", "Ana Souza");
+            a.historico().inserir(agora.minus(Duration.ofDays(2)), seringa.id(), seringa.nome(), ENTRADA, 3, "Manual", LOCAL_A, "id-ana", "Ana Souza");
 
             List<Movimentacao> resultado = a.movimentacaoServico().listar("7", gaze.id());
 

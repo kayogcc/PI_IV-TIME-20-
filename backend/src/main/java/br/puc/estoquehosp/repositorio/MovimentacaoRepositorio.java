@@ -28,7 +28,7 @@ public class MovimentacaoRepositorio {
     }
 
     public Movimentacao inserir(Instant data, String materialId, String material, String tipo, int quantidade,
-                                String origem, String local, String usuario) {
+                                String origem, String local, String usuarioId, String usuario) {
         Document doc = new Document("data", Date.from(data))
                 .append("materialId", materialId)
                 .append("material", material)
@@ -36,6 +36,7 @@ public class MovimentacaoRepositorio {
                 .append("quantidade", quantidade)
                 .append("origem", origem)
                 .append("local", local)
+                .append("usuarioId", usuarioId)
                 .append("usuario", usuario);
         colecao.insertOne(doc);
         return paraMovimentacao(doc);
@@ -60,6 +61,7 @@ public class MovimentacaoRepositorio {
                 doc.getInteger("quantidade"),
                 doc.getString("origem"),
                 doc.getString("local"),
+                doc.getString("usuarioId"), // null em registros antigos
                 doc.getString("usuario")
         );
     }

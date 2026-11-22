@@ -65,7 +65,7 @@ public class MovimentacaoServico {
 
         try {
             return movimentacoes.inserir(Instant.now(), material.id(), material.nome(), dados.tipo(), quantidade,
-                    dados.origem(), dados.local(), usuario.nome());
+                    dados.origem(), dados.local(), usuario.id(), usuario.nome());
         } catch (RuntimeException e) {
             // Não conseguiu gravar o histórico: desfaz o saldo para os dois não ficarem diferentes
             materiais.ajustarSaldo(material.id(), dados.local(), -delta);

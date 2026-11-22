@@ -6,6 +6,7 @@ package br.puc.estoquehosp.modelo;
 import java.io.Serializable;
 
 // data em ISO-8601 (UTC). tipo: Entrada | Saída — origem: Código de barras | Manual
+// usuarioId identifica quem fez a movimentação mesmo que o nome mude; usuario guarda o nome da época
 public record Movimentacao(
         String id,
         String data,
@@ -15,5 +16,6 @@ public record Movimentacao(
         int quantidade,
         String origem,
         String local,
+        String usuarioId,
         String usuario
 ) implements Serializable {}
