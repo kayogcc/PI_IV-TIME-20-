@@ -1,6 +1,6 @@
-// Autores: Bruno Lobo de Jesus RA: 25019830 (modelo de dados), Gabriel Albasini RA: 25019916 (adaptação para o servidor de sockets)
+// Autores: Bruno Lobo de Jesus RA: 25019830 (modelo de dados), Gabriel Albasini RA: 25019916 (adaptação para o servidor de sockets), Leonardo Fonseca RA: 25024579 (campo usuarioId)
 
-// Palavras-chave: record · Serializable · histórico · Entrada/Saída · origem (código de barras | manual) · data ISO-8601
+// Palavras-chave: record · Serializable · histórico · Entrada/Saída · origem (código de barras | manual) · data ISO-8601 · usuarioId (rastreabilidade)
 package br.puc.estoquehosp.modelo;
 
 import java.io.Serializable;

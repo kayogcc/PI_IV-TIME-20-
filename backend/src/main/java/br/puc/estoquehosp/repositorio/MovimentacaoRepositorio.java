@@ -1,6 +1,6 @@
-//Autor: Bruno Lobo de Jesus RA: 25019830
+// Autores: Bruno Lobo de Jesus RA: 25019830, Leonardo Fonseca RA: 25024579 (gravação do usuarioId)
 
-// Palavras-chave: coleção "movimentacoes" · registro imutável · índice por data · mais recentes primeiro
+// Palavras-chave: coleção "movimentacoes" · registro imutável · índice por data · mais recentes primeiro · usuarioId (null em registros antigos)
 package br.puc.estoquehosp.repositorio;
 
 import br.puc.estoquehosp.modelo.Movimentacao;

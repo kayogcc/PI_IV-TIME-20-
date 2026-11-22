@@ -1,4 +1,4 @@
-// Autores: Carlos Eduardo RA: 25020992, Gabriel Albasini RA: 25019916, Bruno Lobo de Jesus RA: 25019830 (testes da gestão de usuários)
+// Autores: Carlos Eduardo RA: 25020992, Gabriel Albasini RA: 25019916, Bruno Lobo de Jesus RA: 25019830 (testes da gestão de usuários), Leonardo Fonseca RA: 25024579 (testes do usuarioId nas movimentações)
 
 package br.puc.estoquehosp.servico;
 
